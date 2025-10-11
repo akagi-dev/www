@@ -4,54 +4,133 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
 
+permissions:
+  contents: read
+  pull-requests: write
+  deployments: write
+
 jobs:
   build-preview:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
-      
+
       - name: Install dependencies
         run: npm ci
-      
+
       - name: Build website
         run: npm run build
-      
+
       - name: Upload preview artifact
         uses: actions/upload-artifact@v4
         with:
           name: pr-preview-${{ github.event.pull_request.number }}
           path: ./dist
           retention-days: 7
-      
-      - name: Comment PR
+
+      - name: Create or update deployment
         uses: actions/github-script@v7
         with:
           script: |
             const prNumber = context.issue.number;
-            const message = `✅ Preview build completed successfully!
-            
-            **Build artifact:** \`pr-preview-${prNumber}\`
-            
-            To test locally:
-            1. Download the artifact from the Actions tab
-            2. Extract and serve the \`dist\` folder
-            3. Navigate to \`http://localhost:<port>/www\`
-            
-            **Languages available:**
-            - English: \`/www/en/\`
-            - Japanese: \`/www/ja/\`
-            - Russian: \`/www/ru/\``;
-            
-            github.rest.issues.createComment({
-              issue_number: prNumber,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: message
-            });
+            const runId = context.runId;
+            const sha = context.sha;
+
+            try {
+              // Create deployment
+              await github.rest.repos.createDeployment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                ref: sha,
+                environment: `pr-${prNumber}`,
+                auto_merge: false,
+                required_contexts: [],
+                description: `PR #${prNumber} preview deployment`
+              });
+
+              core.info(`Deployment created for PR #${prNumber}`);
+            } catch (error) {
+              core.warning(`Failed to create deployment: ${error.message}`);
+            }
+
+      - name: Comment PR with preview info
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const prNumber = context.issue.number;
+            const runId = context.runId;
+            const sha = context.sha.substring(0, 7);
+            const actionUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${runId}`;
+            const artifactName = `pr-preview-${prNumber}`;
+
+            const message = `## 🚀 PR Preview Build Completed!
+
+            ✅ **Status:** Build successful
+            📦 **Artifact:** \`${artifactName}\`
+            🔗 **Commit:** \`${sha}\`
+            ⏱️ **Built at:** ${new Date().toISOString()}
+
+            ### 📥 How to test this preview:
+
+            1. Go to the [Actions tab](${actionUrl})
+            2. Download the \`${artifactName}\` artifact
+            3. Extract the ZIP file
+            4. Serve the \`dist\` folder with a static server:
+               \`\`\`bash
+               npx serve dist
+               # or
+               python -m http.server --directory dist
+               \`\`\`
+            5. Navigate to \`http://localhost:<port>/www\`
+
+            ### 🌐 Available Languages:
+            - 🇬🇧 English: \`/www/en/\`
+            - 🇯🇵 Japanese: \`/www/ja/\`
+            - 🇷🇺 Russian: \`/www/ru/\`
+
+            ---
+            *This comment will be updated on each new commit to this PR.*`;
+
+            try {
+              // Try to find existing comment
+              const { data: comments } = await github.rest.issues.listComments({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: prNumber
+              });
+
+              const botComment = comments.find(comment =>
+                comment.user.type === 'Bot' &&
+                comment.body.includes('PR Preview Build Completed')
+              );
+
+              if (botComment) {
+                // Update existing comment
+                await github.rest.issues.updateComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  comment_id: botComment.id,
+                  body: message
+                });
+                core.info(`Updated existing comment #${botComment.id}`);
+              } else {
+                // Create new comment
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: prNumber,
+                  body: message
+                });
+                core.info(`Created new comment for PR #${prNumber}`);
+              }
+            } catch (error) {
+              core.error(`Failed to post comment: ${error.message}`);
+              core.setFailed(`Comment posting failed: ${error.message}`);
+            }
