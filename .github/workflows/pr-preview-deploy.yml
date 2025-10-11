@@ -1,0 +1,128 @@
+name: Deploy PR Preview
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: write
+  pull-requests: write
+  pages: write
+
+jobs:
+  deploy-preview:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout PR branch
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build with PR preview config
+        env:
+          GITHUB_REF: preview/pr-${{ github.event.pull_request.number }}
+        run: npm run build
+
+      - name: Deploy to preview branch
+        run: |
+          PR_NUMBER=${{ github.event.pull_request.number }}
+          PREVIEW_BRANCH="preview/pr-${PR_NUMBER}"
+          
+          # Configure git
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Create orphan branch for preview
+          git checkout --orphan ${PREVIEW_BRANCH}
+          
+          # Remove all files from git tracking
+          git rm -rf .
+          
+          # Copy built files to root
+          cp -r dist/* .
+          
+          # Add all files
+          git add .
+          
+          # Commit
+          git commit -m "Deploy PR #${PR_NUMBER} preview - commit ${{ github.sha }}"
+          
+          # Force push to preview branch
+          git push -f origin ${PREVIEW_BRANCH}
+
+      - name: Comment PR with preview links
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const prNumber = context.issue.number;
+            const sha = context.sha.substring(0, 7);
+            const baseUrl = `https://akagi-dev.github.io/www/pr-${prNumber}`;
+            
+            const message = `## 🌟 PR Preview Deployed!
+
+            ### 📱 **Preview Links:**
+            - 🇬🇧 [English](${baseUrl}/en/) 
+            - 🇯🇵 [Japanese](${baseUrl}/ja/)
+            - 🇷🇺 [Russian](${baseUrl}/ru/)
+
+            ### 📊 **Quick Access:**
+            - 🏠 [Home Page](${baseUrl}/)
+            - 📱 Mobile-optimized design
+            - ✅ All languages available
+
+            ### 🔗 **Share Links:**
+            - Direct PR preview: \`${baseUrl}/\`
+            - For testing on mobile devices
+
+            ### 📝 **Details:**
+            - 🔗 **Commit:** \`${sha}\`
+            - ⏱️ **Deployed at:** ${new Date().toISOString()}
+            - 🌿 **Branch:** \`preview/pr-${prNumber}\`
+
+            ---
+            🤖 *Auto-updated on each commit*
+            ⚡ *Deployed via GitHub Pages*`;
+
+            try {
+              // Try to find existing comment
+              const { data: comments } = await github.rest.issues.listComments({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: prNumber
+              });
+
+              const botComment = comments.find(comment =>
+                comment.user.type === 'Bot' &&
+                comment.body.includes('PR Preview Deployed')
+              );
+
+              if (botComment) {
+                // Update existing comment
+                await github.rest.issues.updateComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  comment_id: botComment.id,
+                  body: message
+                });
+                core.info(`Updated existing comment #${botComment.id}`);
+              } else {
+                // Create new comment
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: prNumber,
+                  body: message
+                });
+                core.info(`Created new comment for PR #${prNumber}`);
+              }
+            } catch (error) {
+              core.error(`Failed to post comment: ${error.message}`);
+              core.setFailed(`Comment posting failed: ${error.message}`);
+            }
