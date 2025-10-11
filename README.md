@@ -89,24 +89,34 @@ The site will be available at `http://localhost:4321/www`
 The site is automatically deployed to GitHub Pages on every push to `main`:
 
 - **Production URL**: https://akagi-dev.github.io/www
-- **PR Previews**: Automated build artifacts with comment notifications for each PR
+- **PR Previews**: Live preview deployments via GitHub Pages for each PR
 
 ### PR Preview Workflow
 
 When you open or update a pull request:
-1. ✅ GitHub Actions automatically builds the site
-2. 📦 Creates a downloadable artifact with the preview build
-3. 💬 Posts/updates a comment on the PR with:
-   - Direct link to download the artifact
-   - Step-by-step testing instructions
-   - Build metadata (commit SHA, timestamp)
-   - Available language routes
+1. ✅ GitHub Actions automatically builds the site with PR-specific configuration
+2. 🌐 Deploys to a dedicated orphan branch `preview/pr-{number}`
+3. 📱 Creates live preview URLs accessible via GitHub Pages
+4. 💬 Posts/updates a comment on the PR with:
+   - Direct preview links for all languages (English, Japanese, Russian)
+   - Easy mobile testing with shareable URLs
+   - Build metadata (commit SHA, timestamp, branch)
+   - Quick access links for different pages
 
 The preview workflow includes:
-- **Automated comments** - No need to search for artifacts
-- **Smart updates** - Comments are updated on new commits (no spam)
-- **Fork support** - Works for external contributors
-- **Error handling** - Graceful failure with detailed logs
+- **Live Previews** - Test changes directly in browser without downloading
+- **Multi-language Support** - Preview all language versions
+- **Mobile-Friendly** - Share preview links for mobile device testing
+- **Automated Comments** - Clear preview links updated on each commit
+- **Smart Updates** - Comments are updated on new commits (no spam)
+- **Auto Cleanup** - Preview branches automatically deleted when PR closes
+- **Error Handling** - Graceful failure with detailed logs
+
+#### Preview URL Format:
+- Base: `https://akagi-dev.github.io/www/pr-{number}/`
+- English: `https://akagi-dev.github.io/www/pr-{number}/en/`
+- Japanese: `https://akagi-dev.github.io/www/pr-{number}/ja/`
+- Russian: `https://akagi-dev.github.io/www/pr-{number}/ru/`
 
 For more details, see [`.github/workflows/README.md`](.github/workflows/README.md)
 

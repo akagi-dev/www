@@ -1,0 +1,90 @@
+name: Cleanup PR Preview
+
+on:
+  pull_request:
+    types: [closed]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  cleanup-preview:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Delete preview branch
+        run: |
+          PR_NUMBER=${{ github.event.pull_request.number }}
+          PREVIEW_BRANCH="preview/pr-${PR_NUMBER}"
+          
+          # Configure git
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Delete remote preview branch if it exists
+          if git ls-remote --heads origin ${PREVIEW_BRANCH} | grep ${PREVIEW_BRANCH}; then
+            git push origin --delete ${PREVIEW_BRANCH}
+            echo "Deleted preview branch: ${PREVIEW_BRANCH}"
+          else
+            echo "Preview branch ${PREVIEW_BRANCH} does not exist"
+          fi
+
+      - name: Update PR comment
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const prNumber = context.issue.number;
+            const isMerged = context.payload.pull_request.merged;
+            const status = isMerged ? 'merged' : 'closed';
+            
+            const message = `## 🧹 PR Preview Cleaned Up
+
+            This PR has been **${status}**.
+            
+            The preview deployment has been removed:
+            - ❌ Preview branch \`preview/pr-${prNumber}\` deleted
+            - ❌ Preview links are no longer accessible
+            
+            ${isMerged ? '✅ Changes have been merged to main branch' : ''}
+            
+            ---
+            🤖 *Automatic cleanup on PR ${status}*`;
+
+            try {
+              // Try to find existing preview comment
+              const { data: comments } = await github.rest.issues.listComments({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: prNumber
+              });
+
+              const botComment = comments.find(comment =>
+                comment.user.type === 'Bot' &&
+                comment.body.includes('PR Preview Deployed')
+              );
+
+              if (botComment) {
+                // Update existing comment
+                await github.rest.issues.updateComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  comment_id: botComment.id,
+                  body: message
+                });
+                core.info(`Updated comment #${botComment.id} with cleanup message`);
+              } else {
+                // Create new comment if preview comment not found
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: prNumber,
+                  body: message
+                });
+                core.info(`Created cleanup comment for PR #${prNumber}`);
+              }
+            } catch (error) {
+              core.warning(`Failed to update comment: ${error.message}`);
+            }
