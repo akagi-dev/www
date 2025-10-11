@@ -22,22 +22,13 @@ const t = useTranslations('ja');
     <!-- Contact Information -->
     <section class="py-16">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid md:grid-cols-3 gap-8">
+        <div class="grid md:grid-cols-2 gap-8">
           <!-- Location -->
           <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition border-t-4 border-akagi-teal">
             <div class="text-akagi-teal text-4xl mb-4">📍</div>
             <h2 class="text-2xl font-bold mb-4 text-akagi-charcoal">{t('contact.location.title')}</h2>
             <p class="text-gray-600">
               {t('contact.location.description')}
-            </p>
-          </div>
-
-          <!-- Business Hours -->
-          <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition border-t-4 border-akagi-orange">
-            <div class="text-akagi-orange text-4xl mb-4">⏰</div>
-            <h2 class="text-2xl font-bold mb-4 text-akagi-charcoal">{t('contact.hours.title')}</h2>
-            <p class="text-gray-600 whitespace-pre-line">
-              {t('contact.hours.description')}
             </p>
           </div>
 
@@ -56,14 +47,20 @@ const t = useTranslations('ja');
       </div>
     </section>
 
-    <!-- Map Placeholder -->
+    <!-- Map Section -->
     <section class="py-16 bg-gray-100">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="bg-gradient-to-r from-akagi-teal to-akagi-navy rounded-lg h-96 flex items-center justify-center">
-          <div class="text-center text-white">
-            <p class="text-2xl font-bold mb-2">🗺️ 地図プレースホルダー</p>
-            <p class="text-akagi-light-blue">所在地マップ / 道順</p>
-          </div>
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3207.7885461699283!2d139.0227!3d36.5158!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzbCsDMwJzU2LjkiTiAxMznCsDAxJzIxLjciRQ!5e0!3m2!1sja!2sjp!4v1234567890123"
+            width="100%"
+            height="450"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="赤城エンジニアリング所在地"
+          ></iframe>
         </div>
       </div>
     </section>
