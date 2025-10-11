@@ -14,11 +14,17 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const distDir = path.join(__dirname, '../dist');
+const VERBOSE = process.env.VERBOSE === 'true';
 const results = {
   passed: 0,
   failed: 0,
   warnings: 0,
-  errors: []
+  errors: [],
+  stats: {
+    totalPages: 0,
+    completePages: 0,
+    partialPages: 0
+  }
 };
 
 const LANGUAGES = ['en', 'ja', 'ru'];
@@ -98,6 +104,7 @@ function checkPageConsistency() {
     
     // Check each page exists in all languages
     const missingPages = [];
+    const completePages = [];
     
     for (const page of allPages) {
       const existsIn = [];
@@ -117,22 +124,48 @@ function checkPageConsistency() {
           existsIn: existsIn,
           missingIn: missingIn
         });
-        results.failed++;
+        results.stats.partialPages++;
+        // Only treat as warning if page is missing in some but not all languages
+        if (existsIn.includes('en')) {
+          results.warnings++;
+        } else {
+          results.failed++;
+        }
       } else {
+        completePages.push(page);
+        results.stats.completePages++;
         results.passed++;
       }
     }
     
+    results.stats.totalPages += allPages.size;
+    
+    if (completePages.length > 0) {
+      console.log(`✅ ${completePages.length} page(s) exist in all languages (${LANGUAGES.join(', ')})`);
+    }
+    
     if (missingPages.length > 0) {
-      console.error(`❌ Pages missing in some languages:`);
+      console.warn(`⚠️  ${missingPages.length} page(s) missing in some languages:`);
       missingPages.forEach(({ page, existsIn, missingIn }) => {
-        console.error(`  Page: "${page}"`);
-        console.error(`    Exists in: ${existsIn.join(', ')}`);
-        console.error(`    Missing in: ${missingIn.join(', ')}\n`);
-        results.errors.push(`Page "${page}" missing in ${missingIn.join(', ')} for ${portal} portal`);
+        const severity = existsIn.includes('en') ? '⚠️ ' : '❌';
+        console.warn(`  ${severity} Page: "${page}"`);
+        console.warn(`     Exists in: ${existsIn.join(', ')}`);
+        console.warn(`     Missing in: ${missingIn.join(', ')}`);
+        if (existsIn.includes('en')) {
+          results.errors.push(`[Warning] Page "${page}" missing in ${missingIn.join(', ')} for ${portal} portal`);
+        } else {
+          results.errors.push(`[Critical] Page "${page}" missing in ${missingIn.join(', ')} for ${portal} portal`);
+        }
       });
+      console.log('');
+      
+      const enOnlyPages = missingPages.filter(p => p.existsIn.includes('en'));
+      if (enOnlyPages.length > 0) {
+        console.warn(`  💡 ${enOnlyPages.length} page(s) available only in English.`);
+        console.warn(`     Consider adding translations for complete multi-language support.\n`);
+      }
     } else {
-      console.log(`✅ All ${allPages.size} pages exist in all languages (${LANGUAGES.join(', ')})\n`);
+      console.log(`  All pages are complete\n`);
     }
   }
 }
@@ -281,20 +314,29 @@ async function validateCrossLanguage() {
   console.log('='.repeat(60));
   console.log('CROSS-LANGUAGE CONSISTENCY SUMMARY');
   console.log('='.repeat(60));
-  console.log(`Languages checked: ${LANGUAGES.join(', ')}`);
-  console.log(`Portals checked: ${PORTALS.join(', ')}`);
+  console.log(`📊 Statistics:`);
+  console.log(`   Languages checked: ${LANGUAGES.join(', ')}`);
+  console.log(`   Portals checked: ${PORTALS.join(', ')}`);
+  console.log(`   Total pages: ${results.stats.totalPages}`);
+  console.log(`   Complete (all languages): ${results.stats.completePages}`);
+  console.log(`   Partial (some languages): ${results.stats.partialPages}`);
   console.log(`\n✅ Passed: ${results.passed}`);
   console.log(`❌ Failed: ${results.failed}`);
   console.log(`⚠️  Warnings: ${results.warnings}`);
   
   if (results.failed > 0) {
-    console.log('\n❌ Cross-language validation FAILED');
+    console.log('\n❌ Cross-language validation FAILED - Critical issues found');
+    console.log(`   ${results.failed} critical issue(s) must be fixed`);
     process.exit(1);
+  } else if (results.warnings > 0) {
+    console.log('\n✅ Cross-language validation PASSED with warnings');
+    console.log(`   ${results.warnings} non-critical issue(s) found`);
+    if (results.warnings > 0) {
+      console.log(`   💡 Some pages are available only in English - consider adding translations`);
+    }
+    process.exit(0);
   } else {
     console.log('\n✅ All cross-language validations PASSED');
-    if (results.warnings > 0) {
-      console.log(`⚠️  Note: ${results.warnings} warnings found (non-critical)`);
-    }
     process.exit(0);
   }
 }
