@@ -89,7 +89,26 @@ The site will be available at `http://localhost:4321/www`
 The site is automatically deployed to GitHub Pages on every push to `main`:
 
 - **Production URL**: https://akagi-dev.github.io/www
-- **PR Previews**: Build artifacts available for each PR
+- **PR Previews**: Automated build artifacts with comment notifications for each PR
+
+### PR Preview Workflow
+
+When you open or update a pull request:
+1. ✅ GitHub Actions automatically builds the site
+2. 📦 Creates a downloadable artifact with the preview build
+3. 💬 Posts/updates a comment on the PR with:
+   - Direct link to download the artifact
+   - Step-by-step testing instructions
+   - Build metadata (commit SHA, timestamp)
+   - Available language routes
+
+The preview workflow includes:
+- **Automated comments** - No need to search for artifacts
+- **Smart updates** - Comments are updated on new commits (no spam)
+- **Fork support** - Works for external contributors
+- **Error handling** - Graceful failure with detailed logs
+
+For more details, see [`.github/workflows/README.md`](.github/workflows/README.md)
 
 ## 📝 License
 
