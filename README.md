@@ -1,6 +1,7 @@
 # Akagi Engineering Portal
 
 [![Deploy to GitHub Pages](https://github.com/akagi-dev/www/actions/workflows/deploy.yml/badge.svg)](https://github.com/akagi-dev/www/actions/workflows/deploy.yml)
+[![PR Tests](https://github.com/akagi-dev/www/actions/workflows/pr-tests.yml/badge.svg)](https://github.com/akagi-dev/www/actions/workflows/pr-tests.yml)
 
 Official website for Akagi Engineering - Japanese car service specializing in JDM drift cars and D1GP motorsport.
 
@@ -162,6 +163,48 @@ The preview workflow includes:
   - Russian: `https://akagi-dev.github.io/www/pr-{number}/drift/ru/`
 
 For more details, see [`.github/workflows/README.md`](.github/workflows/README.md)
+
+## 🧪 Quality Assurance
+
+### Automated PR Tests
+
+Every Pull Request is automatically tested for quality using comprehensive validation:
+
+[![PR Tests](https://github.com/akagi-dev/www/actions/workflows/pr-tests.yml/badge.svg)](https://github.com/akagi-dev/www/actions/workflows/pr-tests.yml)
+
+**Test Categories:**
+- ✅ **Link Validation** - Verifies all internal and external links
+- ✅ **Resource Validation** - Checks images, CSS, JS files exist
+- ✅ **Content Quality** - Detects duplicates, validates HTML structure
+- ✅ **SEO & Meta Tags** - Ensures proper titles, descriptions, lang attributes
+- ✅ **Cross-Language Consistency** - Validates parity across en/ja/ru
+- ✅ **Build Verification** - Tests both production and PR preview builds
+- ✅ **Responsive Design** - Validates mobile-friendly implementation
+
+**Running Tests Locally:**
+```bash
+# Build the site first
+npm run build
+
+# Run all tests
+node tests/run-all-tests.mjs
+
+# Run individual tests
+node tests/validate-links.mjs
+node tests/validate-resources.mjs
+node tests/validate-content.mjs
+node tests/validate-seo.mjs
+node tests/validate-cross-language.mjs
+```
+
+**Performance:**
+- Complete test suite runs in < 1 second
+- Total CI/CD workflow time: ~2-3 minutes
+- Includes both production and PR preview build testing
+
+For detailed information, see:
+- [Test Documentation](tests/README.md)
+- [Workflow Documentation](.github/workflows/PR_TESTS_README.md)
 
 ## 📝 License
 
