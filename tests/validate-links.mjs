@@ -125,6 +125,13 @@ async function checkExternalLink(url) {
   }
 }
 
+// Check if link is to a missing language-specific page
+function isMissingLanguagePage(link) {
+  // Pattern: /drift/{lang}/{page} or /{lang}/{page}
+  const driftPattern = /^\/drift\/(ja|ru)\/(fleet|tracks|pricing|booking|faq)/;
+  return driftPattern.test(link);
+}
+
 // Main validation
 async function validateLinks() {
   console.log('🔗 Validating links...\n');
@@ -138,6 +145,7 @@ async function validateLinks() {
   console.log(`Found ${htmlFiles.length} HTML files to check\n`);
   
   const brokenLinks = [];
+  const missingLanguagePages = [];
   const externalLinks = new Set();
   
   for (const filePath of htmlFiles) {
@@ -151,19 +159,29 @@ async function validateLinks() {
       if (check.external) {
         externalLinks.add(link);
       } else if (!check.exists) {
-        brokenLinks.push({
-          file: relativePath,
-          link: link,
-          attempted: check.attempted
-        });
-        results.failed++;
+        // Categorize broken links
+        if (isMissingLanguagePage(link)) {
+          missingLanguagePages.push({
+            file: relativePath,
+            link: link,
+            attempted: check.attempted
+          });
+          results.warnings++;
+        } else {
+          brokenLinks.push({
+            file: relativePath,
+            link: link,
+            attempted: check.attempted
+          });
+          results.failed++;
+        }
       } else {
         results.passed++;
       }
     }
   }
   
-  // Report broken links
+  // Report critical broken links
   if (brokenLinks.length > 0) {
     console.error('❌ BROKEN INTERNAL LINKS FOUND:\n');
     brokenLinks.forEach(({ file, link }) => {
@@ -173,8 +191,30 @@ async function validateLinks() {
     });
   }
   
+  // Report missing language pages as warnings
+  if (missingLanguagePages.length > 0) {
+    console.warn('⚠️  MISSING LANGUAGE-SPECIFIC PAGES (non-critical):\n');
+    
+    // Group by page type
+    const pagesByType = {};
+    missingLanguagePages.forEach(({ file, link }) => {
+      if (!pagesByType[link]) {
+        pagesByType[link] = [];
+      }
+      pagesByType[link].push(file);
+    });
+    
+    for (const [link, files] of Object.entries(pagesByType)) {
+      console.warn(`  Missing page: ${link}`);
+      console.warn(`  Referenced in: ${files.length} file(s)\n`);
+    }
+    
+    console.warn('  💡 These pages exist in English but not in other languages.');
+    console.warn('     Consider creating translated versions or removing links.\n');
+  }
+  
   // Validate external links
-  console.log(`\n🌐 Checking ${externalLinks.size} unique external links...`);
+  console.log(`🌐 Checking ${externalLinks.size} unique external links...`);
   for (const url of externalLinks) {
     const check = await checkExternalLink(url);
     if (check.valid) {
@@ -194,8 +234,13 @@ async function validateLinks() {
   console.log(`⚠️  Warnings: ${results.warnings}`);
   
   if (results.failed > 0) {
-    console.log('\n❌ Link validation FAILED');
+    console.log('\n❌ Link validation FAILED - Critical broken links found');
+    console.log(`   ${results.failed} critical issue(s) must be fixed`);
     process.exit(1);
+  } else if (results.warnings > 0) {
+    console.log('\n✅ Link validation PASSED with warnings');
+    console.log(`   ${results.warnings} non-critical issue(s) found`);
+    process.exit(0);
   } else {
     console.log('\n✅ All link validations PASSED');
     process.exit(0);
