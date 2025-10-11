@@ -67,13 +67,20 @@ jobs:
             
             const message = `## 🌟 PR Preview Deployed!
 
-            ### 📱 **Preview Links:**
+            ### 📱 **Corporate Portal:**
             - 🇬🇧 [English](${baseUrl}/en/) 
             - 🇯🇵 [Japanese](${baseUrl}/ja/)
             - 🇷🇺 [Russian](${baseUrl}/ru/)
 
+            ### 🏎️ **Drift Rental Portal:**
+            - 🇬🇧 [English](${baseUrl}/drift/en/) 
+            - 🇯🇵 [Japanese](${baseUrl}/drift/ja/)
+            - 🇷🇺 [Russian](${baseUrl}/drift/ru/)
+
             ### 📊 **Quick Access:**
             - 🏠 [Home Page](${baseUrl}/)
+            - 🏢 [Corporate Site](${baseUrl}/en/)
+            - 🏁 [Drift Portal](${baseUrl}/drift/en/)
             - 📱 Mobile-optimized design
             - ✅ All languages available
 
