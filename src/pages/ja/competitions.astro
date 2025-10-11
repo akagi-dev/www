@@ -8,12 +8,12 @@ const t = useTranslations('ja');
 <Layout>
   <div class="min-h-screen">
     <!-- Hero Section -->
-    <section class="bg-gradient-to-r from-akagi-black to-akagi-gray text-white py-20">
+    <section class="bg-gradient-to-r from-akagi-navy to-akagi-teal text-white py-20">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 class="text-4xl md:text-5xl font-bold mb-6 text-akagi-red">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6 text-akagi-orange">
           {t('competitions.title')}
         </h1>
-        <p class="text-xl text-gray-300 max-w-3xl">
+        <p class="text-xl text-akagi-light-blue max-w-3xl">
           {t('competitions.description')}
         </p>
       </div>
@@ -24,27 +24,27 @@ const t = useTranslations('ja');
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid md:grid-cols-3 gap-8">
           <!-- D1 Lights -->
-          <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition">
+          <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition border-t-4 border-akagi-red">
             <div class="text-akagi-red text-4xl mb-4">🏆</div>
-            <h2 class="text-2xl font-bold mb-4">{t('competitions.d1lights.title')}</h2>
+            <h2 class="text-2xl font-bold mb-4 text-akagi-charcoal">{t('competitions.d1lights.title')}</h2>
             <p class="text-gray-600">
               {t('competitions.d1lights.description')}
             </p>
           </div>
 
           <!-- D1GP Aspirations -->
-          <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition">
-            <div class="text-akagi-red text-4xl mb-4">🎯</div>
-            <h2 class="text-2xl font-bold mb-4">{t('competitions.d1gp.title')}</h2>
+          <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition border-t-4 border-akagi-teal">
+            <div class="text-akagi-teal text-4xl mb-4">🎯</div>
+            <h2 class="text-2xl font-bold mb-4 text-akagi-charcoal">{t('competitions.d1gp.title')}</h2>
             <p class="text-gray-600">
               {t('competitions.d1gp.description')}
             </p>
           </div>
 
           <!-- Achievements -->
-          <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition">
-            <div class="text-akagi-red text-4xl mb-4">⭐</div>
-            <h2 class="text-2xl font-bold mb-4">{t('competitions.achievements.title')}</h2>
+          <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition border-t-4 border-akagi-orange">
+            <div class="text-akagi-orange text-4xl mb-4">⭐</div>
+            <h2 class="text-2xl font-bold mb-4 text-akagi-charcoal">{t('competitions.achievements.title')}</h2>
             <p class="text-gray-600">
               {t('competitions.achievements.description')}
             </p>
@@ -56,15 +56,15 @@ const t = useTranslations('ja');
     <!-- D1GP Series Info -->
     <section class="py-16 bg-gray-100">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="bg-white p-12 rounded-lg shadow-lg text-center">
-          <h2 class="text-3xl font-bold mb-6">D1グランプリシリーズ</h2>
+        <div class="bg-white p-12 rounded-lg shadow-lg text-center border-l-4 border-akagi-red">
+          <h2 class="text-3xl font-bold mb-6 text-akagi-charcoal">D1グランプリシリーズ</h2>
           <p class="text-gray-600 max-w-3xl mx-auto mb-8">
             D1グランプリは、日本最高峰のプロフェッショナルドリフティング選手権であり、
             世界最高のドライバーと最先端のドリフトマシンを披露しています。
             D1ライツからメインシリーズへの私たちの旅は、
             日本のモータースポーツにおける卓越性への取り組みを表しています。
           </p>
-          <div class="inline-block bg-akagi-red text-white px-8 py-3 rounded-lg font-semibold">
+          <div class="inline-block bg-akagi-red text-white px-8 py-3 rounded-lg font-semibold hover:bg-akagi-orange transition">
             現在：D1ライツライセンス保持
           </div>
         </div>
@@ -74,10 +74,10 @@ const t = useTranslations('ja');
     <!-- Image Placeholder -->
     <section class="py-16">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="bg-gradient-to-r from-akagi-gray to-akagi-black rounded-lg h-96 flex items-center justify-center">
+        <div class="bg-gradient-to-r from-akagi-teal to-akagi-navy rounded-lg h-96 flex items-center justify-center">
           <div class="text-center text-white">
             <p class="text-2xl font-bold mb-2">📸 画像プレースホルダー</p>
-            <p class="text-gray-400">競技アクション / チーム写真 / トロフィーの瞬間</p>
+            <p class="text-akagi-light-blue">競技アクション / チーム写真 / トロフィーの瞬間</p>
           </div>
         </div>
       </div>
