@@ -16,13 +16,13 @@ const currentPath = Astro.url.pathname;
     <title>Akagi Engineering - JDM Motorsport Specialists</title>
     <meta name="description" content="Akagi Engineering - Japanese car service specializing in JDM drift cars and D1GP motorsport" />
   </head>
-  <body class="bg-gray-50 text-gray-900">
-    <header class="bg-akagi-black text-white sticky top-0 z-50 shadow-md">
+  <body class="bg-gray-50 text-akagi-charcoal">
+    <header class="bg-akagi-navy text-white sticky top-0 z-50 shadow-md">
       <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16">
           <!-- Logo -->
           <div class="flex-shrink-0">
-            <a href={`/www/${lang}/`} class="text-xl font-bold text-akagi-red hover:text-red-400 transition">
+            <a href={`/www/${lang}/`} class="text-xl font-bold text-akagi-red hover:text-akagi-orange transition">
               AKAGI ENGINEERING
             </a>
           </div>
@@ -31,35 +31,35 @@ const currentPath = Astro.url.pathname;
           <div class="hidden md:flex md:items-center md:space-x-8">
             <a 
               href={`/www/${lang}/`}
-              class={`hover:text-akagi-red transition ${currentPath.endsWith(`/${lang}/`) || currentPath.endsWith(`/${lang}`) ? 'text-akagi-red' : ''}`}
+              class={`hover:text-akagi-orange transition ${currentPath.endsWith(`/${lang}/`) || currentPath.endsWith(`/${lang}`) ? 'text-akagi-light-blue' : 'text-akagi-teal'}`}
             >
               {t('nav.about')}
             </a>
             <a 
               href={`/www/${lang}/services`}
-              class={`hover:text-akagi-red transition ${currentPath.includes('/services') ? 'text-akagi-red' : ''}`}
+              class={`hover:text-akagi-orange transition ${currentPath.includes('/services') ? 'text-akagi-light-blue' : 'text-akagi-teal'}`}
             >
               {t('nav.services')}
             </a>
             <a 
               href={`/www/${lang}/competitions`}
-              class={`hover:text-akagi-red transition ${currentPath.includes('/competitions') ? 'text-akagi-red' : ''}`}
+              class={`hover:text-akagi-orange transition ${currentPath.includes('/competitions') ? 'text-akagi-light-blue' : 'text-akagi-teal'}`}
             >
               {t('nav.competitions')}
             </a>
             <a 
               href={`/www/${lang}/contact`}
-              class={`hover:text-akagi-red transition ${currentPath.includes('/contact') ? 'text-akagi-red' : ''}`}
+              class={`hover:text-akagi-orange transition ${currentPath.includes('/contact') ? 'text-akagi-light-blue' : 'text-akagi-teal'}`}
             >
               {t('nav.contact')}
             </a>
 
             <!-- Language Switcher -->
-            <div class="flex items-center space-x-2 border-l border-gray-600 pl-4">
+            <div class="flex items-center space-x-2 border-l border-akagi-teal pl-4">
               {Object.entries(languages).map(([code, name]) => (
                 <a
                   href={currentPath.replace(`/${lang}/`, `/${code}/`).replace(`/${lang}`, `/${code}`)}
-                  class={`px-2 py-1 rounded text-sm ${lang === code ? 'bg-akagi-red text-white' : 'hover:bg-gray-700'}`}
+                  class={`px-2 py-1 rounded text-sm ${lang === code ? 'bg-akagi-red text-white' : 'hover:bg-akagi-light-blue hover:text-akagi-navy'}`}
                   title={name}
                 >
                   {code.toUpperCase()}
@@ -73,7 +73,7 @@ const currentPath = Astro.url.pathname;
             <button
               id="mobile-menu-button"
               type="button"
-              class="inline-flex items-center justify-center p-2 rounded-md hover:bg-gray-700 focus:outline-none"
+              class="inline-flex items-center justify-center p-2 rounded-md hover:bg-akagi-teal focus:outline-none"
               aria-expanded="false"
             >
               <span class="sr-only">Open main menu</span>
@@ -89,35 +89,35 @@ const currentPath = Astro.url.pathname;
           <div class="space-y-1">
             <a 
               href={`/www/${lang}/`}
-              class={`block px-3 py-2 rounded-md hover:bg-gray-700 ${currentPath.endsWith(`/${lang}/`) || currentPath.endsWith(`/${lang}`) ? 'bg-akagi-red' : ''}`}
+              class={`block px-3 py-2 rounded-md hover:bg-akagi-teal ${currentPath.endsWith(`/${lang}/`) || currentPath.endsWith(`/${lang}`) ? 'bg-akagi-light-blue text-akagi-navy' : ''}`}
             >
               {t('nav.about')}
             </a>
             <a 
               href={`/www/${lang}/services`}
-              class={`block px-3 py-2 rounded-md hover:bg-gray-700 ${currentPath.includes('/services') ? 'bg-akagi-red' : ''}`}
+              class={`block px-3 py-2 rounded-md hover:bg-akagi-teal ${currentPath.includes('/services') ? 'bg-akagi-light-blue text-akagi-navy' : ''}`}
             >
               {t('nav.services')}
             </a>
             <a 
               href={`/www/${lang}/competitions`}
-              class={`block px-3 py-2 rounded-md hover:bg-gray-700 ${currentPath.includes('/competitions') ? 'bg-akagi-red' : ''}`}
+              class={`block px-3 py-2 rounded-md hover:bg-akagi-teal ${currentPath.includes('/competitions') ? 'bg-akagi-light-blue text-akagi-navy' : ''}`}
             >
               {t('nav.competitions')}
             </a>
             <a 
               href={`/www/${lang}/contact`}
-              class={`block px-3 py-2 rounded-md hover:bg-gray-700 ${currentPath.includes('/contact') ? 'bg-akagi-red' : ''}`}
+              class={`block px-3 py-2 rounded-md hover:bg-akagi-teal ${currentPath.includes('/contact') ? 'bg-akagi-light-blue text-akagi-navy' : ''}`}
             >
               {t('nav.contact')}
             </a>
             
             <!-- Mobile Language Switcher -->
-            <div class="flex space-x-2 px-3 py-2 border-t border-gray-600 mt-2 pt-2">
+            <div class="flex space-x-2 px-3 py-2 border-t border-akagi-teal mt-2 pt-2">
               {Object.entries(languages).map(([code, name]) => (
                 <a
                   href={currentPath.replace(`/${lang}/`, `/${code}/`).replace(`/${lang}`, `/${code}`)}
-                  class={`px-3 py-1 rounded text-sm ${lang === code ? 'bg-akagi-red text-white' : 'bg-gray-700 hover:bg-gray-600'}`}
+                  class={`px-3 py-1 rounded text-sm ${lang === code ? 'bg-akagi-red text-white' : 'bg-akagi-teal hover:bg-akagi-light-blue hover:text-akagi-navy'}`}
                   title={name}
                 >
                   {code.toUpperCase()}
@@ -133,12 +133,12 @@ const currentPath = Astro.url.pathname;
       <slot />
     </main>
 
-    <footer class="bg-akagi-black text-white mt-auto">
+    <footer class="bg-akagi-navy text-white mt-auto">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div class="text-center">
           <p class="text-lg font-bold text-akagi-red mb-2">AKAGI ENGINEERING</p>
-          <p class="text-gray-400 text-sm">JDM Motorsport Specialists | D1 Lights License</p>
-          <p class="text-gray-500 text-xs mt-4">&copy; 2025 Akagi Engineering. All rights reserved.</p>
+          <p class="text-akagi-light-blue text-sm">JDM Motorsport Specialists | D1 Lights License</p>
+          <p class="text-gray-400 text-xs mt-4">&copy; 2025 Akagi Engineering. All rights reserved.</p>
         </div>
       </div>
     </footer>

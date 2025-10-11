@@ -8,12 +8,12 @@ const t = useTranslations('en');
 <Layout>
   <div class="min-h-screen">
     <!-- Hero Section -->
-    <section class="bg-gradient-to-r from-akagi-black to-akagi-gray text-white py-20">
+    <section class="bg-gradient-to-r from-akagi-navy to-akagi-teal text-white py-20">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 class="text-4xl md:text-5xl font-bold mb-6 text-akagi-red">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6 text-akagi-orange">
           {t('services.title')}
         </h1>
-        <p class="text-xl text-gray-300 max-w-3xl">
+        <p class="text-xl text-akagi-light-blue max-w-3xl">
           {t('services.description')}
         </p>
       </div>
@@ -24,18 +24,18 @@ const t = useTranslations('en');
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid md:grid-cols-2 gap-8 mb-12">
           <!-- Drift Car Rental -->
-          <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition">
+          <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition border-t-4 border-akagi-red">
             <div class="text-akagi-red text-4xl mb-4">🚗</div>
-            <h2 class="text-2xl font-bold mb-4">{t('services.rental.title')}</h2>
+            <h2 class="text-2xl font-bold mb-4 text-akagi-charcoal">{t('services.rental.title')}</h2>
             <p class="text-gray-600">
               {t('services.rental.description')}
             </p>
           </div>
 
           <!-- Track Support -->
-          <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition">
-            <div class="text-akagi-red text-4xl mb-4">🔧</div>
-            <h2 class="text-2xl font-bold mb-4">{t('services.support.title')}</h2>
+          <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition border-t-4 border-akagi-light-blue">
+            <div class="text-akagi-light-blue text-4xl mb-4">🔧</div>
+            <h2 class="text-2xl font-bold mb-4 text-akagi-charcoal">{t('services.support.title')}</h2>
             <p class="text-gray-600">
               {t('services.support.description')}
             </p>
@@ -43,22 +43,22 @@ const t = useTranslations('en');
         </div>
 
         <!-- Available Tracks -->
-        <div class="bg-gradient-to-r from-gray-50 to-gray-100 p-8 rounded-lg">
-          <h2 class="text-3xl font-bold mb-6 text-center">{t('services.tracks.title')}</h2>
+        <div class="bg-gradient-to-r from-gray-50 to-gray-100 p-8 rounded-lg border-l-4 border-akagi-teal">
+          <h2 class="text-3xl font-bold mb-6 text-center text-akagi-charcoal">{t('services.tracks.title')}</h2>
           <div class="grid md:grid-cols-3 gap-6">
-            <div class="bg-white p-6 rounded-lg shadow">
+            <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition">
               <div class="text-2xl mb-2">🏁</div>
-              <p class="text-gray-800 font-semibold mb-2">Chiba Circuit</p>
+              <p class="text-akagi-charcoal font-semibold mb-2">Chiba Circuit</p>
               <p class="text-gray-600 text-sm">{t('services.tracks.chiba')}</p>
             </div>
-            <div class="bg-white p-6 rounded-lg shadow">
+            <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition">
               <div class="text-2xl mb-2">🏁</div>
-              <p class="text-gray-800 font-semibold mb-2">Gunma Track</p>
+              <p class="text-akagi-charcoal font-semibold mb-2">Gunma Track</p>
               <p class="text-gray-600 text-sm">{t('services.tracks.gunma')}</p>
             </div>
-            <div class="bg-white p-6 rounded-lg shadow">
+            <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition">
               <div class="text-2xl mb-2">🏁</div>
-              <p class="text-gray-800 font-semibold mb-2">Fuji Speedway</p>
+              <p class="text-akagi-charcoal font-semibold mb-2">Fuji Speedway</p>
               <p class="text-gray-600 text-sm">{t('services.tracks.fuji')}</p>
             </div>
           </div>
@@ -69,10 +69,10 @@ const t = useTranslations('en');
     <!-- Image Placeholder -->
     <section class="py-16 bg-gray-100">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="bg-gradient-to-r from-akagi-gray to-akagi-black rounded-lg h-96 flex items-center justify-center">
+        <div class="bg-gradient-to-r from-akagi-teal to-akagi-navy rounded-lg h-96 flex items-center justify-center">
           <div class="text-center text-white">
             <p class="text-2xl font-bold mb-2">📸 Image Placeholder</p>
-            <p class="text-gray-400">Race Track / Drift Action / Service Photos</p>
+            <p class="text-akagi-light-blue">Race Track / Drift Action / Service Photos</p>
           </div>
         </div>
       </div>
