@@ -1,0 +1,127 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { useTranslations } from '@i18n/ui';
+
+const t = useTranslations('ru');
+---
+
+<Layout>
+  <div class="min-h-screen">
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-akagi-navy to-akagi-teal text-white py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6 text-akagi-orange">
+          {t('drift.faq.title')}
+        </h1>
+        <p class="text-xl text-akagi-light-blue max-w-3xl">
+          {t('drift.faq.description')}
+        </p>
+      </div>
+    </section>
+
+    <!-- FAQ Content -->
+    <section class="py-16">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="space-y-6">
+          <!-- General Questions -->
+          <div class="bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-2xl font-bold mb-4 text-akagi-red">General Questions</h2>
+            
+            <div class="space-y-4">
+              <div class="border-b border-gray-200 pb-4">
+                <h3 class="font-bold text-akagi-charcoal mb-2">What do I need to rent a drift car?</h3>
+                <p class="text-gray-600">You need a valid driver's license (international licenses accepted), to be at least 18 years old, and provide contact information. Previous drift experience is helpful but not required - we offer instruction!</p>
+              </div>
+
+              <div class="border-b border-gray-200 pb-4">
+                <h3 class="font-bold text-akagi-charcoal mb-2">Is insurance included?</h3>
+                <p class="text-gray-600">Yes, all rentals include comprehensive insurance coverage. We'll explain the details during booking confirmation.</p>
+              </div>
+
+              <div class="border-b border-gray-200 pb-4">
+                <h3 class="font-bold text-akagi-charcoal mb-2">Can I bring my own helmet?</h3>
+                <p class="text-gray-600">Yes, you can bring your own helmet if it meets Japanese safety standards. We also provide helmets and all required safety equipment at no extra charge.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Booking & Pricing -->
+          <div class="bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-2xl font-bold mb-4 text-akagi-red">Booking & Pricing</h2>
+            
+            <div class="space-y-4">
+              <div class="border-b border-gray-200 pb-4">
+                <h3 class="font-bold text-akagi-charcoal mb-2">How far in advance should I book?</h3>
+                <p class="text-gray-600">We recommend booking at least 1-2 weeks in advance, especially for weekends and Fuji Speedway. Popular dates can book up months ahead.</p>
+              </div>
+
+              <div class="border-b border-gray-200 pb-4">
+                <h3 class="font-bold text-akagi-charcoal mb-2">What's your cancellation policy?</h3>
+                <p class="text-gray-600">Full refund if cancelled 48+ hours before booking. 50% refund for 24-48 hours notice. No refund for same-day cancellations.</p>
+              </div>
+
+              <div class="border-b border-gray-200 pb-4">
+                <h3 class="font-bold text-akagi-charcoal mb-2">Are there additional costs beyond car and track rental?</h3>
+                <p class="text-gray-600">The main costs are car rental and track time. You'll likely want fuel refills and may go through tires depending on your session length and driving style. We offer tire sets and fuel service for convenience.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Experience & Safety -->
+          <div class="bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-2xl font-bold mb-4 text-akagi-red">Experience & Safety</h2>
+            
+            <div class="space-y-4">
+              <div class="border-b border-gray-200 pb-4">
+                <h3 class="font-bold text-akagi-charcoal mb-2">I've never drifted before - is this suitable for me?</h3>
+                <p class="text-gray-600">Absolutely! We recommend starting with the AE86 at Chiba Speedway and adding drift instruction. Our coaches are experienced and patient.</p>
+              </div>
+
+              <div class="border-b border-gray-200 pb-4">
+                <h3 class="font-bold text-akagi-charcoal mb-2">What safety equipment is provided?</h3>
+                <p class="text-gray-600">We provide helmets, racing suits, gloves, and neck braces. All cars are equipped with roll cages, racing seats, and 5-point harnesses.</p>
+              </div>
+
+              <div class="border-b border-gray-200 pb-4">
+                <h3 class="font-bold text-akagi-charcoal mb-2">What if I damage the car?</h3>
+                <p class="text-gray-600">Insurance covers most damage. There may be a deductible depending on the severity. We'll review this during your safety briefing.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cars & Tracks -->
+          <div class="bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-2xl font-bold mb-4 text-akagi-red">Cars & Tracks</h2>
+            
+            <div class="space-y-4">
+              <div class="border-b border-gray-200 pb-4">
+                <h3 class="font-bold text-akagi-charcoal mb-2">Which car should I choose as a beginner?</h3>
+                <p class="text-gray-600">The Toyota AE86 is perfect for beginners - it's forgiving, easy to control, and teaches proper drift fundamentals with its balanced chassis.</p>
+              </div>
+
+              <div class="border-b border-gray-200 pb-4">
+                <h3 class="font-bold text-akagi-charcoal mb-2">What's the difference between the tracks?</h3>
+                <p class="text-gray-600">Chiba is technical and beginner-friendly. Gunma offers mountain driving with elevation changes. Fuji is a world-class professional circuit with high-speed sections.</p>
+              </div>
+
+              <div class="border-b border-gray-200 pb-4">
+                <h3 class="font-bold text-akagi-charcoal mb-2">Can I switch cars during my session?</h3>
+                <p class="text-gray-600">Car switches aren't typically included, but we can arrange this for an additional fee if another car is available. Contact us when booking.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Still Have Questions -->
+        <div class="mt-12 bg-gradient-to-r from-akagi-red to-akagi-orange text-white p-8 rounded-lg text-center">
+          <h2 class="text-3xl font-bold mb-4">Still Have Questions?</h2>
+          <p class="text-xl mb-6">Contact us directly and we'll be happy to help!</p>
+          <div class="space-y-2">
+            <p class="text-akagi-light-blue">Email: drift@akagi.dev</p>
+            <p class="text-akagi-light-blue">Phone: +81-XX-XXXX-XXXX</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>

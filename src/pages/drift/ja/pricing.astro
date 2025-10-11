@@ -1,0 +1,154 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { useTranslations } from '@i18n/ui';
+
+const t = useTranslations('ja');
+---
+
+<Layout>
+  <div class="min-h-screen">
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-akagi-navy to-akagi-teal text-white py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6 text-akagi-orange">
+          {t('drift.pricing.title')}
+        </h1>
+        <p class="text-xl text-akagi-light-blue max-w-3xl">
+          {t('drift.pricing.description')}
+        </p>
+      </div>
+    </section>
+
+    <!-- Pricing Tables -->
+    <section class="py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Car Rental Rates -->
+        <div class="mb-16">
+          <h2 class="text-3xl font-bold mb-8 text-center text-akagi-charcoal">Car Rental Rates</h2>
+          <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+              <div class="bg-akagi-teal text-white p-6">
+                <h3 class="text-2xl font-bold">Toyota AE86</h3>
+                <p class="text-akagi-light-blue">Entry Level</p>
+              </div>
+              <div class="p-6">
+                <div class="mb-4">
+                  <div class="text-3xl font-bold text-akagi-charcoal">¥15,000<span class="text-lg text-gray-600">/hour</span></div>
+                  <div class="text-xl text-gray-600">¥80,000/day</div>
+                </div>
+                <ul class="space-y-2 text-gray-600">
+                  <li>✓ Insurance included</li>
+                  <li>✓ Basic setup</li>
+                  <li>✓ Safety equipment</li>
+                  <li>✓ Track support</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden border-2 border-akagi-orange">
+              <div class="bg-akagi-orange text-white p-6">
+                <h3 class="text-2xl font-bold">Nissan S13</h3>
+                <p class="text-akagi-light-blue">Most Popular</p>
+              </div>
+              <div class="p-6">
+                <div class="mb-4">
+                  <div class="text-3xl font-bold text-akagi-charcoal">¥20,000<span class="text-lg text-gray-600">/hour</span></div>
+                  <div class="text-xl text-gray-600">¥120,000/day</div>
+                </div>
+                <ul class="space-y-2 text-gray-600">
+                  <li>✓ Insurance included</li>
+                  <li>✓ Competition setup</li>
+                  <li>✓ Safety equipment</li>
+                  <li>✓ Priority track support</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+              <div class="bg-akagi-red text-white p-6">
+                <h3 class="text-2xl font-bold">Nissan S14</h3>
+                <p class="text-akagi-light-blue">Premium</p>
+              </div>
+              <div class="p-6">
+                <div class="mb-4">
+                  <div class="text-3xl font-bold text-akagi-charcoal">¥25,000<span class="text-lg text-gray-600">/hour</span></div>
+                  <div class="text-xl text-gray-600">¥150,000/day</div>
+                </div>
+                <ul class="space-y-2 text-gray-600">
+                  <li>✓ Insurance included</li>
+                  <li>✓ Pro competition setup</li>
+                  <li>✓ Safety equipment</li>
+                  <li>✓ Dedicated mechanic</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Track Session Fees -->
+        <div class="mb-16">
+          <h2 class="text-3xl font-bold mb-8 text-center text-akagi-charcoal">Track Session Fees</h2>
+          <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <table class="w-full">
+              <thead class="bg-akagi-navy text-white">
+                <tr>
+                  <th class="px-6 py-4 text-left">Track</th>
+                  <th class="px-6 py-4 text-right">Per Hour</th>
+                  <th class="px-6 py-4 text-right">Half Day (4hrs)</th>
+                  <th class="px-6 py-4 text-right">Full Day (8hrs)</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-200">
+                <tr>
+                  <td class="px-6 py-4 font-semibold text-akagi-charcoal">Chiba Speedway</td>
+                  <td class="px-6 py-4 text-right text-gray-600">¥8,000</td>
+                  <td class="px-6 py-4 text-right text-gray-600">¥28,000</td>
+                  <td class="px-6 py-4 text-right text-gray-600">¥50,000</td>
+                </tr>
+                <tr>
+                  <td class="px-6 py-4 font-semibold text-akagi-charcoal">Gunma Cycle Sports</td>
+                  <td class="px-6 py-4 text-right text-gray-600">¥10,000</td>
+                  <td class="px-6 py-4 text-right text-gray-600">¥35,000</td>
+                  <td class="px-6 py-4 text-right text-gray-600">¥65,000</td>
+                </tr>
+                <tr>
+                  <td class="px-6 py-4 font-semibold text-akagi-charcoal">Fuji Speedway</td>
+                  <td class="px-6 py-4 text-right text-gray-600">¥15,000</td>
+                  <td class="px-6 py-4 text-right text-gray-600">¥50,000</td>
+                  <td class="px-6 py-4 text-right text-gray-600">¥90,000</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Add-on Services -->
+        <div>
+          <h2 class="text-3xl font-bold mb-8 text-center text-akagi-charcoal">Optional Add-ons</h2>
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="bg-white p-6 rounded-lg shadow-md">
+              <h3 class="text-xl font-bold mb-2 text-akagi-charcoal">Drift Instruction</h3>
+              <p class="text-gray-600 mb-2">Professional coaching from D1 Lights drivers</p>
+              <p class="text-2xl font-bold text-akagi-red">¥30,000/hour</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md">
+              <h3 class="text-xl font-bold mb-2 text-akagi-charcoal">Photo/Video Package</h3>
+              <p class="text-gray-600 mb-2">Professional photography and video of your session</p>
+              <p class="text-2xl font-bold text-akagi-red">¥25,000/session</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md">
+              <h3 class="text-xl font-bold mb-2 text-akagi-charcoal">Tire Set</h3>
+              <p class="text-gray-600 mb-2">Fresh drift tires (set of 4, installed)</p>
+              <p class="text-2xl font-bold text-akagi-red">¥40,000/set</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md">
+              <h3 class="text-xl font-bold mb-2 text-akagi-charcoal">Fuel Service</h3>
+              <p class="text-gray-600 mb-2">Premium 98 octane fuel</p>
+              <p class="text-2xl font-bold text-akagi-red">¥200/liter</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>
