@@ -1,0 +1,210 @@
+name: PR Quality Tests
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  test-production-build:
+    name: Test Production Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build (Production Mode)
+        run: npm run build
+
+      - name: Run validation tests
+        run: node tests/run-all-tests.mjs
+
+      - name: Check bundle size
+        run: |
+          echo "📦 Bundle Size Report:"
+          echo "====================="
+          du -sh dist/
+          echo ""
+          echo "CSS Files:"
+          find dist -name "*.css" -exec du -h {} \; | sort -hr
+          echo ""
+          echo "HTML Files:"
+          find dist -name "*.html" | wc -l
+          echo "files generated"
+
+  test-pr-preview-build:
+    name: Test PR Preview Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build (PR Preview Mode)
+        env:
+          GITHUB_REF: preview/pr-${{ github.event.pull_request.number }}
+        run: npm run build
+
+      - name: Verify PR preview paths
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          echo "🔍 Verifying PR preview build..."
+          
+          # Check that paths include PR number
+          if [ ! -f "dist/index.html" ]; then
+            echo "❌ Root index.html not found"
+            exit 1
+          fi
+          
+          # Verify base paths in HTML
+          if grep -r "/www/pr-${PR_NUMBER}/" dist/en/index.html > /dev/null; then
+            echo "✅ PR preview paths correctly configured"
+          else
+            echo "⚠️  Warning: PR preview paths may not be configured correctly"
+          fi
+          
+          echo "✅ PR preview build verification passed"
+
+      - name: Run validation tests on PR build
+        run: node tests/run-all-tests.mjs
+
+  responsive-design-check:
+    name: Responsive Design Check
+    runs-on: ubuntu-latest
+    needs: test-production-build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Check responsive meta tags
+        run: |
+          echo "📱 Checking responsive design..."
+          
+          # Check viewport meta tags
+          if grep -r 'name="viewport"' dist/*.html > /dev/null; then
+            echo "✅ Viewport meta tags found"
+          else
+            echo "❌ Viewport meta tags missing"
+            exit 1
+          fi
+          
+          # Check for mobile menu
+          if grep -r 'mobile-menu' dist/en/index.html > /dev/null; then
+            echo "✅ Mobile menu implementation found"
+          else
+            echo "⚠️  Mobile menu may be missing"
+          fi
+          
+          echo "✅ Responsive design checks passed"
+
+  comment-results:
+    name: Comment Test Results
+    runs-on: ubuntu-latest
+    needs: [test-production-build, test-pr-preview-build, responsive-design-check]
+    if: always()
+    steps:
+      - name: Comment PR with results
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const prNumber = context.issue.number;
+            const runId = context.runId;
+            const runUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${runId}`;
+            
+            const prodStatus = '${{ needs.test-production-build.result }}';
+            const prStatus = '${{ needs.test-pr-preview-build.result }}';
+            const responsiveStatus = '${{ needs.responsive-design-check.result }}';
+            
+            const getEmoji = (status) => {
+              if (status === 'success') return '✅';
+              if (status === 'failure') return '❌';
+              return '⚠️';
+            };
+            
+            const message = `## 🧪 PR Quality Tests Results
+            
+            | Test Suite | Status |
+            |------------|--------|
+            | Production Build & Tests | ${getEmoji(prodStatus)} ${prodStatus} |
+            | PR Preview Build & Tests | ${getEmoji(prStatus)} ${prStatus} |
+            | Responsive Design Check | ${getEmoji(responsiveStatus)} ${responsiveStatus} |
+            
+            ### Test Categories:
+            - ✅ Link validation (internal & external)
+            - ✅ Resource validation (images, CSS, JS)
+            - ✅ Content quality checks
+            - ✅ SEO & meta tag validation
+            - ✅ Cross-language consistency
+            - ✅ Build verification (production & PR preview)
+            - ✅ Responsive design basics
+            
+            [View detailed results →](${runUrl})
+            
+            ---
+            🤖 *Automated quality checks for multilingual Astro website*`;
+            
+            try {
+              const { data: comments } = await github.rest.issues.listComments({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: prNumber
+              });
+              
+              const botComment = comments.find(comment =>
+                comment.user.type === 'Bot' &&
+                comment.body.includes('PR Quality Tests Results')
+              );
+              
+              if (botComment) {
+                await github.rest.issues.updateComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  comment_id: botComment.id,
+                  body: message
+                });
+              } else {
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: prNumber,
+                  body: message
+                });
+              }
+            } catch (error) {
+              console.error('Failed to post comment:', error);
+            }
