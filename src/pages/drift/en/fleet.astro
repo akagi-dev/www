@@ -1,0 +1,143 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { useTranslations } from '@i18n/ui';
+
+const t = useTranslations('en');
+---
+
+<Layout>
+  <div class="min-h-screen">
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-akagi-navy to-akagi-teal text-white py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6 text-akagi-orange">
+          {t('drift.fleet.title')}
+        </h1>
+        <p class="text-xl text-akagi-light-blue max-w-3xl">
+          {t('drift.fleet.description')}
+        </p>
+      </div>
+    </section>
+
+    <!-- Fleet Grid -->
+    <section class="py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="space-y-12">
+          <!-- Toyota AE86 -->
+          <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="md:flex">
+              <div class="md:w-2/5 bg-gradient-to-br from-akagi-navy to-akagi-teal h-64 md:h-auto flex items-center justify-center">
+                <span class="text-9xl">🏎️</span>
+              </div>
+              <div class="md:w-3/5 p-8">
+                <h2 class="text-3xl font-bold mb-4 text-akagi-charcoal">Toyota AE86 Trueno</h2>
+                <p class="text-gray-600 mb-4">The legendary "Hachiroku" that started it all. Perfect for learning drift fundamentals with its balanced chassis and responsive handling.</p>
+                
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                  <div>
+                    <h3 class="font-bold text-akagi-charcoal mb-2">Specifications</h3>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                      <li>• Engine: 4A-GE 1.6L</li>
+                      <li>• Power: 130hp</li>
+                      <li>• Drivetrain: FR (RWD)</li>
+                      <li>• Weight: 925kg</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h3 class="font-bold text-akagi-charcoal mb-2">Features</h3>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                      <li>• LSD differential</li>
+                      <li>• Coilover suspension</li>
+                      <li>• Bucket seats</li>
+                      <li>• Roll cage</li>
+                    </ul>
+                  </div>
+                </div>
+                
+                <div class="bg-akagi-light-blue bg-opacity-20 p-4 rounded-lg">
+                  <p class="text-sm text-akagi-charcoal"><strong>Best for:</strong> Beginners to intermediate drivers learning drift fundamentals</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Nissan S13 -->
+          <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="md:flex">
+              <div class="md:w-2/5 bg-gradient-to-br from-akagi-teal to-akagi-navy h-64 md:h-auto flex items-center justify-center">
+                <span class="text-9xl">🚗</span>
+              </div>
+              <div class="md:w-3/5 p-8">
+                <h2 class="text-3xl font-bold mb-4 text-akagi-charcoal">Nissan S13 Silvia</h2>
+                <p class="text-gray-600 mb-4">The 240SX/Silvia is the ultimate drift platform. With SR20DET power and perfect weight distribution, it's a drift machine favorite worldwide.</p>
+                
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                  <div>
+                    <h3 class="font-bold text-akagi-charcoal mb-2">Specifications</h3>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                      <li>• Engine: SR20DET 2.0L Turbo</li>
+                      <li>• Power: 220hp</li>
+                      <li>• Drivetrain: FR (RWD)</li>
+                      <li>• Weight: 1,240kg</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h3 class="font-bold text-akagi-charcoal mb-2">Features</h3>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                      <li>• 2-way LSD</li>
+                      <li>• Adjustable coilovers</li>
+                      <li>• Hydraulic handbrake</li>
+                      <li>• Angle kit</li>
+                    </ul>
+                  </div>
+                </div>
+                
+                <div class="bg-akagi-light-blue bg-opacity-20 p-4 rounded-lg">
+                  <p class="text-sm text-akagi-charcoal"><strong>Best for:</strong> Intermediate to advanced drivers wanting more power</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Nissan S14 -->
+          <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="md:flex">
+              <div class="md:w-2/5 bg-gradient-to-br from-akagi-navy to-akagi-red h-64 md:h-auto flex items-center justify-center">
+                <span class="text-9xl">🏁</span>
+              </div>
+              <div class="md:w-3/5 p-8">
+                <h2 class="text-3xl font-bold mb-4 text-akagi-charcoal">Nissan S14 Silvia</h2>
+                <p class="text-gray-600 mb-4">Evolution of the S13 with more power, better chassis, and improved aerodynamics. Perfect for advanced drifting and competition-level performance.</p>
+                
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                  <div>
+                    <h3 class="font-bold text-akagi-charcoal mb-2">Specifications</h3>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                      <li>• Engine: SR20DET 2.0L Turbo</li>
+                      <li>• Power: 250hp</li>
+                      <li>• Drivetrain: FR (RWD)</li>
+                      <li>• Weight: 1,270kg</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h3 class="font-bold text-akagi-charcoal mb-2">Features</h3>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                      <li>• 2-way LSD</li>
+                      <li>• Competition coilovers</li>
+                      <li>• Hydraulic handbrake</li>
+                      <li>• Wide-body kit</li>
+                    </ul>
+                  </div>
+                </div>
+                
+                <div class="bg-akagi-light-blue bg-opacity-20 p-4 rounded-lg">
+                  <p class="text-sm text-akagi-charcoal"><strong>Best for:</strong> Advanced drivers and competition-focused sessions</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>

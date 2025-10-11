@@ -1,0 +1,158 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { useTranslations } from '@i18n/ui';
+
+const t = useTranslations('en');
+const base = import.meta.env.BASE_URL;
+const buildPath = (path: string) => `${base}/${path}`.replace(/\/+/g, '/');
+---
+
+<Layout>
+  <div class="min-h-screen">
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-akagi-navy via-akagi-teal to-akagi-navy text-white py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="text-5xl md:text-6xl font-bold mb-6 text-akagi-orange">
+          {t('drift.hero.title')}
+        </h1>
+        <p class="text-2xl text-akagi-light-blue max-w-3xl mb-8">
+          {t('drift.hero.subtitle')}
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a 
+            href={buildPath('drift/en/booking')}
+            class="bg-akagi-red hover:bg-akagi-orange text-white px-8 py-4 rounded-lg font-bold text-lg transition text-center"
+          >
+            {t('drift.cta.book')}
+          </a>
+          <a 
+            href={buildPath('drift/en/fleet')}
+            class="bg-white text-akagi-navy hover:bg-akagi-light-blue px-8 py-4 rounded-lg font-bold text-lg transition text-center"
+          >
+            {t('drift.cta.fleet')}
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Fleet Preview -->
+    <section class="py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-4xl font-bold mb-12 text-center text-akagi-charcoal">
+          {t('drift.fleet.title')}
+        </h2>
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- Toyota AE86 -->
+          <div class="bg-gray-100 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition">
+            <div class="bg-gradient-to-br from-akagi-navy to-akagi-teal h-48 flex items-center justify-center">
+              <span class="text-6xl">🏎️</span>
+            </div>
+            <div class="p-6">
+              <h3 class="text-2xl font-bold mb-2 text-akagi-charcoal">Toyota AE86</h3>
+              <p class="text-gray-600 mb-4">Legendary Hachiroku - Perfect for learning drift fundamentals</p>
+              <a href={buildPath('drift/en/fleet')} class="text-akagi-red hover:text-akagi-orange font-semibold">Learn More →</a>
+            </div>
+          </div>
+
+          <!-- Nissan S13 -->
+          <div class="bg-gray-100 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition">
+            <div class="bg-gradient-to-br from-akagi-teal to-akagi-navy h-48 flex items-center justify-center">
+              <span class="text-6xl">🚗</span>
+            </div>
+            <div class="p-6">
+              <h3 class="text-2xl font-bold mb-2 text-akagi-charcoal">Nissan S13</h3>
+              <p class="text-gray-600 mb-4">240SX - The ultimate drift platform with SR20DET power</p>
+              <a href={buildPath('drift/en/fleet')} class="text-akagi-red hover:text-akagi-orange font-semibold">Learn More →</a>
+            </div>
+          </div>
+
+          <!-- Nissan S14 -->
+          <div class="bg-gray-100 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition">
+            <div class="bg-gradient-to-br from-akagi-navy to-akagi-red h-48 flex items-center justify-center">
+              <span class="text-6xl">🏁</span>
+            </div>
+            <div class="p-6">
+              <h3 class="text-2xl font-bold mb-2 text-akagi-charcoal">Nissan S14</h3>
+              <p class="text-gray-600 mb-4">Silvia - Advanced drifting with more power and grip</p>
+              <a href={buildPath('drift/en/fleet')} class="text-akagi-red hover:text-akagi-orange font-semibold">Learn More →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Tracks -->
+    <section class="py-16 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-4xl font-bold mb-12 text-center text-akagi-charcoal">
+          {t('drift.tracks.title')}
+        </h2>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition border-t-4 border-akagi-teal">
+            <div class="text-4xl mb-4">🏁</div>
+            <h3 class="text-2xl font-bold mb-4 text-akagi-charcoal">Chiba Speedway</h3>
+            <p class="text-gray-600 mb-4">Technical layout perfect for skill development and precision driving</p>
+            <a href={buildPath('drift/en/tracks')} class="text-akagi-red hover:text-akagi-orange font-semibold">View Details →</a>
+          </div>
+
+          <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition border-t-4 border-akagi-orange">
+            <div class="text-4xl mb-4">⛰️</div>
+            <h3 class="text-2xl font-bold mb-4 text-akagi-charcoal">Gunma Cycle Sports</h3>
+            <p class="text-gray-600 mb-4">Challenging course with elevation changes in the mountains</p>
+            <a href={buildPath('drift/en/tracks')} class="text-akagi-red hover:text-akagi-orange font-semibold">View Details →</a>
+          </div>
+
+          <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition border-t-4 border-akagi-red">
+            <div class="text-4xl mb-4">🏆</div>
+            <h3 class="text-2xl font-bold mb-4 text-akagi-charcoal">Fuji Speedway</h3>
+            <p class="text-gray-600 mb-4">World-class international circuit - the ultimate drift experience</p>
+            <a href={buildPath('drift/en/tracks')} class="text-akagi-red hover:text-akagi-orange font-semibold">View Details →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-4xl font-bold mb-12 text-center text-akagi-charcoal">Why Choose Akagi Drift Rental</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div class="text-center">
+            <div class="text-5xl mb-4">🔧</div>
+            <h3 class="text-xl font-bold mb-2 text-akagi-charcoal">Professional Maintenance</h3>
+            <p class="text-gray-600">All cars maintained by D1GP mechanics</p>
+          </div>
+          <div class="text-center">
+            <div class="text-5xl mb-4">👨‍🏫</div>
+            <h3 class="text-xl font-bold mb-2 text-akagi-charcoal">Expert Coaching</h3>
+            <p class="text-gray-600">Optional instruction from D1 Lights drivers</p>
+          </div>
+          <div class="text-center">
+            <div class="text-5xl mb-4">🛡️</div>
+            <h3 class="text-xl font-bold mb-2 text-akagi-charcoal">Insurance Included</h3>
+            <p class="text-gray-600">Comprehensive coverage for peace of mind</p>
+          </div>
+          <div class="text-center">
+            <div class="text-5xl mb-4">📸</div>
+            <h3 class="text-xl font-bold mb-2 text-akagi-charcoal">Photo/Video Package</h3>
+            <p class="text-gray-600">Capture your drift experience</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-gradient-to-r from-akagi-red to-akagi-orange text-white">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-4xl font-bold mb-6">Ready to Experience JDM Drift Culture?</h2>
+        <p class="text-xl mb-8">Book your drift car rental today and feel the adrenaline of authentic Japanese drifting</p>
+        <a 
+          href={buildPath('drift/en/booking')}
+          class="bg-white text-akagi-red hover:bg-akagi-light-blue px-8 py-4 rounded-lg font-bold text-lg transition inline-block"
+        >
+          Book Now
+        </a>
+      </div>
+    </section>
+  </div>
+</Layout>

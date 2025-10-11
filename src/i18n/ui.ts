@@ -8,10 +8,17 @@ export const defaultLang = 'en';
 
 export const ui = {
   en: {
+    // Shared navigation
+    'nav.corporate': 'Corporate Site',
+    'nav.drift': 'Drift Rental',
+    
+    // Corporate portal navigation
     'nav.about': 'About Company',
     'nav.services': 'Services',
     'nav.competitions': 'Competitions',
     'nav.contact': 'Contact Us',
+    
+    // Corporate portal content
     'about.title': 'About Akagi Eng. Co. Ltd',
     'about.description': 'Akagi Eng. Co. Ltd is a premier Japanese car service center specializing in JDM (Japanese Domestic Market) vehicles and motorsport. Based in Japan, we provide exceptional service and expertise for drift car enthusiasts.',
     'about.jdm.title': 'JDM Car Specialists',
@@ -47,12 +54,47 @@ export const ui = {
     'contact.info.title': 'Contact Information',
     'contact.info.email': 'Email: info@akagi.dev',
     'contact.info.phone': 'Phone: +81-XX-XXXX-XXXX',
+    
+    // Drift portal navigation
+    'drift.nav.fleet': 'Car Fleet',
+    'drift.nav.tracks': 'Tracks',
+    'drift.nav.booking': 'Book Now',
+    'drift.nav.pricing': 'Pricing',
+    'drift.nav.faq': 'FAQ',
+    
+    // Drift portal content
+    'drift.hero.title': 'Rent JDM Drift Cars',
+    'drift.hero.subtitle': 'Experience authentic Japanese drift culture at Chiba, Gunma, and Fuji Speedway',
+    'drift.cta.book': 'Book Your Drift Experience',
+    'drift.cta.fleet': 'View Our Fleet',
+    
+    'drift.fleet.title': 'Our Drift Car Fleet',
+    'drift.fleet.description': 'Choose from our selection of iconic JDM drift machines',
+    
+    'drift.tracks.title': 'Premium Drift Tracks',
+    'drift.tracks.description': 'Experience Japan\'s finest drift circuits',
+    
+    'drift.booking.title': 'Book Your Drift Experience',
+    'drift.booking.description': 'Reserve your JDM drift car and track time',
+    
+    'drift.pricing.title': 'Transparent Pricing',
+    'drift.pricing.description': 'Clear, competitive rates for your drift rental',
+    
+    'drift.faq.title': 'Frequently Asked Questions',
+    'drift.faq.description': 'Everything you need to know about drift car rental',
   },
   ja: {
+    // Shared navigation
+    'nav.corporate': 'コーポレートサイト',
+    'nav.drift': 'ドリフトレンタル',
+    
+    // Corporate portal navigation
     'nav.about': '会社概要',
     'nav.services': 'サービス',
     'nav.competitions': '競技',
     'nav.contact': 'お問い合わせ',
+    
+    // Corporate portal content
     'about.title': '赤城エンジニアリング株式会社について',
     'about.description': '赤城エンジニアリング株式会社は、JDM（日本国内市場）車両とモータースポーツを専門とする日本のカーサービスセンターです。日本を拠点に、ドリフトカー愛好家に優れたサービスと専門知識を提供しています。',
     'about.jdm.title': 'JDMカースペシャリスト',
@@ -88,12 +130,47 @@ export const ui = {
     'contact.info.title': '連絡先情報',
     'contact.info.email': 'メール: info@akagi.dev',
     'contact.info.phone': '電話: +81-XX-XXXX-XXXX',
+    
+    // Drift portal navigation
+    'drift.nav.fleet': '車両一覧',
+    'drift.nav.tracks': 'サーキット',
+    'drift.nav.booking': '予約する',
+    'drift.nav.pricing': '料金',
+    'drift.nav.faq': 'よくある質問',
+    
+    // Drift portal content
+    'drift.hero.title': 'JDMドリフトカーをレンタル',
+    'drift.hero.subtitle': '千葉、群馬、富士スピードウェイで本格的な日本のドリフト文化を体験',
+    'drift.cta.book': 'ドリフト体験を予約',
+    'drift.cta.fleet': '車両を見る',
+    
+    'drift.fleet.title': 'ドリフトカーラインナップ',
+    'drift.fleet.description': '象徴的なJDMドリフトマシンから選択',
+    
+    'drift.tracks.title': 'プレミアムドリフトサーキット',
+    'drift.tracks.description': '日本最高のドリフトサーキットを体験',
+    
+    'drift.booking.title': 'ドリフト体験を予約',
+    'drift.booking.description': 'JDMドリフトカーとサーキット時間を予約',
+    
+    'drift.pricing.title': '明瞭な料金',
+    'drift.pricing.description': 'ドリフトレンタルの明確で競争力のある料金',
+    
+    'drift.faq.title': 'よくある質問',
+    'drift.faq.description': 'ドリフトカーレンタルについて知っておくべきすべて',
   },
   ru: {
+    // Shared navigation
+    'nav.corporate': 'Корпоративный сайт',
+    'nav.drift': 'Аренда дрифт-каров',
+    
+    // Corporate portal navigation
     'nav.about': 'О компании',
     'nav.services': 'Услуги',
     'nav.competitions': 'Соревнования',
     'nav.contact': 'Контакты',
+    
+    // Corporate portal content
     'about.title': 'О компании Akagi Eng. Co. Ltd',
     'about.description': 'Akagi Eng. Co. Ltd - ведущий японский автосервис, специализирующийся на автомобилях JDM (японский внутренний рынок) и автоспорте. Базируясь в Японии, мы предоставляем исключительный сервис и опыт для энтузиастов дрифт-каров.',
     'about.jdm.title': 'Специалисты по JDM автомобилям',
@@ -129,17 +206,70 @@ export const ui = {
     'contact.info.title': 'Контактная информация',
     'contact.info.email': 'Email: info@akagi.dev',
     'contact.info.phone': 'Телефон: +81-XX-XXXX-XXXX',
+    
+    // Drift portal navigation
+    'drift.nav.fleet': 'Автопарк',
+    'drift.nav.tracks': 'Трассы',
+    'drift.nav.booking': 'Забронировать',
+    'drift.nav.pricing': 'Цены',
+    'drift.nav.faq': 'Вопросы',
+    
+    // Drift portal content
+    'drift.hero.title': 'Аренда JDM дрифт-каров',
+    'drift.hero.subtitle': 'Познайте настоящую японскую дрифт-культуру на трассах Чиба, Гунма и Fuji Speedway',
+    'drift.cta.book': 'Забронировать дрифт-опыт',
+    'drift.cta.fleet': 'Посмотреть автопарк',
+    
+    'drift.fleet.title': 'Наш автопарк дрифт-каров',
+    'drift.fleet.description': 'Выберите из нашей коллекции культовых JDM дрифт-машин',
+    
+    'drift.tracks.title': 'Премиум дрифт-трассы',
+    'drift.tracks.description': 'Испытайте лучшие дрифт-треки Японии',
+    
+    'drift.booking.title': 'Забронируйте ваш дрифт-опыт',
+    'drift.booking.description': 'Зарезервируйте JDM дрифт-кар и время на трассе',
+    
+    'drift.pricing.title': 'Прозрачные цены',
+    'drift.pricing.description': 'Четкие, конкурентные тарифы на аренду дрифт-каров',
+    
+    'drift.faq.title': 'Часто задаваемые вопросы',
+    'drift.faq.description': 'Все, что нужно знать об аренде дрифт-каров',
   },
 } as const;
 
 export function getLangFromUrl(url: URL) {
   // Split pathname and filter out empty strings
   const parts = url.pathname.split('/').filter(Boolean);
-  // Account for base path '/www' - language is after base
-  const langIndex = parts[0] === 'www' ? 1 : 0;
+  
+  // Account for base path in PR previews (e.g., /www/pr-123/)
+  let startIndex = 0;
+  if (parts[0] === 'www' && parts[1]?.startsWith('pr-')) {
+    startIndex = 2; // Skip /www/pr-{number}/
+  } else if (parts[0] === 'www') {
+    startIndex = 1; // Skip /www/
+  }
+  
+  // Check if we're in drift portal (/drift/lang/ or /lang/)
+  const isDrift = parts[startIndex] === 'drift';
+  const langIndex = isDrift ? startIndex + 1 : startIndex;
   const lang = parts[langIndex];
+  
   if (lang in languages) return lang as keyof typeof languages;
   return defaultLang;
+}
+
+export function getPortalFromUrl(url: URL): 'corporate' | 'drift' {
+  const parts = url.pathname.split('/').filter(Boolean);
+  
+  // Account for base path in PR previews
+  let startIndex = 0;
+  if (parts[0] === 'www' && parts[1]?.startsWith('pr-')) {
+    startIndex = 2;
+  } else if (parts[0] === 'www') {
+    startIndex = 1;
+  }
+  
+  return parts[startIndex] === 'drift' ? 'drift' : 'corporate';
 }
 
 export function useTranslations(lang: keyof typeof languages) {
