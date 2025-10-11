@@ -133,7 +133,11 @@ export const ui = {
 } as const;
 
 export function getLangFromUrl(url: URL) {
-  const [, lang] = url.pathname.split('/');
+  // Split pathname and filter out empty strings
+  const parts = url.pathname.split('/').filter(Boolean);
+  // Account for base path '/www' - language is after base
+  const langIndex = parts[0] === 'www' ? 1 : 0;
+  const lang = parts[langIndex];
   if (lang in languages) return lang as keyof typeof languages;
   return defaultLang;
 }
