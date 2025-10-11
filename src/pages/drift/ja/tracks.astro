@@ -1,0 +1,126 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { useTranslations } from '@i18n/ui';
+
+const t = useTranslations('ja');
+---
+
+<Layout>
+  <div class="min-h-screen">
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-akagi-navy to-akagi-teal text-white py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6 text-akagi-orange">
+          {t('drift.tracks.title')}
+        </h1>
+        <p class="text-xl text-akagi-light-blue max-w-3xl">
+          {t('drift.tracks.description')}
+        </p>
+      </div>
+    </section>
+
+    <!-- Tracks Details -->
+    <section class="py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        <!-- Chiba Speedway -->
+        <div class="bg-white rounded-lg shadow-lg p-8 border-l-4 border-akagi-teal">
+          <div class="flex items-center mb-6">
+            <span class="text-5xl mr-4">🏁</span>
+            <div>
+              <h2 class="text-3xl font-bold text-akagi-charcoal">Chiba Speedway</h2>
+              <p class="text-gray-600">Technical Layout • Beginner Friendly</p>
+            </div>
+          </div>
+          <div class="grid md:grid-cols-2 gap-8">
+            <div>
+              <h3 class="font-bold text-akagi-charcoal mb-4">Track Features</h3>
+              <ul class="space-y-2 text-gray-600">
+                <li>• Length: 1.2km technical circuit</li>
+                <li>• Multiple drift zones and transitions</li>
+                <li>• Wide runoff areas for safety</li>
+                <li>• Perfect for learning drift fundamentals</li>
+                <li>• Pit facilities and viewing areas</li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="font-bold text-akagi-charcoal mb-4">Available Services</h3>
+              <ul class="space-y-2 text-gray-600">
+                <li>• Hourly and daily rental options</li>
+                <li>• Track-side mechanical support</li>
+                <li>• Optional drift instruction</li>
+                <li>• Tire rental and changes</li>
+                <li>• Fuel service available</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gunma Cycle Sports Center -->
+        <div class="bg-white rounded-lg shadow-lg p-8 border-l-4 border-akagi-orange">
+          <div class="flex items-center mb-6">
+            <span class="text-5xl mr-4">⛰️</span>
+            <div>
+              <h2 class="text-3xl font-bold text-akagi-charcoal">Gunma Cycle Sports Center</h2>
+              <p class="text-gray-600">Mountain Course • Elevation Changes</p>
+            </div>
+          </div>
+          <div class="grid md:grid-cols-2 gap-8">
+            <div>
+              <h3 class="font-bold text-akagi-charcoal mb-4">Track Features</h3>
+              <ul class="space-y-2 text-gray-600">
+                <li>• Length: 1.5km mountain circuit</li>
+                <li>• Challenging elevation changes</li>
+                <li>• Mix of tight and flowing corners</li>
+                <li>• Scenic mountain backdrop</li>
+                <li>• Popular with D1GP drivers for practice</li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="font-bold text-akagi-charcoal mb-4">Available Services</h3>
+              <ul class="space-y-2 text-gray-600">
+                <li>• Half-day and full-day sessions</li>
+                <li>• Professional coaching available</li>
+                <li>• On-site tire vendor</li>
+                <li>• Covered pit garages</li>
+                <li>• Café and viewing terrace</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fuji Speedway -->
+        <div class="bg-white rounded-lg shadow-lg p-8 border-l-4 border-akagi-red">
+          <div class="flex items-center mb-6">
+            <span class="text-5xl mr-4">🏆</span>
+            <div>
+              <h2 class="text-3xl font-bold text-akagi-charcoal">Fuji Speedway</h2>
+              <p class="text-gray-600">World-Class Circuit • Premium Experience</p>
+            </div>
+          </div>
+          <div class="grid md:grid-cols-2 gap-8">
+            <div>
+              <h3 class="font-bold text-akagi-charcoal mb-4">Track Features</h3>
+              <ul class="space-y-2 text-gray-600">
+                <li>• Length: 2.2km drift configuration</li>
+                <li>• International FIA Grade 1 circuit</li>
+                <li>• View of Mount Fuji on clear days</li>
+                <li>• High-speed drift zones</li>
+                <li>• World-class facilities</li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="font-bold text-akagi-charcoal mb-4">Available Services</h3>
+              <ul class="space-y-2 text-gray-600">
+                <li>• Full-day premium rental packages</li>
+                <li>• D1GP driver instruction available</li>
+                <li>• Professional photography service</li>
+                <li>• VIP hospitality suite</li>
+                <li>• Premium tire and fuel service</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>
