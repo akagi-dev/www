@@ -88,34 +88,30 @@ const otherPortalPrefix = portal === 'drift' ? '' : 'drift/';
                 >
                   {t('drift.hero.title')}
                 </a>
-                {lang === 'en' && (
-                  <>
-                    <a 
-                      href={buildPath(`drift/${lang}/fleet`)}
-                      class={`hover:text-akagi-orange transition ${currentPath.includes('/fleet') ? 'text-akagi-light-blue' : 'text-akagi-teal'}`}
-                    >
-                      {t('drift.nav.fleet')}
-                    </a>
-                    <a 
-                      href={buildPath(`drift/${lang}/tracks`)}
-                      class={`hover:text-akagi-orange transition ${currentPath.includes('/tracks') ? 'text-akagi-light-blue' : 'text-akagi-teal'}`}
-                    >
-                      {t('drift.nav.tracks')}
-                    </a>
-                    <a 
-                      href={buildPath(`drift/${lang}/pricing`)}
-                      class={`hover:text-akagi-orange transition ${currentPath.includes('/pricing') ? 'text-akagi-light-blue' : 'text-akagi-teal'}`}
-                    >
-                      {t('drift.nav.pricing')}
-                    </a>
-                    <a 
-                      href={buildPath(`drift/${lang}/booking`)}
-                      class={`bg-akagi-red hover:bg-akagi-orange px-4 py-2 rounded-md transition ${currentPath.includes('/booking') ? 'bg-akagi-orange' : ''}`}
-                    >
-                      {t('drift.nav.booking')}
-                    </a>
-                  </>
-                )}
+                <a 
+                  href={buildPath(`drift/${lang}/fleet`)}
+                  class={`hover:text-akagi-orange transition ${currentPath.includes('/fleet') ? 'text-akagi-light-blue' : 'text-akagi-teal'}`}
+                >
+                  {t('drift.nav.fleet')}
+                </a>
+                <a 
+                  href={buildPath(`drift/${lang}/tracks`)}
+                  class={`hover:text-akagi-orange transition ${currentPath.includes('/tracks') ? 'text-akagi-light-blue' : 'text-akagi-teal'}`}
+                >
+                  {t('drift.nav.tracks')}
+                </a>
+                <a 
+                  href={buildPath(`drift/${lang}/pricing`)}
+                  class={`hover:text-akagi-orange transition ${currentPath.includes('/pricing') ? 'text-akagi-light-blue' : 'text-akagi-teal'}`}
+                >
+                  {t('drift.nav.pricing')}
+                </a>
+                <a 
+                  href={buildPath(`drift/${lang}/booking`)}
+                  class={`bg-akagi-red hover:bg-akagi-orange px-4 py-2 rounded-md transition ${currentPath.includes('/booking') ? 'bg-akagi-orange' : ''}`}
+                >
+                  {t('drift.nav.booking')}
+                </a>
               </>
             )}
 
@@ -196,34 +192,30 @@ const otherPortalPrefix = portal === 'drift' ? '' : 'drift/';
                 >
                   {t('drift.hero.title')}
                 </a>
-                {lang === 'en' && (
-                  <>
-                    <a 
-                      href={buildPath(`drift/${lang}/fleet`)}
-                      class={`block px-3 py-2 rounded-md hover:bg-akagi-teal ${currentPath.includes('/fleet') ? 'bg-akagi-light-blue text-akagi-navy' : ''}`}
-                    >
-                      {t('drift.nav.fleet')}
-                    </a>
-                    <a 
-                      href={buildPath(`drift/${lang}/tracks`)}
-                      class={`block px-3 py-2 rounded-md hover:bg-akagi-teal ${currentPath.includes('/tracks') ? 'bg-akagi-light-blue text-akagi-navy' : ''}`}
-                    >
-                      {t('drift.nav.tracks')}
-                    </a>
-                    <a 
-                      href={buildPath(`drift/${lang}/pricing`)}
-                      class={`block px-3 py-2 rounded-md hover:bg-akagi-teal ${currentPath.includes('/pricing') ? 'bg-akagi-light-blue text-akagi-navy' : ''}`}
-                    >
-                      {t('drift.nav.pricing')}
-                    </a>
-                    <a 
-                      href={buildPath(`drift/${lang}/booking`)}
-                      class={`block px-3 py-2 rounded-md bg-akagi-red hover:bg-akagi-orange ${currentPath.includes('/booking') ? 'bg-akagi-orange' : ''}`}
-                    >
-                      {t('drift.nav.booking')}
-                    </a>
-                  </>
-                )}
+                <a 
+                  href={buildPath(`drift/${lang}/fleet`)}
+                  class={`block px-3 py-2 rounded-md hover:bg-akagi-teal ${currentPath.includes('/fleet') ? 'bg-akagi-light-blue text-akagi-navy' : ''}`}
+                >
+                  {t('drift.nav.fleet')}
+                </a>
+                <a 
+                  href={buildPath(`drift/${lang}/tracks`)}
+                  class={`block px-3 py-2 rounded-md hover:bg-akagi-teal ${currentPath.includes('/tracks') ? 'bg-akagi-light-blue text-akagi-navy' : ''}`}
+                >
+                  {t('drift.nav.tracks')}
+                </a>
+                <a 
+                  href={buildPath(`drift/${lang}/pricing`)}
+                  class={`block px-3 py-2 rounded-md hover:bg-akagi-teal ${currentPath.includes('/pricing') ? 'bg-akagi-light-blue text-akagi-navy' : ''}`}
+                >
+                  {t('drift.nav.pricing')}
+                </a>
+                <a 
+                  href={buildPath(`drift/${lang}/booking`)}
+                  class={`block px-3 py-2 rounded-md bg-akagi-red hover:bg-akagi-orange ${currentPath.includes('/booking') ? 'bg-akagi-orange' : ''}`}
+                >
+                  {t('drift.nav.booking')}
+                </a>
               </>
             )}
 
