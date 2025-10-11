@@ -1,0 +1,163 @@
+---
+import { getLangFromUrl, useTranslations, languages } from '@i18n/ui';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const currentPath = Astro.url.pathname;
+---
+
+<!DOCTYPE html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/www/favicon.svg" />
+    <title>Akagi Engineering - JDM Motorsport Specialists</title>
+    <meta name="description" content="Akagi Engineering - Japanese car service specializing in JDM drift cars and D1GP motorsport" />
+  </head>
+  <body class="bg-gray-50 text-gray-900">
+    <header class="bg-akagi-black text-white sticky top-0 z-50 shadow-md">
+      <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+          <!-- Logo -->
+          <div class="flex-shrink-0">
+            <a href={`/www/${lang}/`} class="text-xl font-bold text-akagi-red hover:text-red-400 transition">
+              AKAGI ENGINEERING
+            </a>
+          </div>
+
+          <!-- Desktop Navigation -->
+          <div class="hidden md:flex md:items-center md:space-x-8">
+            <a 
+              href={`/www/${lang}/`}
+              class={`hover:text-akagi-red transition ${currentPath.endsWith(`/${lang}/`) || currentPath.endsWith(`/${lang}`) ? 'text-akagi-red' : ''}`}
+            >
+              {t('nav.about')}
+            </a>
+            <a 
+              href={`/www/${lang}/services`}
+              class={`hover:text-akagi-red transition ${currentPath.includes('/services') ? 'text-akagi-red' : ''}`}
+            >
+              {t('nav.services')}
+            </a>
+            <a 
+              href={`/www/${lang}/competitions`}
+              class={`hover:text-akagi-red transition ${currentPath.includes('/competitions') ? 'text-akagi-red' : ''}`}
+            >
+              {t('nav.competitions')}
+            </a>
+            <a 
+              href={`/www/${lang}/contact`}
+              class={`hover:text-akagi-red transition ${currentPath.includes('/contact') ? 'text-akagi-red' : ''}`}
+            >
+              {t('nav.contact')}
+            </a>
+
+            <!-- Language Switcher -->
+            <div class="flex items-center space-x-2 border-l border-gray-600 pl-4">
+              {Object.entries(languages).map(([code, name]) => (
+                <a
+                  href={currentPath.replace(`/${lang}/`, `/${code}/`).replace(`/${lang}`, `/${code}`)}
+                  class={`px-2 py-1 rounded text-sm ${lang === code ? 'bg-akagi-red text-white' : 'hover:bg-gray-700'}`}
+                  title={name}
+                >
+                  {code.toUpperCase()}
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <!-- Mobile menu button -->
+          <div class="md:hidden">
+            <button
+              id="mobile-menu-button"
+              type="button"
+              class="inline-flex items-center justify-center p-2 rounded-md hover:bg-gray-700 focus:outline-none"
+              aria-expanded="false"
+            >
+              <span class="sr-only">Open main menu</span>
+              <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" class="hidden md:hidden pb-4">
+          <div class="space-y-1">
+            <a 
+              href={`/www/${lang}/`}
+              class={`block px-3 py-2 rounded-md hover:bg-gray-700 ${currentPath.endsWith(`/${lang}/`) || currentPath.endsWith(`/${lang}`) ? 'bg-akagi-red' : ''}`}
+            >
+              {t('nav.about')}
+            </a>
+            <a 
+              href={`/www/${lang}/services`}
+              class={`block px-3 py-2 rounded-md hover:bg-gray-700 ${currentPath.includes('/services') ? 'bg-akagi-red' : ''}`}
+            >
+              {t('nav.services')}
+            </a>
+            <a 
+              href={`/www/${lang}/competitions`}
+              class={`block px-3 py-2 rounded-md hover:bg-gray-700 ${currentPath.includes('/competitions') ? 'bg-akagi-red' : ''}`}
+            >
+              {t('nav.competitions')}
+            </a>
+            <a 
+              href={`/www/${lang}/contact`}
+              class={`block px-3 py-2 rounded-md hover:bg-gray-700 ${currentPath.includes('/contact') ? 'bg-akagi-red' : ''}`}
+            >
+              {t('nav.contact')}
+            </a>
+            
+            <!-- Mobile Language Switcher -->
+            <div class="flex space-x-2 px-3 py-2 border-t border-gray-600 mt-2 pt-2">
+              {Object.entries(languages).map(([code, name]) => (
+                <a
+                  href={currentPath.replace(`/${lang}/`, `/${code}/`).replace(`/${lang}`, `/${code}`)}
+                  class={`px-3 py-1 rounded text-sm ${lang === code ? 'bg-akagi-red text-white' : 'bg-gray-700 hover:bg-gray-600'}`}
+                  title={name}
+                >
+                  {code.toUpperCase()}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="bg-akagi-black text-white mt-auto">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="text-center">
+          <p class="text-lg font-bold text-akagi-red mb-2">AKAGI ENGINEERING</p>
+          <p class="text-gray-400 text-sm">JDM Motorsport Specialists | D1 Lights License</p>
+          <p class="text-gray-500 text-xs mt-4">&copy; 2025 Akagi Engineering. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Mobile menu toggle
+      const mobileMenuButton = document.getElementById('mobile-menu-button');
+      const mobileMenu = document.getElementById('mobile-menu');
+
+      mobileMenuButton?.addEventListener('click', () => {
+        const isHidden = mobileMenu?.classList.contains('hidden');
+        if (isHidden) {
+          mobileMenu?.classList.remove('hidden');
+          mobileMenuButton?.setAttribute('aria-expanded', 'true');
+        } else {
+          mobileMenu?.classList.add('hidden');
+          mobileMenuButton?.setAttribute('aria-expanded', 'false');
+        }
+      });
+    </script>
+  </body>
+</html>
