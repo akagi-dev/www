@@ -1,0 +1,121 @@
+---
+import Layout from '@components/common/Layout.astro';
+import { useTranslations } from '@i18n/ui';
+
+const t = useTranslations('ja');
+---
+
+<Layout>
+  <div class="min-h-screen">
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-akagi-navy to-akagi-teal text-white py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6 text-akagi-orange">
+          {t('drift.faq.title')}
+        </h1>
+        <p class="text-xl text-akagi-light-blue max-w-3xl">
+          Everything you need to know about renting drift cars in Japan
+        </p>
+      </div>
+    </section>
+
+    <!-- FAQ List -->
+    <section class="py-16">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="space-y-6">
+          <!-- License Question -->
+          <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+            <h3 class="text-xl font-bold mb-3 text-akagi-red">{t('drift.faq.license.q')}</h3>
+            <p class="text-gray-600">{t('drift.faq.license.a')}</p>
+          </div>
+
+          <!-- Experience Question -->
+          <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+            <h3 class="text-xl font-bold mb-3 text-akagi-red">{t('drift.faq.experience.q')}</h3>
+            <p class="text-gray-600">{t('drift.faq.experience.a')}</p>
+          </div>
+
+          <!-- Bring Question -->
+          <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+            <h3 class="text-xl font-bold mb-3 text-akagi-red">{t('drift.faq.bring.q')}</h3>
+            <p class="text-gray-600">{t('drift.faq.bring.a')}</p>
+          </div>
+
+          <!-- Safety Question -->
+          <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+            <h3 class="text-xl font-bold mb-3 text-akagi-red">{t('drift.faq.safety.q')}</h3>
+            <p class="text-gray-600">{t('drift.faq.safety.a')}</p>
+          </div>
+
+          <!-- Booking Question -->
+          <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+            <h3 class="text-xl font-bold mb-3 text-akagi-red">{t('drift.faq.booking.q')}</h3>
+            <p class="text-gray-600">{t('drift.faq.booking.a')}</p>
+          </div>
+
+          <!-- Additional Questions -->
+          <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+            <h3 class="text-xl font-bold mb-3 text-akagi-red">What if I damage the car?</h3>
+            <p class="text-gray-600">
+              We offer optional damage insurance. Minor wear and tear is expected, but significant damage may incur additional costs. 
+              Our professional instruction helps minimize risk.
+            </p>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+            <h3 class="text-xl font-bold mb-3 text-akagi-red">Can I bring a friend/photographer?</h3>
+            <p class="text-gray-600">
+              Yes! Spectators and photographers are welcome. Track access fees may apply for non-drivers.
+            </p>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+            <h3 class="text-xl font-bold mb-3 text-akagi-red">What's the weather policy?</h3>
+            <p class="text-gray-600">
+              We operate in most weather conditions. Wet weather provides excellent drift training opportunities! 
+              Only severe weather (typhoons, heavy snow) will result in cancellations with full refunds.
+            </p>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+            <h3 class="text-xl font-bold mb-3 text-akagi-red">Do you provide English instruction?</h3>
+            <p class="text-gray-600">
+              Yes! Our instructors are fluent in English and Japanese. We also have Russian-speaking staff available.
+            </p>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+            <h3 class="text-xl font-bold mb-3 text-akagi-red">Can I choose a specific car?</h3>
+            <p class="text-gray-600">
+              Yes, you can request a specific car when booking. We'll do our best to accommodate, though availability may vary. 
+              We recommend booking in advance for the best selection.
+            </p>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+            <h3 class="text-xl font-bold mb-3 text-akagi-red">Is there an age limit?</h3>
+            <p class="text-gray-600">
+              Drivers must be 18+ with a valid license. For insurance purposes, drivers under 21 may have additional requirements.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Still Have Questions CTA -->
+    <section class="py-16 bg-gray-100">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl font-bold mb-4 text-akagi-charcoal">Still Have Questions?</h2>
+        <p class="text-gray-600 mb-6">
+          Don't hesitate to reach out. We're here to help make your drift experience unforgettable.
+        </p>
+        <a
+          href="/www/drift/ja/booking"
+          class="inline-block bg-akagi-red hover:bg-akagi-orange text-white font-bold px-8 py-3 rounded-md transition"
+        >
+          Contact Us
+        </a>
+      </div>
+    </section>
+  </div>
+</Layout>

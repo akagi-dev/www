@@ -1,8 +1,8 @@
 ---
 import { defaultLang } from '@i18n/ui';
 
-// Use Astro.site and Astro.url.pathname for proper base path handling
+// Redirect to www portal with default language
 const base = import.meta.env.BASE_URL;
-const redirectPath = base.endsWith('/') ? `${base}${defaultLang}/` : `${base}/${defaultLang}/`;
+const redirectPath = base.endsWith('/') ? `${base}www/${defaultLang}/` : `${base}/www/${defaultLang}/`;
 return Astro.redirect(redirectPath);
 ---

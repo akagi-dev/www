@@ -1,0 +1,80 @@
+---
+import Layout from '@components/common/Layout.astro';
+import { useTranslations } from '@i18n/ui';
+
+const t = useTranslations('en');
+---
+
+<Layout>
+  <div class="min-h-screen">
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-akagi-navy to-akagi-teal text-white py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6 text-akagi-orange">
+          {t('drift.fleet.title')}
+        </h1>
+        <p class="text-xl text-akagi-light-blue max-w-3xl">
+          {t('drift.fleet.description')}
+        </p>
+      </div>
+    </section>
+
+    <!-- Fleet Grid -->
+    <section class="py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- AE86 -->
+          <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-2xl transition border-t-4 border-akagi-red">
+            <div class="bg-gradient-to-r from-akagi-red to-akagi-orange rounded-lg h-48 flex items-center justify-center mb-6">
+              <div class="text-center text-white">
+                <p class="text-6xl mb-2">🏎️</p>
+                <p class="text-sm">Image Placeholder</p>
+              </div>
+            </div>
+            <h3 class="text-2xl font-bold mb-3 text-akagi-charcoal">{t('drift.fleet.ae86.name')}</h3>
+            <p class="text-akagi-teal font-semibold mb-4">{t('drift.fleet.ae86.specs')}</p>
+            <p class="text-gray-600 mb-4">{t('drift.fleet.ae86.desc')}</p>
+            <div class="border-t pt-4">
+              <p class="text-sm text-gray-500 font-semibold">Perfect for:</p>
+              <p class="text-sm text-gray-600">Beginners, lightweight handling, classic experience</p>
+            </div>
+          </div>
+
+          <!-- S13 -->
+          <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-2xl transition border-t-4 border-akagi-teal">
+            <div class="bg-gradient-to-r from-akagi-teal to-akagi-navy rounded-lg h-48 flex items-center justify-center mb-6">
+              <div class="text-center text-white">
+                <p class="text-6xl mb-2">🏎️</p>
+                <p class="text-sm">Image Placeholder</p>
+              </div>
+            </div>
+            <h3 class="text-2xl font-bold mb-3 text-akagi-charcoal">{t('drift.fleet.s13.name')}</h3>
+            <p class="text-akagi-teal font-semibold mb-4">{t('drift.fleet.s13.specs')}</p>
+            <p class="text-gray-600 mb-4">{t('drift.fleet.s13.desc')}</p>
+            <div class="border-t pt-4">
+              <p class="text-sm text-gray-500 font-semibold">Perfect for:</p>
+              <p class="text-sm text-gray-600">Intermediate drivers, turbocharged power</p>
+            </div>
+          </div>
+
+          <!-- S14 -->
+          <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-2xl transition border-t-4 border-akagi-orange">
+            <div class="bg-gradient-to-r from-akagi-orange to-akagi-red rounded-lg h-48 flex items-center justify-center mb-6">
+              <div class="text-center text-white">
+                <p class="text-6xl mb-2">🏎️</p>
+                <p class="text-sm">Image Placeholder</p>
+              </div>
+            </div>
+            <h3 class="text-2xl font-bold mb-3 text-akagi-charcoal">{t('drift.fleet.s14.name')}</h3>
+            <p class="text-akagi-teal font-semibold mb-4">{t('drift.fleet.s14.specs')}</p>
+            <p class="text-gray-600 mb-4">{t('drift.fleet.s14.desc')}</p>
+            <div class="border-t pt-4">
+              <p class="text-sm text-gray-500 font-semibold">Perfect for:</p>
+              <p class="text-sm text-gray-600">Advanced drivers, high performance</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>

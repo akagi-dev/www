@@ -1,0 +1,107 @@
+---
+import Layout from '@components/common/Layout.astro';
+import { useTranslations } from '@i18n/ui';
+
+const t = useTranslations('ja');
+---
+
+<Layout>
+  <div class="min-h-screen">
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-akagi-navy to-akagi-teal text-white py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6 text-akagi-orange">
+          {t('drift.tracks.title')}
+        </h1>
+        <p class="text-xl text-akagi-light-blue max-w-3xl">
+          {t('drift.tracks.description')}
+        </p>
+      </div>
+    </section>
+
+    <!-- Tracks Grid -->
+    <section class="py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="space-y-8">
+          <!-- Chiba Circuit -->
+          <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition">
+            <div class="grid md:grid-cols-2 gap-8">
+              <div class="bg-gradient-to-r from-akagi-teal to-akagi-navy rounded-lg h-64 flex items-center justify-center">
+                <div class="text-center text-white">
+                  <p class="text-7xl mb-2">🏁</p>
+                  <p class="text-akagi-light-blue">Track Layout / Action Photos</p>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-3xl font-bold mb-3 text-akagi-charcoal">{t('drift.tracks.chiba.name')}</h3>
+                <p class="text-akagi-teal font-semibold mb-4">{t('drift.tracks.chiba.features')}</p>
+                <p class="text-gray-600 mb-4">{t('drift.tracks.chiba.desc')}</p>
+                <div class="border-t pt-4 mt-4">
+                  <h4 class="font-semibold text-akagi-charcoal mb-2">Track Details:</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• Length: 1.2km</li>
+                    <li>• Surface: Smooth asphalt</li>
+                    <li>• Best for: Skill development, beginners</li>
+                    <li>• Facilities: Pit garage, timing system</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Gunma Track -->
+          <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition">
+            <div class="grid md:grid-cols-2 gap-8">
+              <div class="bg-gradient-to-r from-akagi-red to-akagi-orange rounded-lg h-64 flex items-center justify-center">
+                <div class="text-center text-white">
+                  <p class="text-7xl mb-2">🏔️</p>
+                  <p class="text-akagi-light-blue">Track Layout / Action Photos</p>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-3xl font-bold mb-3 text-akagi-charcoal">{t('drift.tracks.gunma.name')}</h3>
+                <p class="text-akagi-teal font-semibold mb-4">{t('drift.tracks.gunma.features')}</p>
+                <p class="text-gray-600 mb-4">{t('drift.tracks.gunma.desc')}</p>
+                <div class="border-t pt-4 mt-4">
+                  <h4 class="font-semibold text-akagi-charcoal mb-2">Track Details:</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• Length: 1.8km</li>
+                    <li>• Elevation: 120m change</li>
+                    <li>• Best for: Intermediate to advanced</li>
+                    <li>• Facilities: Full pit complex, viewing areas</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Fuji Speedway -->
+          <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition">
+            <div class="grid md:grid-cols-2 gap-8">
+              <div class="bg-gradient-to-r from-akagi-orange to-akagi-teal rounded-lg h-64 flex items-center justify-center">
+                <div class="text-center text-white">
+                  <p class="text-7xl mb-2">🏆</p>
+                  <p class="text-akagi-light-blue">Track Layout / Action Photos</p>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-3xl font-bold mb-3 text-akagi-charcoal">{t('drift.tracks.fuji.name')}</h3>
+                <p class="text-akagi-teal font-semibold mb-4">{t('drift.tracks.fuji.features')}</p>
+                <p class="text-gray-600 mb-4">{t('drift.tracks.fuji.desc')}</p>
+                <div class="border-t pt-4 mt-4">
+                  <h4 class="font-semibold text-akagi-charcoal mb-2">Track Details:</h4>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li>• Length: 4.5km (full circuit)</li>
+                    <li>• Type: Professional racing venue</li>
+                    <li>• Best for: Advanced drivers, events</li>
+                    <li>• Facilities: World-class facilities, grandstands</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>

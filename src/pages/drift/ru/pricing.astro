@@ -1,0 +1,177 @@
+---
+import Layout from '@components/common/Layout.astro';
+import { useTranslations } from '@i18n/ui';
+
+const t = useTranslations('en');
+---
+
+<Layout>
+  <div class="min-h-screen">
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-akagi-navy to-akagi-teal text-white py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6 text-akagi-orange">
+          {t('drift.pricing.title')}
+        </h1>
+        <p class="text-xl text-akagi-light-blue max-w-3xl">
+          {t('drift.pricing.description')}
+        </p>
+      </div>
+    </section>
+
+    <!-- Pricing Grid -->
+    <section class="py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- Half Day Package -->
+          <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-2xl transition border-t-4 border-akagi-teal">
+            <div class="text-center mb-6">
+              <h3 class="text-2xl font-bold mb-2 text-akagi-charcoal">{t('drift.pricing.half.name')}</h3>
+              <p class="text-gray-500 mb-4">{t('drift.pricing.half.duration')}</p>
+              <p class="text-4xl font-bold text-akagi-red">{t('drift.pricing.half.price')}</p>
+            </div>
+            <div class="border-t pt-6">
+              <h4 class="font-semibold text-akagi-charcoal mb-3">Includes:</h4>
+              <ul class="space-y-2 text-gray-600">
+                <li class="flex items-start">
+                  <span class="text-akagi-teal mr-2">✓</span>
+                  <span>Car rental (4 hours)</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-akagi-teal mr-2">✓</span>
+                  <span>Basic drift instruction</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-akagi-teal mr-2">✓</span>
+                  <span>Safety gear (helmet, gloves)</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-akagi-teal mr-2">✓</span>
+                  <span>Track access</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-akagi-teal mr-2">✓</span>
+                  <span>Fuel included</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Full Day Package -->
+          <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-2xl transition border-t-4 border-akagi-red transform scale-105">
+            <div class="text-center mb-2">
+              <span class="bg-akagi-red text-white text-xs font-bold px-3 py-1 rounded-full">POPULAR</span>
+            </div>
+            <div class="text-center mb-6">
+              <h3 class="text-2xl font-bold mb-2 text-akagi-charcoal">{t('drift.pricing.full.name')}</h3>
+              <p class="text-gray-500 mb-4">{t('drift.pricing.full.duration')}</p>
+              <p class="text-4xl font-bold text-akagi-red">{t('drift.pricing.full.price')}</p>
+            </div>
+            <div class="border-t pt-6">
+              <h4 class="font-semibold text-akagi-charcoal mb-3">Includes:</h4>
+              <ul class="space-y-2 text-gray-600">
+                <li class="flex items-start">
+                  <span class="text-akagi-red mr-2">✓</span>
+                  <span>Car rental (8 hours)</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-akagi-red mr-2">✓</span>
+                  <span>Professional coaching</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-akagi-red mr-2">✓</span>
+                  <span>Safety gear (helmet, gloves, suit)</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-akagi-red mr-2">✓</span>
+                  <span>Track access</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-akagi-red mr-2">✓</span>
+                  <span>Fuel included</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-akagi-red mr-2">✓</span>
+                  <span>Lunch provided</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-akagi-red mr-2">✓</span>
+                  <span>Video analysis</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Weekend Package -->
+          <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-2xl transition border-t-4 border-akagi-orange">
+            <div class="text-center mb-6">
+              <h3 class="text-2xl font-bold mb-2 text-akagi-charcoal">{t('drift.pricing.weekend.name')}</h3>
+              <p class="text-gray-500 mb-4">{t('drift.pricing.weekend.duration')}</p>
+              <p class="text-4xl font-bold text-akagi-red">{t('drift.pricing.weekend.price')}</p>
+            </div>
+            <div class="border-t pt-6">
+              <h4 class="font-semibold text-akagi-charcoal mb-3">Includes:</h4>
+              <ul class="space-y-2 text-gray-600">
+                <li class="flex items-start">
+                  <span class="text-akagi-orange mr-2">✓</span>
+                  <span>Car rental (2 days)</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-akagi-orange mr-2">✓</span>
+                  <span>Professional coaching (2 days)</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-akagi-orange mr-2">✓</span>
+                  <span>Safety gear (full kit)</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-akagi-orange mr-2">✓</span>
+                  <span>Multiple track access</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-akagi-orange mr-2">✓</span>
+                  <span>Fuel included</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-akagi-orange mr-2">✓</span>
+                  <span>All meals provided</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-akagi-orange mr-2">✓</span>
+                  <span>Hotel accommodation</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-akagi-orange mr-2">✓</span>
+                  <span>Video analysis & photos</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Additional Info -->
+        <div class="mt-12 bg-gray-100 p-8 rounded-lg">
+          <h3 class="text-2xl font-bold mb-4 text-akagi-charcoal">Additional Information</h3>
+          <div class="grid md:grid-cols-2 gap-6 text-gray-600">
+            <div>
+              <h4 class="font-semibold text-akagi-charcoal mb-2">What's Not Included:</h4>
+              <ul class="space-y-1 text-sm">
+                <li>• Damage insurance (available for purchase)</li>
+                <li>• Transportation to/from track</li>
+                <li>• Personal items</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-semibold text-akagi-charcoal mb-2">Cancellation Policy:</h4>
+              <ul class="space-y-1 text-sm">
+                <li>• 7+ days: Full refund</li>
+                <li>• 3-7 days: 50% refund</li>
+                <li>• Less than 3 days: No refund</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>

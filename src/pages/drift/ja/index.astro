@@ -1,0 +1,142 @@
+---
+import Layout from '@components/common/Layout.astro';
+import { useTranslations } from '@i18n/ui';
+
+const t = useTranslations('ja');
+const base = import.meta.env.BASE_URL;
+const buildPath = (path: string) => `${base}/${path}`.replace(/\/+/g, '/');
+---
+
+<Layout>
+  <div class="min-h-screen">
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-akagi-navy via-akagi-teal to-akagi-navy text-white py-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h1 class="text-5xl md:text-6xl font-bold mb-6 text-akagi-orange">
+          {t('drift.hero.title')}
+        </h1>
+        <p class="text-xl md:text-2xl text-akagi-light-blue max-w-4xl mx-auto mb-8">
+          {t('drift.hero.subtitle')}
+        </p>
+        <a 
+          href={buildPath('drift/ja/booking')}
+          class="inline-block bg-akagi-red hover:bg-akagi-orange text-white font-bold px-8 py-4 rounded-lg transition transform hover:scale-105 text-lg"
+        >
+          {t('drift.hero.cta')}
+        </a>
+      </div>
+    </section>
+
+    <!-- Fleet Preview -->
+    <section class="py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-akagi-charcoal">
+          {t('drift.fleet.title')}
+        </h2>
+        <p class="text-center text-gray-600 mb-12 text-lg">
+          {t('drift.fleet.description')}
+        </p>
+        
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- AE86 -->
+          <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition border-t-4 border-akagi-red">
+            <div class="text-akagi-red text-5xl mb-4 text-center">🏎️</div>
+            <h3 class="text-xl font-bold mb-2 text-akagi-charcoal">{t('drift.fleet.ae86.name')}</h3>
+            <p class="text-sm text-akagi-teal mb-3">{t('drift.fleet.ae86.specs')}</p>
+            <p class="text-gray-600">{t('drift.fleet.ae86.desc')}</p>
+          </div>
+
+          <!-- S13 -->
+          <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition border-t-4 border-akagi-teal">
+            <div class="text-akagi-teal text-5xl mb-4 text-center">🏎️</div>
+            <h3 class="text-xl font-bold mb-2 text-akagi-charcoal">{t('drift.fleet.s13.name')}</h3>
+            <p class="text-sm text-akagi-teal mb-3">{t('drift.fleet.s13.specs')}</p>
+            <p class="text-gray-600">{t('drift.fleet.s13.desc')}</p>
+          </div>
+
+          <!-- S14 -->
+          <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition border-t-4 border-akagi-orange">
+            <div class="text-akagi-orange text-5xl mb-4 text-center">🏎️</div>
+            <h3 class="text-xl font-bold mb-2 text-akagi-charcoal">{t('drift.fleet.s14.name')}</h3>
+            <p class="text-sm text-akagi-teal mb-3">{t('drift.fleet.s14.specs')}</p>
+            <p class="text-gray-600">{t('drift.fleet.s14.desc')}</p>
+          </div>
+        </div>
+
+        <div class="text-center mt-8">
+          <a 
+            href={buildPath('drift/ja/fleet')}
+            class="inline-block text-akagi-red hover:text-akagi-orange font-semibold transition"
+          >
+            View Full Fleet →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tracks Preview -->
+    <section class="py-16 bg-gray-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-akagi-charcoal">
+          {t('drift.tracks.title')}
+        </h2>
+        <p class="text-center text-gray-600 mb-12 text-lg">
+          {t('drift.tracks.description')}
+        </p>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- Chiba -->
+          <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition">
+            <div class="text-akagi-teal text-4xl mb-4">🏁</div>
+            <h3 class="text-xl font-bold mb-2 text-akagi-charcoal">{t('drift.tracks.chiba.name')}</h3>
+            <p class="text-sm text-gray-500 mb-3">{t('drift.tracks.chiba.features')}</p>
+            <p class="text-gray-600">{t('drift.tracks.chiba.desc')}</p>
+          </div>
+
+          <!-- Gunma -->
+          <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition">
+            <div class="text-akagi-red text-4xl mb-4">🏔️</div>
+            <h3 class="text-xl font-bold mb-2 text-akagi-charcoal">{t('drift.tracks.gunma.name')}</h3>
+            <p class="text-sm text-gray-500 mb-3">{t('drift.tracks.gunma.features')}</p>
+            <p class="text-gray-600">{t('drift.tracks.gunma.desc')}</p>
+          </div>
+
+          <!-- Fuji -->
+          <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition">
+            <div class="text-akagi-orange text-4xl mb-4">🏆</div>
+            <h3 class="text-xl font-bold mb-2 text-akagi-charcoal">{t('drift.tracks.fuji.name')}</h3>
+            <p class="text-sm text-gray-500 mb-3">{t('drift.tracks.fuji.features')}</p>
+            <p class="text-gray-600">{t('drift.tracks.fuji.desc')}</p>
+          </div>
+        </div>
+
+        <div class="text-center mt-8">
+          <a 
+            href={buildPath('drift/ja/tracks')}
+            class="inline-block text-akagi-red hover:text-akagi-orange font-semibold transition"
+          >
+            Explore All Tracks →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-gradient-to-r from-akagi-red to-akagi-orange text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">
+          Ready to Experience JDM Drift Culture?
+        </h2>
+        <p class="text-xl mb-8 max-w-2xl mx-auto">
+          Book your drift car rental today and feel the adrenaline of Japanese motorsport.
+        </p>
+        <a 
+          href={buildPath('drift/ja/booking')}
+          class="inline-block bg-white text-akagi-red hover:bg-gray-100 font-bold px-8 py-4 rounded-lg transition transform hover:scale-105 text-lg"
+        >
+          {t('drift.hero.cta')}
+        </a>
+      </div>
+    </section>
+  </div>
+</Layout>

@@ -1,0 +1,160 @@
+---
+import Layout from '@components/common/Layout.astro';
+import { useTranslations } from '@i18n/ui';
+
+const t = useTranslations('en');
+---
+
+<Layout>
+  <div class="min-h-screen">
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-akagi-navy to-akagi-teal text-white py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6 text-akagi-orange">
+          {t('drift.booking.title')}
+        </h1>
+        <p class="text-xl text-akagi-light-blue max-w-3xl">
+          {t('drift.booking.description')}
+        </p>
+      </div>
+    </section>
+
+    <!-- Booking Form -->
+    <section class="py-16">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-white p-8 rounded-lg shadow-lg">
+          <form class="space-y-6">
+            <!-- Name -->
+            <div>
+              <label for="name" class="block text-sm font-semibold text-akagi-charcoal mb-2">
+                {t('drift.booking.form.name')}
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-akagi-red focus:border-transparent"
+                placeholder="John Doe"
+              />
+            </div>
+
+            <!-- Email -->
+            <div>
+              <label for="email" class="block text-sm font-semibold text-akagi-charcoal mb-2">
+                {t('drift.booking.form.email')}
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-akagi-red focus:border-transparent"
+                placeholder="john@example.com"
+              />
+            </div>
+
+            <!-- Date -->
+            <div>
+              <label for="date" class="block text-sm font-semibold text-akagi-charcoal mb-2">
+                {t('drift.booking.form.date')}
+              </label>
+              <input
+                type="date"
+                id="date"
+                name="date"
+                required
+                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-akagi-red focus:border-transparent"
+              />
+            </div>
+
+            <!-- Track Selection -->
+            <div>
+              <label for="track" class="block text-sm font-semibold text-akagi-charcoal mb-2">
+                {t('drift.booking.form.track')}
+              </label>
+              <select
+                id="track"
+                name="track"
+                required
+                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-akagi-red focus:border-transparent"
+              >
+                <option value="">Select a track...</option>
+                <option value="chiba">Chiba Circuit</option>
+                <option value="gunma">Gunma Track</option>
+                <option value="fuji">Fuji Speedway</option>
+              </select>
+            </div>
+
+            <!-- Car Preference -->
+            <div>
+              <label for="car" class="block text-sm font-semibold text-akagi-charcoal mb-2">
+                {t('drift.booking.form.car')}
+              </label>
+              <select
+                id="car"
+                name="car"
+                required
+                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-akagi-red focus:border-transparent"
+              >
+                <option value="">Select a car...</option>
+                <option value="ae86">Toyota AE86 Trueno</option>
+                <option value="s13">Nissan Silvia S13</option>
+                <option value="s14">Nissan Silvia S14</option>
+              </select>
+            </div>
+
+            <!-- Package -->
+            <div>
+              <label for="package" class="block text-sm font-semibold text-akagi-charcoal mb-2">
+                {t('drift.booking.form.package')}
+              </label>
+              <select
+                id="package"
+                name="package"
+                required
+                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-akagi-red focus:border-transparent"
+              >
+                <option value="">Select a package...</option>
+                <option value="half">Half Day (¥45,000)</option>
+                <option value="full">Full Day (¥80,000)</option>
+                <option value="weekend">Weekend Package (¥150,000)</option>
+              </select>
+            </div>
+
+            <!-- Message -->
+            <div>
+              <label for="message" class="block text-sm font-semibold text-akagi-charcoal mb-2">
+                {t('drift.booking.form.message')}
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                rows="4"
+                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-akagi-red focus:border-transparent"
+                placeholder="Tell us about your experience level and any special requirements..."
+              ></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <div>
+              <button
+                type="submit"
+                class="w-full bg-akagi-red hover:bg-akagi-orange text-white font-bold py-3 px-6 rounded-md transition transform hover:scale-105"
+              >
+                {t('drift.booking.form.submit')}
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="mt-8 text-center text-gray-600">
+          <p class="mb-2">Or contact us directly:</p>
+          <p class="font-semibold text-akagi-charcoal">Email: drift@akagi.dev</p>
+          <p class="font-semibold text-akagi-charcoal">Phone: +81-XX-XXXX-XXXX</p>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>
