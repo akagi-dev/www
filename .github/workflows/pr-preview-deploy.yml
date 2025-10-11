@@ -48,6 +48,9 @@ jobs:
           # Copy built files to root
           cp -r dist/* .
           
+          # Remove CNAME file to prevent redirect to custom domain
+          rm -f CNAME
+          
           # Add all files
           git add .
           
