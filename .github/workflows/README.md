@@ -28,16 +28,26 @@ Automatically builds and deploys live previews for pull requests to GitHub Pages
 - ⚠️ Graceful error handling for deployment and comment posting
 
 #### Preview URL Format
-Each PR gets its own set of preview URLs:
-- Base: `https://akagi-dev.github.io/www/pr-{number}/`
-- English: `https://akagi-dev.github.io/www/pr-{number}/en/`
-- Japanese: `https://akagi-dev.github.io/www/pr-{number}/ja/`
-- Russian: `https://akagi-dev.github.io/www/pr-{number}/ru/`
+Each PR gets preview URLs for both portals:
+
+**Corporate Portal (www):**
+- English: `https://akagi-dev.github.io/www/pr-{number}/www/en/`
+- Japanese: `https://akagi-dev.github.io/www/pr-{number}/www/ja/`
+- Russian: `https://akagi-dev.github.io/www/pr-{number}/www/ru/`
+
+**Drift Rental Portal (drift):**
+- English: `https://akagi-dev.github.io/www/pr-{number}/drift/en/`
+- Japanese: `https://akagi-dev.github.io/www/pr-{number}/drift/ja/`
+- Russian: `https://akagi-dev.github.io/www/pr-{number}/drift/ru/`
+
+**Root:**
+- Base URL: `https://akagi-dev.github.io/www/pr-{number}/` (redirects to www/en/)
 
 #### Comment Details
 The workflow posts a comment on the PR with:
-- Direct preview links for all languages
-- Quick access links for home page
+- Direct preview links for both portals (corporate and drift)
+- All three language variants for each portal
+- Quick access links for root redirect and portal home pages
 - Build metadata (commit SHA, timestamp, branch)
 - Easy-to-share URLs for mobile testing
 
