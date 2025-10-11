@@ -1,5 +1,7 @@
 ---
 import { defaultLang } from '@i18n/ui';
 
-return Astro.redirect(`/www/${defaultLang}/`);
+const base = import.meta.env.BASE_URL;
+const basePath = base.endsWith('/') ? base : base + '/';
+return Astro.redirect(`${basePath}${defaultLang}/`);
 ---

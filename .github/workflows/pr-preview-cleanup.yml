@@ -1,0 +1,37 @@
+name: PR Preview Cleanup
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Surge
+        run: npm install -g surge
+      
+      - name: Remove Surge deployment
+        run: |
+          surge teardown https://pr-${{ github.event.pull_request.number }}-akagi-www.surge.sh --token ${{ secrets.SURGE_TOKEN }}
+        continue-on-error: true
+      
+      - name: Comment on PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const prNumber = context.issue.number;
+            const message = `## 🧹 Preview Cleanup Complete
+            
+            The preview deployment for this PR has been removed.
+            
+            - ~~https://pr-${prNumber}-akagi-www.surge.sh~~
+            
+            Thank you for your contribution! 🎉`;
+            
+            await github.rest.issues.createComment({
+              issue_number: prNumber,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: message
+            });

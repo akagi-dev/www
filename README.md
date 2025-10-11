@@ -1,6 +1,7 @@
 # Akagi Engineering Portal
 
 [![Deploy to GitHub Pages](https://github.com/akagi-dev/www/actions/workflows/deploy.yml/badge.svg)](https://github.com/akagi-dev/www/actions/workflows/deploy.yml)
+[![PR Preview](https://github.com/akagi-dev/www/actions/workflows/pr-preview.yml/badge.svg)](https://github.com/akagi-dev/www/actions/workflows/pr-preview.yml)
 
 Official website for Akagi Engineering - Japanese car service specializing in JDM drift cars and D1GP motorsport.
 
@@ -86,10 +87,38 @@ The site will be available at `http://localhost:4321/www`
 
 ## 🚢 Deployment
 
+### Production
+
 The site is automatically deployed to GitHub Pages on every push to `main`:
 
 - **Production URL**: https://akagi-dev.github.io/www
-- **PR Previews**: Build artifacts available for each PR
+
+### PR Previews
+
+Every pull request automatically gets a live preview deployment for easy testing:
+
+- **Preview URL**: `https://pr-{number}-akagi-www.surge.sh`
+- **Auto Deployment**: Triggered on PR open, update, or reopen
+- **Auto Cleanup**: Removed when PR is closed or merged
+- **Multi-Language Support**: All language variants available in preview
+- **Mobile Testing**: QR codes provided for easy mobile device testing
+
+Preview deployments include:
+- 🇬🇧 English: `/en/`
+- 🇯🇵 Japanese: `/ja/`
+- 🇷🇺 Russian: `/ru/`
+
+Each PR receives an automated comment with:
+- Direct links to all language variants
+- QR codes for mobile testing
+- Links to all available pages
+- Build artifact download option (backup)
+
+### Environment Configuration
+
+The build system automatically adjusts for different environments:
+- **Production**: Uses `/www` base path for GitHub Pages
+- **PR Preview**: Uses `/` root path for Surge.sh deployments
 
 ## 📝 License
 

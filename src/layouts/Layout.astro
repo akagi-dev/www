@@ -5,6 +5,9 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const currentPath = Astro.url.pathname;
+const base = import.meta.env.BASE_URL;
+// Ensure base has trailing slash for consistent URL building
+const basePath = base.endsWith('/') ? base : base + '/';
 ---
 
 <!DOCTYPE html>
@@ -12,7 +15,7 @@ const currentPath = Astro.url.pathname;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/www/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href={`${basePath}favicon.svg`} />
     <title>Akagi Engineering - JDM Motorsport Specialists</title>
     <meta name="description" content="Akagi Engineering - Japanese car service specializing in JDM drift cars and D1GP motorsport" />
   </head>
@@ -22,7 +25,7 @@ const currentPath = Astro.url.pathname;
         <div class="flex items-center justify-between h-16">
           <!-- Logo -->
           <div class="flex-shrink-0">
-            <a href={`/www/${lang}/`} class="text-xl font-bold text-akagi-red hover:text-akagi-orange transition">
+            <a href={`${basePath}${lang}/`} class="text-xl font-bold text-akagi-red hover:text-akagi-orange transition">
               AKAGI ENGINEERING
             </a>
           </div>
@@ -30,25 +33,25 @@ const currentPath = Astro.url.pathname;
           <!-- Desktop Navigation -->
           <div class="hidden md:flex md:items-center md:space-x-8">
             <a 
-              href={`/www/${lang}/`}
+              href={`${basePath}${lang}/`}
               class={`hover:text-akagi-orange transition ${currentPath.endsWith(`/${lang}/`) || currentPath.endsWith(`/${lang}`) ? 'text-akagi-light-blue' : 'text-akagi-teal'}`}
             >
               {t('nav.about')}
             </a>
             <a 
-              href={`/www/${lang}/services`}
+              href={`${basePath}${lang}/services`}
               class={`hover:text-akagi-orange transition ${currentPath.includes('/services') ? 'text-akagi-light-blue' : 'text-akagi-teal'}`}
             >
               {t('nav.services')}
             </a>
             <a 
-              href={`/www/${lang}/competitions`}
+              href={`${basePath}${lang}/competitions`}
               class={`hover:text-akagi-orange transition ${currentPath.includes('/competitions') ? 'text-akagi-light-blue' : 'text-akagi-teal'}`}
             >
               {t('nav.competitions')}
             </a>
             <a 
-              href={`/www/${lang}/contact`}
+              href={`${basePath}${lang}/contact`}
               class={`hover:text-akagi-orange transition ${currentPath.includes('/contact') ? 'text-akagi-light-blue' : 'text-akagi-teal'}`}
             >
               {t('nav.contact')}
@@ -88,25 +91,25 @@ const currentPath = Astro.url.pathname;
         <div id="mobile-menu" class="hidden md:hidden pb-4">
           <div class="space-y-1">
             <a 
-              href={`/www/${lang}/`}
+              href={`${basePath}${lang}/`}
               class={`block px-3 py-2 rounded-md hover:bg-akagi-teal ${currentPath.endsWith(`/${lang}/`) || currentPath.endsWith(`/${lang}`) ? 'bg-akagi-light-blue text-akagi-navy' : ''}`}
             >
               {t('nav.about')}
             </a>
             <a 
-              href={`/www/${lang}/services`}
+              href={`${basePath}${lang}/services`}
               class={`block px-3 py-2 rounded-md hover:bg-akagi-teal ${currentPath.includes('/services') ? 'bg-akagi-light-blue text-akagi-navy' : ''}`}
             >
               {t('nav.services')}
             </a>
             <a 
-              href={`/www/${lang}/competitions`}
+              href={`${basePath}${lang}/competitions`}
               class={`block px-3 py-2 rounded-md hover:bg-akagi-teal ${currentPath.includes('/competitions') ? 'bg-akagi-light-blue text-akagi-navy' : ''}`}
             >
               {t('nav.competitions')}
             </a>
             <a 
-              href={`/www/${lang}/contact`}
+              href={`${basePath}${lang}/contact`}
               class={`block px-3 py-2 rounded-md hover:bg-akagi-teal ${currentPath.includes('/contact') ? 'bg-akagi-light-blue text-akagi-navy' : ''}`}
             >
               {t('nav.contact')}
