@@ -1,23 +1,59 @@
-# Akagi Engineering Portal
+# Akagi Engineering Dual-Portal Website
 
 [![Deploy to GitHub Pages](https://github.com/akagi-dev/www/actions/workflows/deploy.yml/badge.svg)](https://github.com/akagi-dev/www/actions/workflows/deploy.yml)
 
-Official website for Akagi Engineering - Japanese car service specializing in JDM drift cars and D1GP motorsport.
+Official website for Akagi Engineering featuring dual portals: corporate site and drift car rental service.
 
-## 🏎️ About
+## 🚗 Dual-Portal Architecture
 
-Akagi Engineering is a premier Japanese car service center specializing in JDM (Japanese Domestic Market) vehicles and motorsport. We provide exceptional service and expertise for drift car enthusiasts.
+This monorepo hosts two integrated portals sharing common code, layouts, and i18n:
 
-- **D1 Lights License** - Currently competing in D1 Lights series
-- **D1GP Aspirations** - Working towards D1 Grand Prix series
-- **Track Services** - Drift car rental at Chiba, Gunma, and Fuji Speedway
+### **Corporate Portal** (`www.akagi.dev`)
+- Company information and motorsport activities
+- D1 Lights License and D1GP aspirations
+- Professional services and competition updates
+- **Pages**: About, Services, Competitions, Contact
 
-## 🌐 Languages
+### **Drift Rental Portal** (`drift.akagi.dev`)
+- JDM drift car rental service
+- Track information and booking system
+- Pricing packages and FAQs
+- **Pages**: Fleet, Tracks, Pricing, Booking, FAQ
 
-The site is available in three languages:
-- 🇬🇧 English (default)
-- 🇯🇵 Japanese (日本語)
-- 🇷🇺 Russian (Русский)
+Both portals feature:
+- **Portal Switcher** - Easy navigation between corporate and drift sites
+- **Multi-language Support** - EN, JA, RU across both portals
+- **Shared Components** - Common layouts, header, footer
+- **Consistent Branding** - Unified design system
+
+## ✨ Key Features
+
+### Dual-Portal Architecture
+- **Single Codebase**: Both portals built from one monorepo
+- **Shared i18n**: Unified translation system supporting both portals
+- **Common Components**: Reusable layouts and UI elements
+- **Portal-Aware Routing**: Smart navigation based on current portal
+- **Cross-Portal Links**: Footer links to easily switch between portals
+
+### Corporate Portal Features
+- Company history and motorsport achievements
+- D1 Lights and D1GP competition information
+- Professional services showcase
+- Contact information and location
+
+### Drift Rental Portal Features
+- **Car Fleet**: Detailed JDM drift car showcase (AE86, S13, S14)
+- **Track Information**: Chiba, Gunma, Fuji Speedway details
+- **Pricing Packages**: Half-day, full-day, weekend options
+- **Booking System**: Online rental request form
+- **Comprehensive FAQ**: Common questions and requirements
+
+### Technical Features
+- **SEO Optimized**: Separate meta tags for each portal
+- **Mobile Responsive**: Touch-friendly navigation on all devices
+- **Language Detection**: Auto-redirect based on browser settings
+- **Fast Loading**: Astro static site generation
+- **PR Previews**: Both portals previewed on every pull request
 
 ## 🛠️ Tech Stack
 
@@ -51,38 +87,71 @@ npm run preview
 
 The site will be available at `http://localhost:4321/www`
 
-### Available Languages
+### Available Portals & Languages
 
-- English: `http://localhost:4321/www/en/`
-- Japanese: `http://localhost:4321/www/ja/`
-- Russian: `http://localhost:4321/www/ru/`
+**Corporate Portal:**
+- English: `http://localhost:4321/www/www/en/`
+- Japanese: `http://localhost:4321/www/www/ja/`
+- Russian: `http://localhost:4321/www/www/ru/`
+
+**Drift Rental Portal:**
+- English: `http://localhost:4321/www/drift/en/`
+- Japanese: `http://localhost:4321/www/drift/ja/`
+- Russian: `http://localhost:4321/www/drift/ru/`
 
 ## 📁 Project Structure
 
 ```
 /
-├── public/              # Static assets
+├── public/                    # Static assets
 │   └── favicon.svg
 ├── src/
-│   ├── i18n/           # Internationalization
-│   │   └── ui.ts       # Translation strings
-│   ├── layouts/        # Page layouts
-│   │   └── Layout.astro
-│   └── pages/          # Page components
-│       ├── en/         # English pages
-│       ├── ja/         # Japanese pages
-│       └── ru/         # Russian pages
-├── astro.config.mjs    # Astro configuration
-├── tailwind.config.mjs # Tailwind CSS configuration
-└── tsconfig.json       # TypeScript configuration
+│   ├── components/           # Reusable components
+│   │   ├── common/          # Shared between portals
+│   │   │   └── Layout.astro # Common layout with portal switcher
+│   │   ├── www/             # Corporate-specific components
+│   │   └── drift/           # Drift-specific components
+│   ├── i18n/                # Internationalization
+│   │   └── ui.ts            # Translation strings for both portals
+│   ├── layouts/             # Legacy layouts (deprecated)
+│   │   └── Layout.astro     
+│   └── pages/               # Page components
+│       ├── index.astro      # Root redirect to www portal
+│       ├── www/             # Corporate portal
+│       │   ├── en/          # English pages
+│       │   │   ├── index.astro
+│       │   │   ├── services.astro
+│       │   │   ├── competitions.astro
+│       │   │   └── contact.astro
+│       │   ├── ja/          # Japanese pages
+│       │   └── ru/          # Russian pages
+│       └── drift/           # Drift rental portal
+│           ├── en/          # English pages
+│           │   ├── index.astro
+│           │   ├── fleet.astro
+│           │   ├── tracks.astro
+│           │   ├── pricing.astro
+│           │   ├── booking.astro
+│           │   └── faq.astro
+│           ├── ja/          # Japanese pages
+│           └── ru/          # Russian pages
+├── astro.config.mjs         # Astro configuration
+├── tailwind.config.mjs      # Tailwind CSS configuration
+└── tsconfig.json            # TypeScript configuration
 ```
 
 ## 🎨 Design
 
-- **Color Scheme**: Professional black, red, and gray
+**Common Design System:**
+- **Color Scheme**: Professional navy, teal, red, and orange
 - **Mobile-First**: Responsive design with hamburger menu
 - **Accessibility**: Semantic HTML and ARIA labels
 - **Performance**: Optimized static builds
+- **Portal Switcher**: Seamless navigation between corporate and drift sites
+
+**Portal-Specific Styling:**
+- **Corporate Portal**: Professional, motorsport-focused
+- **Drift Portal**: Action-oriented, booking-focused
 
 ## 🚢 Deployment
 
