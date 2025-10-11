@@ -1,0 +1,8 @@
+---
+import { defaultLang } from '@i18n/ui';
+
+// Redirect to default language drift portal
+const base = import.meta.env.BASE_URL;
+const redirectPath = base.endsWith('/') ? `${base}drift/${defaultLang}/` : `${base}/drift/${defaultLang}/`;
+return Astro.redirect(redirectPath);
+---

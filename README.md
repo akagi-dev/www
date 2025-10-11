@@ -10,11 +10,28 @@ Akagi Engineering is a premier Japanese car service center specializing in JDM (
 
 - **D1 Lights License** - Currently competing in D1 Lights series
 - **D1GP Aspirations** - Working towards D1 Grand Prix series
-- **Track Services** - Drift car rental at Chiba, Gunma, and Fuji Speedway
+- **Drift Car Rental** - Professional JDM drift cars at Chiba, Gunma, and Fuji Speedway
+
+## 🌐 Dual Portal Architecture
+
+The site features two integrated portals:
+
+### Corporate Portal (`/en/`, `/ja/`, `/ru/`)
+- Company information and history
+- Motorsport achievements (D1 Lights, D1GP)
+- Service offerings overview
+- Contact information
+
+### Drift Rental Portal (`/drift/en/`, `/drift/ja/`, `/drift/ru/`)
+- JDM drift car fleet (AE86, S13, S14)
+- Track details (Chiba, Gunma, Fuji Speedway)
+- Transparent pricing
+- Online booking system
+- FAQ and driver requirements
 
 ## 🌐 Languages
 
-The site is available in three languages:
+Both portals are available in three languages:
 - 🇬🇧 English (default)
 - 🇯🇵 Japanese (日本語)
 - 🇷🇺 Russian (Русский)
@@ -24,7 +41,7 @@ The site is available in three languages:
 - **[Astro](https://astro.build)** - Static Site Generator
 - **[TypeScript](https://www.typescriptlang.org/)** - Type-safe JavaScript
 - **[Tailwind CSS](https://tailwindcss.com)** - Utility-first CSS framework
-- **Custom i18n** - Multi-language support
+- **Custom i18n** - Multi-language support with portal detection
 
 ## 🚀 Development
 
@@ -49,47 +66,68 @@ npm run build
 npm run preview
 ```
 
-The site will be available at `http://localhost:4321/www`
+### Local Development URLs
 
-### Available Languages
+In development (with base path `/www`):
+- Corporate Portal:
+  - English: `http://localhost:4321/www/en/`
+  - Japanese: `http://localhost:4321/www/ja/`
+  - Russian: `http://localhost:4321/www/ru/`
 
-- English: `http://localhost:4321/www/en/`
-- Japanese: `http://localhost:4321/www/ja/`
-- Russian: `http://localhost:4321/www/ru/`
+- Drift Rental Portal:
+  - English: `http://localhost:4321/www/drift/en/`
+  - Japanese: `http://localhost:4321/www/drift/ja/`
+  - Russian: `http://localhost:4321/www/drift/ru/`
 
 ## 📁 Project Structure
 
 ```
 /
-├── public/              # Static assets
+├── public/                 # Static assets
 │   └── favicon.svg
 ├── src/
-│   ├── i18n/           # Internationalization
-│   │   └── ui.ts       # Translation strings
-│   ├── layouts/        # Page layouts
+│   ├── components/        # Reusable components
+│   │   ├── common/        # Shared components (Layout, Header, Footer)
+│   │   ├── corporate/     # Corporate portal specific components
+│   │   └── drift/         # Drift portal specific components
+│   ├── i18n/              # Internationalization
+│   │   └── ui.ts          # Translation strings for both portals
+│   ├── layouts/           # Page layouts (exports common Layout)
 │   │   └── Layout.astro
-│   └── pages/          # Page components
-│       ├── en/         # English pages
-│       ├── ja/         # Japanese pages
-│       └── ru/         # Russian pages
-├── astro.config.mjs    # Astro configuration
-├── tailwind.config.mjs # Tailwind CSS configuration
-└── tsconfig.json       # TypeScript configuration
+│   └── pages/             # Page components
+│       ├── en/            # Corporate portal - English
+│       ├── ja/            # Corporate portal - Japanese
+│       ├── ru/            # Corporate portal - Russian
+│       └── drift/         # Drift rental portal
+│           ├── en/        # Drift portal - English
+│           ├── ja/        # Drift portal - Japanese
+│           └── ru/        # Drift portal - Russian
+├── astro.config.mjs       # Astro configuration with custom domain support
+├── tailwind.config.mjs    # Tailwind CSS configuration
+└── tsconfig.json          # TypeScript configuration
 ```
 
 ## 🎨 Design
 
 - **Color Scheme**: Professional black, red, and gray
 - **Mobile-First**: Responsive design with hamburger menu
+- **Portal Switching**: Easy navigation between corporate and drift portals
 - **Accessibility**: Semantic HTML and ARIA labels
 - **Performance**: Optimized static builds
 
 ## 🚢 Deployment
 
-The site is automatically deployed to GitHub Pages on every push to `main`:
+The site is automatically deployed on every push to `main`:
 
-- **Production URL**: https://akagi-dev.github.io/www
+- **Production URL**: https://www.akagi.dev (custom domain)
+- **GitHub Pages Fallback**: https://akagi-dev.github.io/www
 - **PR Previews**: Live preview deployments via GitHub Pages for each PR
+
+### Production Deployment
+
+The main branch deploys to:
+- Corporate Portal: `https://www.akagi.dev/en/`, `/ja/`, `/ru/`
+- Drift Portal: `https://www.akagi.dev/drift/en/`, `/drift/ja/`, `/drift/ru/`
 
 ### PR Preview Workflow
 
@@ -98,7 +136,7 @@ When you open or update a pull request:
 2. 🌐 Deploys to a dedicated orphan branch `preview/pr-{number}`
 3. 📱 Creates live preview URLs accessible via GitHub Pages
 4. 💬 Posts/updates a comment on the PR with:
-   - Direct preview links for all languages (English, Japanese, Russian)
+   - Direct preview links for both portals and all languages
    - Easy mobile testing with shareable URLs
    - Build metadata (commit SHA, timestamp, branch)
    - Quick access links for different pages
@@ -114,9 +152,14 @@ The preview workflow includes:
 
 #### Preview URL Format:
 - Base: `https://akagi-dev.github.io/www/pr-{number}/`
-- English: `https://akagi-dev.github.io/www/pr-{number}/en/`
-- Japanese: `https://akagi-dev.github.io/www/pr-{number}/ja/`
-- Russian: `https://akagi-dev.github.io/www/pr-{number}/ru/`
+- Corporate Portal:
+  - English: `https://akagi-dev.github.io/www/pr-{number}/en/`
+  - Japanese: `https://akagi-dev.github.io/www/pr-{number}/ja/`
+  - Russian: `https://akagi-dev.github.io/www/pr-{number}/ru/`
+- Drift Rental Portal:
+  - English: `https://akagi-dev.github.io/www/pr-{number}/drift/en/`
+  - Japanese: `https://akagi-dev.github.io/www/pr-{number}/drift/ja/`
+  - Russian: `https://akagi-dev.github.io/www/pr-{number}/drift/ru/`
 
 For more details, see [`.github/workflows/README.md`](.github/workflows/README.md)
 
