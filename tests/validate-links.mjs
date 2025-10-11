@@ -13,11 +13,18 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const distDir = path.join(__dirname, '../dist');
+const VERBOSE = process.env.VERBOSE === 'true';
 const results = {
   passed: 0,
   failed: 0,
   warnings: 0,
-  errors: []
+  errors: [],
+  stats: {
+    totalLinks: 0,
+    internalLinks: 0,
+    externalLinks: 0,
+    staticAssets: 0
+  }
 };
 
 // Get all HTML files
@@ -60,13 +67,22 @@ function extractLinks(html, filePath) {
 
 // Normalize path for checking
 function normalizePath(link) {
-  // Remove base path variations
+  // Remove base path variations (PR previews and /www prefix)
   let normalized = link.replace(/^\/www\/pr-\d+/, '');
   normalized = normalized.replace(/^\/www/, '');
   
-  // Ensure leading slash
+  // Handle relative paths without leading slash
   if (!normalized.startsWith('/') && !normalized.startsWith('http')) {
     normalized = '/' + normalized;
+  }
+  
+  // Remove trailing slashes for consistency (except for root)
+  if (normalized.length > 1 && normalized.endsWith('/')) {
+    normalized = normalized.slice(0, -1);
+  }
+  
+  if (VERBOSE) {
+    console.log(`  [normalize] ${link} => ${normalized}`);
   }
   
   return normalized;
@@ -78,11 +94,20 @@ function checkInternalLink(link, distDir) {
   
   // Skip external links
   if (normalized.startsWith('http://') || normalized.startsWith('https://')) {
+    results.stats.externalLinks++;
     return { exists: true, external: true };
   }
   
+  results.stats.internalLinks++;
+  
   // Remove query params and hash
   const cleanPath = normalized.split('?')[0].split('#')[0];
+  
+  // Check if it's a static asset
+  const isStaticAsset = cleanPath.match(/\.(svg|png|jpg|jpeg|gif|css|js|ico|woff|woff2|ttf|eot)$/);
+  if (isStaticAsset) {
+    results.stats.staticAssets++;
+  }
   
   // Try different file locations
   const possiblePaths = [
@@ -91,15 +116,22 @@ function checkInternalLink(link, distDir) {
     path.join(distDir, cleanPath + '.html'),
   ];
   
-  // Check for static assets
-  if (cleanPath.match(/\.(svg|png|jpg|jpeg|gif|css|js|ico)$/)) {
-    possiblePaths.push(path.join(distDir, cleanPath));
+  // For static assets, check the direct path first
+  if (isStaticAsset) {
+    possiblePaths.unshift(path.join(distDir, cleanPath));
   }
   
   for (const testPath of possiblePaths) {
     if (fs.existsSync(testPath)) {
+      if (VERBOSE) {
+        console.log(`  [found] ${link} => ${testPath}`);
+      }
       return { exists: true, external: false, resolvedPath: testPath };
     }
+  }
+  
+  if (VERBOSE) {
+    console.log(`  [missing] ${link} - tried: ${possiblePaths.join(', ')}`);
   }
   
   return { exists: false, external: false, attempted: possiblePaths };
@@ -153,7 +185,12 @@ async function validateLinks() {
     const html = fs.readFileSync(filePath, 'utf-8');
     const links = extractLinks(html, filePath);
     
+    if (VERBOSE) {
+      console.log(`\n📄 Checking ${relativePath} (${links.length} links)...`);
+    }
+    
     for (const link of links) {
+      results.stats.totalLinks++;
       const check = checkInternalLink(link, distDir);
       
       if (check.external) {
@@ -229,7 +266,12 @@ async function validateLinks() {
   console.log('\n' + '='.repeat(60));
   console.log('LINK VALIDATION SUMMARY');
   console.log('='.repeat(60));
-  console.log(`✅ Passed: ${results.passed}`);
+  console.log(`📊 Statistics:`);
+  console.log(`   Total links found: ${results.stats.totalLinks}`);
+  console.log(`   Internal links: ${results.stats.internalLinks}`);
+  console.log(`   External links: ${results.stats.externalLinks}`);
+  console.log(`   Static assets: ${results.stats.staticAssets}`);
+  console.log(`\n✅ Passed: ${results.passed}`);
   console.log(`❌ Failed: ${results.failed}`);
   console.log(`⚠️  Warnings: ${results.warnings}`);
   

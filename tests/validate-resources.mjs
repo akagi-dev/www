@@ -13,10 +13,16 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const distDir = path.join(__dirname, '../dist');
+const VERBOSE = process.env.VERBOSE === 'true';
 const results = {
   passed: 0,
   failed: 0,
-  errors: []
+  errors: [],
+  stats: {
+    totalResources: 0,
+    uniqueResources: 0,
+    externalResources: 0
+  }
 };
 
 // Get all HTML files
@@ -75,11 +81,17 @@ function extractResources(html) {
 
 // Normalize path
 function normalizePath(resourcePath) {
+  // Remove base path variations (PR previews and /www prefix)
   let normalized = resourcePath.replace(/^\/www\/pr-\d+/, '');
   normalized = normalized.replace(/^\/www/, '');
   
-  if (!normalized.startsWith('/')) {
+  // Handle relative paths
+  if (!normalized.startsWith('/') && !normalized.startsWith('http')) {
     normalized = '/' + normalized;
+  }
+  
+  if (VERBOSE) {
+    console.log(`  [normalize] ${resourcePath} => ${normalized}`);
   }
   
   return normalized;
@@ -89,6 +101,7 @@ function normalizePath(resourcePath) {
 function checkResource(resourcePath, distDir) {
   // Skip external resources
   if (resourcePath.startsWith('http://') || resourcePath.startsWith('https://')) {
+    results.stats.externalResources++;
     return { exists: true, external: true };
   }
   
@@ -97,12 +110,19 @@ function checkResource(resourcePath, distDir) {
   
   if (fs.existsSync(filePath)) {
     const stats = fs.statSync(filePath);
+    if (VERBOSE) {
+      console.log(`  [found] ${resourcePath} => ${filePath} (${stats.size} bytes)`);
+    }
     return { 
       exists: true, 
       external: false, 
       size: stats.size,
       path: filePath 
     };
+  }
+  
+  if (VERBOSE) {
+    console.log(`  [missing] ${resourcePath} - attempted: ${filePath}`);
   }
   
   return { exists: false, external: false, attempted: filePath };
@@ -134,10 +154,16 @@ async function validateResources() {
     const html = fs.readFileSync(filePath, 'utf-8');
     const resources = extractResources(html);
     
+    if (VERBOSE) {
+      const totalRes = Object.values(resources).reduce((sum, set) => sum + set.size, 0);
+      console.log(`\n📄 Checking ${relativePath} (${totalRes} resources)...`);
+    }
+    
     // Check each resource type
     for (const [type, resourceSet] of Object.entries(resources)) {
       for (const resource of resourceSet) {
         allResources[type].add(resource);
+        results.stats.totalResources++;
         
         const check = checkResource(resource, distDir);
         
@@ -155,6 +181,13 @@ async function validateResources() {
       }
     }
   }
+  
+  // Count unique resources
+  results.stats.uniqueResources = 
+    allResources.images.size + 
+    allResources.css.size + 
+    allResources.js.size + 
+    allResources.other.size;
   
   // Check for favicon.svg specifically
   const faviconPath = path.join(distDir, 'favicon.svg');
@@ -186,10 +219,15 @@ async function validateResources() {
   console.log('\n' + '='.repeat(60));
   console.log('RESOURCE VALIDATION SUMMARY');
   console.log('='.repeat(60));
-  console.log(`Images referenced: ${allResources.images.size}`);
-  console.log(`CSS files referenced: ${allResources.css.size}`);
-  console.log(`JS files referenced: ${allResources.js.size}`);
-  console.log(`Other resources: ${allResources.other.size}`);
+  console.log(`📊 Statistics:`);
+  console.log(`   Total resource references: ${results.stats.totalResources}`);
+  console.log(`   Unique resources: ${results.stats.uniqueResources}`);
+  console.log(`   External resources: ${results.stats.externalResources}`);
+  console.log(`\n📁 Resource breakdown:`);
+  console.log(`   Images: ${allResources.images.size}`);
+  console.log(`   CSS files: ${allResources.css.size}`);
+  console.log(`   JS files: ${allResources.js.size}`);
+  console.log(`   Other resources: ${allResources.other.size}`);
   console.log(`\n✅ Passed: ${results.passed}`);
   console.log(`❌ Failed: ${results.failed}`);
   

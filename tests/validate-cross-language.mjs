@@ -14,11 +14,17 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const distDir = path.join(__dirname, '../dist');
+const VERBOSE = process.env.VERBOSE === 'true';
 const results = {
   passed: 0,
   failed: 0,
   warnings: 0,
-  errors: []
+  errors: [],
+  stats: {
+    totalPages: 0,
+    completePages: 0,
+    partialPages: 0
+  }
 };
 
 const LANGUAGES = ['en', 'ja', 'ru'];
@@ -118,6 +124,7 @@ function checkPageConsistency() {
           existsIn: existsIn,
           missingIn: missingIn
         });
+        results.stats.partialPages++;
         // Only treat as warning if page is missing in some but not all languages
         if (existsIn.includes('en')) {
           results.warnings++;
@@ -126,9 +133,12 @@ function checkPageConsistency() {
         }
       } else {
         completePages.push(page);
+        results.stats.completePages++;
         results.passed++;
       }
     }
+    
+    results.stats.totalPages += allPages.size;
     
     if (completePages.length > 0) {
       console.log(`✅ ${completePages.length} page(s) exist in all languages (${LANGUAGES.join(', ')})`);
@@ -304,8 +314,12 @@ async function validateCrossLanguage() {
   console.log('='.repeat(60));
   console.log('CROSS-LANGUAGE CONSISTENCY SUMMARY');
   console.log('='.repeat(60));
-  console.log(`Languages checked: ${LANGUAGES.join(', ')}`);
-  console.log(`Portals checked: ${PORTALS.join(', ')}`);
+  console.log(`📊 Statistics:`);
+  console.log(`   Languages checked: ${LANGUAGES.join(', ')}`);
+  console.log(`   Portals checked: ${PORTALS.join(', ')}`);
+  console.log(`   Total pages: ${results.stats.totalPages}`);
+  console.log(`   Complete (all languages): ${results.stats.completePages}`);
+  console.log(`   Partial (some languages): ${results.stats.partialPages}`);
   console.log(`\n✅ Passed: ${results.passed}`);
   console.log(`❌ Failed: ${results.failed}`);
   console.log(`⚠️  Warnings: ${results.warnings}`);

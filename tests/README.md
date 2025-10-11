@@ -15,7 +15,10 @@ The test suite validates various aspects of the built website to ensure quality,
   - External links have valid URL format
   - Navigation links work across all language versions
   - Footer and header links are functional
-- **Critical**: No (warns about issues)
+  - Static assets (CSS, images, fonts) are reachable
+- **Path Normalization**: Handles PR preview paths (`/www/pr-{number}`) and base paths
+- **Smart Detection**: Distinguishes between critical broken links and missing language-specific pages
+- **Critical**: No (warns about issues, fails only on critical broken links)
 
 ### 2. Resource Validation (`validate-resources.mjs`)
 - **Purpose**: Ensures all referenced resources exist
@@ -51,7 +54,9 @@ The test suite validates various aspects of the built website to ensure quality,
   - Navigation consistency across language versions
   - Language switcher presence
   - Portal consistency (corporate, drift)
-- **Critical**: No (warns about inconsistencies)
+- **Smart Warnings**: Differentiates between pages missing in all languages (critical) vs. missing in some languages (warning)
+- **Statistics**: Reports total pages, complete pages, and partial pages
+- **Critical**: No (warns about inconsistencies, fails only on critical issues)
 
 ## Running Tests
 
@@ -68,6 +73,21 @@ node tests/validate-content.mjs
 node tests/validate-seo.mjs
 node tests/validate-cross-language.mjs
 ```
+
+### Enable Verbose Mode for Debugging
+For detailed debugging output showing all link/resource checks:
+```bash
+VERBOSE=true node tests/validate-links.mjs
+VERBOSE=true node tests/validate-resources.mjs
+```
+
+Verbose mode shows:
+- Path normalization steps
+- File resolution attempts
+- Resource sizes and locations
+- Detailed per-file checks
+
+This is useful when debugging link or resource validation failures.
 
 ### Prerequisites
 The website must be built before running tests:
@@ -100,12 +120,14 @@ Each test provides detailed output:
 - ✅ Passed checks
 - ❌ Failed checks (with details)
 - ⚠️ Warnings (non-critical issues)
+- 📊 Statistics (links, resources, pages analyzed)
 
 The test runner provides a summary showing:
 - Total tests run
 - Pass/fail counts
 - Critical vs. non-critical failures
 - Execution time
+- Detailed statistics per test category
 
 ## Supported Languages
 
@@ -124,10 +146,32 @@ Tests cover both website portals:
 
 The tests may report warnings for:
 - Missing translations for some drift portal pages (ja, ru)
+  - Pages like fleet, tracks, pricing, booking, faq exist only in English
+  - These are tracked as non-critical technical debt
 - Short meta descriptions (< 120 chars)
+  - Some drift portal pages need longer descriptions for better SEO
 - Navigation link variations between language versions
+  - Links to untranslated pages are present but marked as warnings
 
 These are tracked as technical debt and don't block PR merges.
+
+## Recent Improvements
+
+**Enhanced Link Validation**:
+- Smart categorization of broken links (critical vs. missing language pages)
+- Improved path normalization for PR preview environments
+- Better handling of static assets (fonts, images, CSS)
+- Detailed statistics on link types analyzed
+
+**Enhanced Resource Validation**:
+- Verbose mode for debugging resource resolution
+- Statistics on resource references and unique resources
+- Better handling of external resources
+
+**Enhanced Cross-Language Validation**:
+- Differentiate between complete pages (all languages) and partial pages (some languages)
+- More helpful warning messages with suggestions
+- Statistics on page coverage across languages
 
 ## Extending Tests
 
