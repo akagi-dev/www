@@ -120,6 +120,12 @@ The build system automatically adjusts for different environments:
 - **Production**: Uses `/www` base path for GitHub Pages
 - **PR Preview**: Uses `/` root path for Surge.sh deployments
 
+**Setup Instructions**: See [docs/PR_PREVIEW_SETUP.md](docs/PR_PREVIEW_SETUP.md) for detailed setup instructions including:
+- Creating a Surge.sh account
+- Configuring the `SURGE_TOKEN` secret
+- Troubleshooting common issues
+- Alternative deployment options (Netlify, Vercel, GitHub Pages)
+
 ## 📝 License
 
 © 2025 Akagi Engineering. All rights reserved.
