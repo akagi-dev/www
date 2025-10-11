@@ -1,0 +1,86 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { useTranslations } from '@i18n/ui';
+
+const t = useTranslations('en');
+---
+
+<Layout>
+  <div class="min-h-screen">
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-akagi-black to-akagi-gray text-white py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6 text-akagi-red">
+          {t('competitions.title')}
+        </h1>
+        <p class="text-xl text-gray-300 max-w-3xl">
+          {t('competitions.description')}
+        </p>
+      </div>
+    </section>
+
+    <!-- Competition Info -->
+    <section class="py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- D1 Lights -->
+          <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition">
+            <div class="text-akagi-red text-4xl mb-4">🏆</div>
+            <h2 class="text-2xl font-bold mb-4">{t('competitions.d1lights.title')}</h2>
+            <p class="text-gray-600">
+              {t('competitions.d1lights.description')}
+            </p>
+          </div>
+
+          <!-- D1GP Aspirations -->
+          <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition">
+            <div class="text-akagi-red text-4xl mb-4">🎯</div>
+            <h2 class="text-2xl font-bold mb-4">{t('competitions.d1gp.title')}</h2>
+            <p class="text-gray-600">
+              {t('competitions.d1gp.description')}
+            </p>
+          </div>
+
+          <!-- Achievements -->
+          <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition">
+            <div class="text-akagi-red text-4xl mb-4">⭐</div>
+            <h2 class="text-2xl font-bold mb-4">{t('competitions.achievements.title')}</h2>
+            <p class="text-gray-600">
+              {t('competitions.achievements.description')}
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- D1GP Series Info -->
+    <section class="py-16 bg-gray-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-white p-12 rounded-lg shadow-lg text-center">
+          <h2 class="text-3xl font-bold mb-6">D1 Grand Prix Series</h2>
+          <p class="text-gray-600 max-w-3xl mx-auto mb-8">
+            The D1 Grand Prix is Japan's premier professional drifting championship, 
+            showcasing the world's best drivers and most advanced drift machines. 
+            Our journey from D1 Lights to the main series represents our commitment 
+            to excellence in Japanese motorsport.
+          </p>
+          <div class="inline-block bg-akagi-red text-white px-8 py-3 rounded-lg font-semibold">
+            Current: D1 Lights License
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Image Placeholder -->
+    <section class="py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-gradient-to-r from-akagi-gray to-akagi-black rounded-lg h-96 flex items-center justify-center">
+          <div class="text-center text-white">
+            <p class="text-2xl font-bold mb-2">📸 Image Placeholder</p>
+            <p class="text-gray-400">Competition Action / Team Photos / Trophy Moments</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>

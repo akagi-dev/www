@@ -1,0 +1,81 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { useTranslations } from '@i18n/ui';
+
+const t = useTranslations('ru');
+---
+
+<Layout>
+  <div class="min-h-screen">
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-akagi-black to-akagi-gray text-white py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6 text-akagi-red">
+          {t('services.title')}
+        </h1>
+        <p class="text-xl text-gray-300 max-w-3xl">
+          {t('services.description')}
+        </p>
+      </div>
+    </section>
+
+    <!-- Services Grid -->
+    <section class="py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-2 gap-8 mb-12">
+          <!-- Drift Car Rental -->
+          <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition">
+            <div class="text-akagi-red text-4xl mb-4">🚗</div>
+            <h2 class="text-2xl font-bold mb-4">{t('services.rental.title')}</h2>
+            <p class="text-gray-600">
+              {t('services.rental.description')}
+            </p>
+          </div>
+
+          <!-- Track Support -->
+          <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition">
+            <div class="text-akagi-red text-4xl mb-4">🔧</div>
+            <h2 class="text-2xl font-bold mb-4">{t('services.support.title')}</h2>
+            <p class="text-gray-600">
+              {t('services.support.description')}
+            </p>
+          </div>
+        </div>
+
+        <!-- Available Tracks -->
+        <div class="bg-gradient-to-r from-gray-50 to-gray-100 p-8 rounded-lg">
+          <h2 class="text-3xl font-bold mb-6 text-center">{t('services.tracks.title')}</h2>
+          <div class="grid md:grid-cols-3 gap-6">
+            <div class="bg-white p-6 rounded-lg shadow">
+              <div class="text-2xl mb-2">🏁</div>
+              <p class="text-gray-800 font-semibold mb-2">Трасса Чиба</p>
+              <p class="text-gray-600 text-sm">{t('services.tracks.chiba')}</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow">
+              <div class="text-2xl mb-2">🏁</div>
+              <p class="text-gray-800 font-semibold mb-2">Трасса Гунма</p>
+              <p class="text-gray-600 text-sm">{t('services.tracks.gunma')}</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow">
+              <div class="text-2xl mb-2">🏁</div>
+              <p class="text-gray-800 font-semibold mb-2">Fuji Speedway</p>
+              <p class="text-gray-600 text-sm">{t('services.tracks.fuji')}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Image Placeholder -->
+    <section class="py-16 bg-gray-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-gradient-to-r from-akagi-gray to-akagi-black rounded-lg h-96 flex items-center justify-center">
+          <div class="text-center text-white">
+            <p class="text-2xl font-bold mb-2">📸 Заполнитель изображения</p>
+            <p class="text-gray-400">Гоночная трасса / Дрифт / Фото сервиса</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>

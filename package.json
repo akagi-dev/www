@@ -1,0 +1,20 @@
+{
+  "name": "www",
+  "version": "1.0.0",
+  "description": "Akagi Engineering Portal",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@astrojs/tailwind": "^6.0.2",
+    "astro": "^5.14.4",
+    "tailwindcss": "^3.4.18"
+  }
+}
