@@ -1,4 +1,4 @@
-# Website Quality Tests
+# Quality Tests
 
 This directory contains comprehensive validation tests for the Akagi Engineering multilingual website.
 

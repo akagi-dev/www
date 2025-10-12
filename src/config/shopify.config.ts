@@ -18,8 +18,8 @@
 
 export const SHOPIFY_CONFIG = {
   // Shopify store configuration
-  storeDomain: import.meta.env.SHOPIFY_STORE_DOMAIN || 'your-store.myshopify.com',
-  storefrontAccessToken: import.meta.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN || 'your-storefront-access-token',
+  storeDomain: import.meta.env.SHOPIFY_STORE_DOMAIN || 'shop.akagi.dev',
+  storefrontAccessToken: import.meta.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN || 'af8b8bd7d3b4344f510144971c308b5b',
   apiVersion: '2024-01',
   
   // API endpoints
@@ -29,7 +29,7 @@ export const SHOPIFY_CONFIG = {
   productMapping: {
     carClasses: {
       'na-classics': {
-        id: 'gid://shopify/Product/PRODUCT_ID_1',
+        id: 'gid://shopify/Product/9106705940705',
         handle: 'na-classics',
         variantIds: {
           '3h': 'gid://shopify/ProductVariant/VARIANT_ID_1',
@@ -37,7 +37,7 @@ export const SHOPIFY_CONFIG = {
         }
       },
       'v6-power': {
-        id: 'gid://shopify/Product/PRODUCT_ID_2',
+        id: 'gid://shopify/Product/9106706301153',
         handle: 'v6-power',
         variantIds: {
           '3h': 'gid://shopify/ProductVariant/VARIANT_ID_3',
@@ -45,7 +45,7 @@ export const SHOPIFY_CONFIG = {
         }
       },
       'turbo-legends': {
-        id: 'gid://shopify/Product/PRODUCT_ID_3',
+        id: 'gid://shopify/Product/9106706464993',
         handle: 'turbo-legends',
         variantIds: {
           '3h': 'gid://shopify/ProductVariant/VARIANT_ID_5',

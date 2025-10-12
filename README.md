@@ -7,23 +7,25 @@ Official website for Akagi Engineering - Japanese car service specializing in JD
 
 ## 🏎️ About
 
-Akagi Engineering is a premier Japanese car service center specializing in JDM (Japanese Domestic Market) vehicles and motorsport. We provide exceptional service and expertise for drift car enthusiasts.
+Akagi Engineering specializing in JDM (Japanese Domestic Market) vehicles and motorsport. We provide exceptional service and expertise for drift car enthusiasts.
 
-- **D1 Lights License** - Currently competing in D1 Lights series
+- **Competiton Inspired** - Currently competing in D1 Lights series
 - **D1GP Aspirations** - Working towards D1 Grand Prix series
-- **Drift Car Rental** - Professional JDM drift cars at Chiba, Gunma, and Fuji Speedway
+- **Motorsport Cars for Rent** - Professional JDM drift cars at Chiba, Gunma, and Fuji Speedway
 
-## 🌐 Dual Portal Architecture
+## 🌐 Portal Architecture
 
 The site features two integrated portals:
 
-### Corporate Portal (`/en/`, `/ja/`, `/ru/`)
+### Company Portal (`/en/`, `/ja/`, `/ru/`)
+
 - Company information and history
 - Motorsport achievements (D1 Lights, D1GP)
 - Service offerings overview
 - Contact information
 
-### Drift Rental Portal (`/drift/en/`, `/drift/ja/`, `/drift/ru/`)
+### Drift Experience (`/drift/en/`, `/drift/ja/`, `/drift/ru/`)
+
 - JDM drift car fleet (AE86, S13, S14)
 - Track details (Chiba, Gunma, Fuji Speedway)
 - Transparent pricing
@@ -76,7 +78,7 @@ In development (with base path `/www`):
   - Japanese: `http://localhost:4321/www/ja/`
   - Russian: `http://localhost:4321/www/ru/`
 
-- Drift Rental Portal:
+- Drift Portal:
   - English: `http://localhost:4321/www/drift/en/`
   - Japanese: `http://localhost:4321/www/drift/ja/`
   - Russian: `http://localhost:4321/www/drift/ru/`
