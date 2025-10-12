@@ -26,73 +26,11 @@ const locale = 'ru';
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="bg-white rounded-lg shadow-lg p-8">
           <form class="space-y-8">
-            <!-- Personal Information -->
-            <div class="border-b border-gray-200 pb-6">
-              <h2 class="text-2xl font-bold mb-6 text-akagi-charcoal">Personal Information</h2>
-              <div class="grid md:grid-cols-2 gap-6">
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
-                  <input type="text" name="name" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-akagi-red focus:border-akagi-red" />
-                </div>
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-2">Email *</label>
-                  <input type="email" name="email" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-akagi-red focus:border-akagi-red" />
-                </div>
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-2">Phone Number *</label>
-                  <input type="tel" name="phone" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-akagi-red focus:border-akagi-red" />
-                </div>
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-2">Driver's License Number *</label>
-                  <input type="text" name="license" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-akagi-red focus:border-akagi-red" />
-                </div>
-              </div>
-            </div>
-
-            <!-- Booking Details -->
-            <div class="border-b border-gray-200 pb-6">
-              <h2 class="text-2xl font-bold mb-6 text-akagi-charcoal">Выберите автомобиль</h2>
-              <ProductGrid 
-                id="carClass" 
-                label="Выберите класс автомобиля"
-                required={true}
-                locale={locale}
-                collectionHandle="drift-cars"
-              />
-            </div>
-
-            <div class="border-b border-gray-200 pb-6">
-              <h2 class="text-2xl font-bold mb-6 text-akagi-charcoal">Выберите трассу</h2>
-              <ProductGrid 
-                id="track" 
-                label="Выберите трассу"
-                required={true}
-                locale={locale}
-                collectionHandle="drift-tracks"
-              />
-            </div>
-
-            <div class="border-b border-gray-200 pb-6">
-              <h2 class="text-2xl font-bold mb-6 text-akagi-charcoal">Time Slot</h2>
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2">Select Time Slot *</label>
-                <select id="timeSlot" name="timeSlot" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-akagi-red focus:border-akagi-red">
-                  <option value="">Choose time slot...</option>
-                  <option value="morning">Morning Session (09:00–12:00, 3h)</option>
-                  <option value="afternoon">Afternoon Session (13:00–16:00, 3h)</option>
-                  <option value="fullday">Full Day (09:00–16:00)</option>
-                </select>
-              </div>
-            </div>
-
             <!-- Calendar Section -->
             <div class="border-b border-gray-200 pb-6">
-              <h2 class="text-2xl font-bold mb-6 text-akagi-charcoal">Select Date</h2>
-              <p class="text-sm text-gray-600 mb-4">Please select a car class and track first to see available dates</p>
-              <div id="availabilityMessage" class="hidden mb-4 p-4 bg-akagi-light-blue bg-opacity-20 rounded-md">
-                <p class="text-sm text-akagi-navy">Loading availability...</p>
-              </div>
-              <div id="calendar" class="hidden">
+              <h2 class="text-2xl font-bold mb-6 text-akagi-charcoal">Выберите дату</h2>
+              <p class="text-sm text-gray-600 mb-4">Выберите предпочитаемую дату, чтобы увидеть доступные трассы и автомобили</p>
+              <div id="calendar">
                 <div class="grid grid-cols-7 gap-2 mb-2">
                   <div class="text-center text-xs font-semibold text-gray-600">Sun</div>
                   <div class="text-center text-xs font-semibold text-gray-600">Mon</div>
@@ -119,6 +57,58 @@ const locale = 'ru';
                 </div>
               </div>
               <input type="hidden" id="selectedDate" name="selectedDate" required />
+            </div>
+
+            <!-- Track Selection -->
+            <div class="border-b border-gray-200 pb-6">
+              <h2 class="text-2xl font-bold mb-6 text-akagi-charcoal">Выберите трассу</h2>
+              <p class="text-sm text-gray-600 mb-4">Сначала выберите дату, чтобы увидеть доступные трассы</p>
+              <ProductGrid 
+                id="track" 
+                label="Выберите трассу"
+                required={true}
+                locale={locale}
+                collectionHandle="drift-tracks"
+              />
+            </div>
+
+            <!-- Car Selection -->
+            <div class="border-b border-gray-200 pb-6">
+              <h2 class="text-2xl font-bold mb-6 text-akagi-charcoal">Выберите автомобиль</h2>
+              <p class="text-sm text-gray-600 mb-4">Сначала выберите трассу, чтобы увидеть доступные автомобили</p>
+              <ProductGrid 
+                id="carClass" 
+                label="Выберите класс автомобиля"
+                required={true}
+                locale={locale}
+                collectionHandle="drift-cars"
+              />
+            </div>
+
+            <!-- Time Slot -->
+            <div class="border-b border-gray-200 pb-6">
+              <h2 class="text-2xl font-bold mb-6 text-akagi-charcoal">Временной слот</h2>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Выберите временной слот *</label>
+                <select id="timeSlot" name="timeSlot" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-akagi-red focus:border-akagi-red">
+                  <option value="fullday" selected>Полный день (09:00–16:00)</option>
+                  <option value="halfday">Полдня (09:00–12:00 или 13:00–16:00)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Personal Information -->
+            <div class="border-b border-gray-200 pb-6">
+              <h2 class="text-2xl font-bold mb-6 text-akagi-charcoal">Личная информация</h2>
+              <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Полное имя *</label>
+                  <input type="text" name="name" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-akagi-red focus:border-akagi-red" />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Email *</label>
+                  <input type="email" name="email" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-akagi-red focus:border-akagi-red" />
+                </div>
               </div>
             </div>
 
@@ -202,12 +192,19 @@ const locale = 'ru';
 
   const locale = document.documentElement.lang || 'en';
 
+  // Store all products for filtering
+  let allTracks: any[] = [];
+  let allCars: any[] = [];
+
   // Initialize product grids on page load
   async function initializeProductGrids() {
     await Promise.all([
       initializeCarGrid(),
       initializeTrackGrid()
     ]);
+    
+    // Initialize calendar immediately
+    renderCalendar();
   }
 
   async function initializeCarGrid() {
@@ -219,12 +216,13 @@ const locale = 'ru';
 
     try {
       const products = await fetchCollectionProducts('drift-cars', locale);
+      allCars = products;
       
       loading?.classList.add('hidden');
       container.classList.remove('hidden');
       
       products.forEach(product => {
-        const card = createProductCard(product, 'carClass');
+        const card = createProductCard(product, 'carClass', true); // Initially disabled
         container.appendChild(card);
       });
     } catch (error) {
@@ -243,12 +241,13 @@ const locale = 'ru';
 
     try {
       const products = await fetchCollectionProducts('drift-tracks', locale);
+      allTracks = products;
       
       loading?.classList.add('hidden');
       container.classList.remove('hidden');
       
       products.forEach(product => {
-        const card = createProductCard(product, 'track');
+        const card = createProductCard(product, 'track', true); // Initially disabled
         container.appendChild(card);
       });
     } catch (error) {
@@ -258,9 +257,10 @@ const locale = 'ru';
     }
   }
 
-  function createProductCard(product: any, type: string) {
+  function createProductCard(product: any, type: string, disabled: boolean = false) {
     const card = document.createElement('div');
-    card.className = 'product-card cursor-pointer border-2 rounded-lg overflow-hidden transition-all duration-200 hover:shadow-lg hover:scale-105 border-gray-300 hover:border-akagi-orange';
+    const disabledClasses = disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:shadow-lg hover:scale-105';
+    card.className = `product-card border-2 rounded-lg overflow-hidden transition-all duration-200 border-gray-300 hover:border-akagi-orange ${disabledClasses}`;
     card.dataset.productId = product.id;
     card.dataset.handle = product.handle;
     
@@ -288,7 +288,9 @@ const locale = 'ru';
       </div>
     `;
     
-    card.addEventListener('click', () => selectProduct(type, product.handle, card));
+    if (!disabled) {
+      card.addEventListener('click', () => selectProduct(type, product.handle, card));
+    }
     
     return card;
   }
@@ -316,11 +318,19 @@ const locale = 'ru';
     // Update hidden input
     hiddenInput.value = handle;
     
-    // Trigger calendar update
-    updateCalendar();
+    // Update dependent fields
+    if (type === 'track') {
+      updateCarAvailability();
+    }
   }
 
-  // Mock availability data (in production, this would come from an API)
+  // Mock availability data - tracks available on specific dates
+  // In production, this would come from an API based on the selected date
+  const trackAvailabilityByDate: Record<string, string[]> = {
+    // Format: day of month -> available track handles
+  };
+
+  // Mock availability data for cars based on track and date
   const mockAvailability: Record<string, Record<string, number[]>> = {
     'na-classics': { chiba: [1, 5, 8, 12, 15, 19, 22, 26, 29], gunma: [2, 6, 9, 13, 16, 20, 23, 27, 30], fuji: [3, 7, 10, 14, 17, 21, 24, 28] },
     'v6-power': { chiba: [2, 6, 9, 13, 16, 20, 23, 27, 30], gunma: [1, 5, 8, 12, 15, 19, 22, 26, 29], fuji: [4, 8, 11, 15, 18, 22, 25, 29] },
@@ -330,28 +340,7 @@ const locale = 'ru';
   let selectedDate: Date | null = null;
   let currentMonth = new Date();
 
-  function updateCalendar() {
-    const carClassInput = document.getElementById('carClass-value') as HTMLInputElement;
-    const trackInput = document.getElementById('track-value') as HTMLInputElement;
-    
-    const carClass = carClassInput?.value;
-    const track = trackInput?.value;
-    
-    if (carClass && track) {
-      document.getElementById('calendar')?.classList.remove('hidden');
-      document.getElementById('availabilityMessage')?.classList.remove('hidden');
-      
-      setTimeout(() => {
-        document.getElementById('availabilityMessage')?.classList.add('hidden');
-        renderCalendar(carClass, track);
-      }, 500);
-    } else {
-      document.getElementById('calendar')?.classList.add('hidden');
-      document.getElementById('availabilityMessage')?.classList.add('hidden');
-    }
-  }
-
-  function renderCalendar(carClass: string, track: string) {
+  function renderCalendar() {
     const calendarDays = document.getElementById('calendarDays');
     if (!calendarDays) return;
 
@@ -364,20 +353,16 @@ const locale = 'ru';
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
-    // Get available days for selected car and track
-    const availableDays = mockAvailability[carClass]?.[track] || [];
-
     // Add empty cells for days before month starts
     for (let i = 0; i < firstDay; i++) {
       const emptyCell = document.createElement('div');
       calendarDays.appendChild(emptyCell);
     }
 
-    // Add day cells
+    // Add day cells - all future dates are available for selection
     for (let day = 1; day <= daysInMonth; day++) {
       const dayDate = new Date(year, month, day);
       const isPast = dayDate < today;
-      const isAvailable = availableDays.includes(day) && !isPast;
       
       const dayCell = document.createElement('button');
       dayCell.type = 'button';
@@ -385,12 +370,10 @@ const locale = 'ru';
       dayCell.className = `p-2 text-sm rounded-md border ${
         isPast 
           ? 'bg-gray-100 text-gray-400 cursor-not-allowed border-gray-300' 
-          : isAvailable 
-            ? 'bg-green-50 border-green-500 hover:bg-green-100 cursor-pointer' 
-            : 'bg-gray-200 text-gray-500 cursor-not-allowed border-gray-400'
+          : 'bg-green-50 border-green-500 hover:bg-green-100 cursor-pointer'
       }`;
       
-      if (isAvailable) {
+      if (!isPast) {
         dayCell.addEventListener('click', () => selectDate(year, month, day));
       } else {
         dayCell.disabled = true;
@@ -415,13 +398,89 @@ const locale = 'ru';
     if (calendarDays) {
       const buttons = calendarDays.querySelectorAll('button');
       buttons.forEach(btn => {
-        if (btn.textContent === day.toString()) {
+        if (btn.textContent === day.toString() && !btn.disabled) {
           btn.className = 'p-2 text-sm rounded-md border bg-akagi-red text-white border-akagi-red font-bold';
         } else if (!btn.disabled) {
           btn.className = 'p-2 text-sm rounded-md border bg-green-50 border-green-500 hover:bg-green-100 cursor-pointer';
         }
       });
     }
+
+    // Update track availability based on selected date
+    updateTrackAvailability();
+  }
+
+  function updateTrackAvailability() {
+    if (!selectedDate) return;
+
+    const container = document.getElementById('track');
+    if (!container) return;
+
+    const day = selectedDate.getDate();
+
+    // Get all track cards
+    container.querySelectorAll('.product-card').forEach(card => {
+      const handle = (card as HTMLElement).dataset.handle;
+      
+      // For demo: tracks chiba, gunma, fuji are available on different days
+      // This simulates checking availability from an API
+      let isAvailable = true; // In production, check against API
+      
+      // Simple logic: different tracks available on different days (for demo)
+      if (handle === 'chiba') {
+        isAvailable = day % 3 === 1;
+      } else if (handle === 'gunma') {
+        isAvailable = day % 3 === 2;
+      } else if (handle === 'fuji') {
+        isAvailable = day % 3 === 0;
+      }
+
+      if (isAvailable) {
+        card.classList.remove('opacity-50', 'cursor-not-allowed');
+        card.classList.add('cursor-pointer', 'hover:shadow-lg', 'hover:scale-105');
+        const handle = (card as HTMLElement).dataset.handle;
+        if (handle) {
+          (card as HTMLElement).onclick = () => selectProduct('track', handle, card as HTMLElement);
+        }
+      } else {
+        card.classList.add('opacity-50', 'cursor-not-allowed');
+        card.classList.remove('cursor-pointer', 'hover:shadow-lg', 'hover:scale-105');
+        (card as HTMLElement).onclick = null;
+      }
+    });
+  }
+
+  function updateCarAvailability() {
+    const trackInput = document.getElementById('track-value') as HTMLInputElement;
+    if (!trackInput?.value || !selectedDate) return;
+
+    const container = document.getElementById('carClass');
+    if (!container) return;
+
+    const track = trackInput.value;
+    const day = selectedDate.getDate();
+
+    // Get all car cards
+    container.querySelectorAll('.product-card').forEach(card => {
+      const handle = (card as HTMLElement).dataset.handle;
+      
+      // Check if car is available for selected track and date
+      const availableDays = mockAvailability[handle || '']?.[track] || [];
+      const isAvailable = availableDays.includes(day);
+
+      if (isAvailable) {
+        card.classList.remove('opacity-50', 'cursor-not-allowed');
+        card.classList.add('cursor-pointer', 'hover:shadow-lg', 'hover:scale-105');
+        const handle = (card as HTMLElement).dataset.handle;
+        if (handle) {
+          (card as HTMLElement).onclick = () => selectProduct('carClass', handle, card as HTMLElement);
+        }
+      } else {
+        card.classList.add('opacity-50', 'cursor-not-allowed');
+        card.classList.remove('cursor-pointer', 'hover:shadow-lg', 'hover:scale-105');
+        (card as HTMLElement).onclick = null;
+      }
+    });
   }
 
   // Form submission handler
@@ -432,16 +491,21 @@ const locale = 'ru';
     const submitBtnText = document.getElementById('submitBtnText');
     const submitBtnLoading = document.getElementById('submitBtnLoading');
     
-    const carClassInput = document.getElementById('carClass-value') as HTMLInputElement;
+    if (!selectedDate) {
+      alert('Please select a date from the calendar');
+      return;
+    }
+
     const trackInput = document.getElementById('track-value') as HTMLInputElement;
+    const carClassInput = document.getElementById('carClass-value') as HTMLInputElement;
     
-    if (!carClassInput?.value || !trackInput?.value) {
-      alert('Please select a car class and track');
+    if (!trackInput?.value) {
+      alert('Please select a track');
       return;
     }
     
-    if (!selectedDate) {
-      alert('Please select a date from the calendar');
+    if (!carClassInput?.value) {
+      alert('Please select a car class');
       return;
     }
     
@@ -454,15 +518,13 @@ const locale = 'ru';
       // Gather form data
       const formData = new FormData(e.target as HTMLFormElement);
       const bookingData = {
-        carClass: carClassInput.value,
-        track: trackInput.value,
-        timeSlot: (document.getElementById('timeSlot') as HTMLSelectElement)?.value,
         selectedDate: selectedDate.toISOString().split('T')[0],
+        track: trackInput.value,
+        carClass: carClassInput.value,
+        timeSlot: (document.getElementById('timeSlot') as HTMLSelectElement)?.value,
         personalInfo: {
           name: formData.get('name'),
-          email: formData.get('email'),
-          phone: formData.get('phone'),
-          license: formData.get('license')
+          email: formData.get('email')
         }
       };
       
