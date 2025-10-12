@@ -17,7 +17,8 @@ const tests = [
   { name: 'Resource Validation', script: 'validate-resources.mjs', critical: true },
   { name: 'Content Quality', script: 'validate-content.mjs', critical: false },
   { name: 'SEO & Meta Tags', script: 'validate-seo.mjs', critical: true },
-  { name: 'Cross-Language Consistency', script: 'validate-cross-language.mjs', critical: false }
+  { name: 'Cross-Language Consistency', script: 'validate-cross-language.mjs', critical: false },
+  { name: 'Booking Components', script: 'validate-booking-components.mjs', critical: true }
 ];
 
 const results = [];
