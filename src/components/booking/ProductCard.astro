@@ -1,0 +1,75 @@
+---
+/**
+ * Product Card Component
+ * Displays a single product card with image, title, and price
+ */
+
+export interface Props {
+  id: string;
+  title: string;
+  price: string;
+  imageUrl: string;
+  imageAlt: string;
+  selected?: boolean;
+  onClick?: () => void;
+  dataHandle?: string;
+}
+
+const { id, title, price, imageUrl, imageAlt, selected = false, dataHandle } = Astro.props;
+---
+
+<div
+  data-product-id={id}
+  data-handle={dataHandle}
+  class:list={[
+    "product-card",
+    "cursor-pointer",
+    "border-2",
+    "rounded-lg",
+    "overflow-hidden",
+    "transition-all",
+    "duration-200",
+    "hover:shadow-lg",
+    "hover:scale-105",
+    selected ? "border-akagi-red bg-akagi-light-blue bg-opacity-10 shadow-md" : "border-gray-300 hover:border-akagi-orange"
+  ]}
+>
+  <div class="aspect-video w-full overflow-hidden bg-gray-100">
+    <img
+      src={imageUrl}
+      alt={imageAlt}
+      class="w-full h-full object-cover"
+      loading="lazy"
+    />
+  </div>
+  <div class="p-4">
+    <h3 class="font-semibold text-lg text-akagi-charcoal mb-2 line-clamp-2">
+      {title}
+    </h3>
+    <div class="flex items-center justify-between">
+      <p class="text-akagi-red font-bold text-xl">
+        {price}
+      </p>
+      {selected && (
+        <svg class="w-6 h-6 text-akagi-red" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+        </svg>
+      )}
+    </div>
+  </div>
+</div>
+
+<style>
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  @media (max-width: 640px) {
+    .product-card {
+      min-height: 200px;
+    }
+  }
+</style>

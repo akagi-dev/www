@@ -27,7 +27,8 @@ The site features two integrated portals:
 - JDM drift car fleet (AE86, S13, S14)
 - Track details (Chiba, Gunma, Fuji Speedway)
 - Transparent pricing
-- Online booking system
+- **Card-based product selection** with Shopify integration
+- Online booking system with visual car/track selection
 - FAQ and driver requirements
 
 ## 🌐 Languages

@@ -1,8 +1,10 @@
 ---
 import Layout from '@layouts/Layout.astro';
 import { useTranslations } from '@i18n/ui';
+import ProductGrid from '@components/booking/ProductGrid.astro';
 
 const t = useTranslations('en');
+const locale = 'en';
 ---
 
 <Layout>
@@ -21,63 +23,65 @@ const t = useTranslations('en');
 
     <!-- Booking Form -->
     <section class="py-16">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="bg-white rounded-lg shadow-lg p-8">
-          <form class="space-y-6">
+          <form class="space-y-8">
             <!-- Personal Information -->
             <div class="border-b border-gray-200 pb-6">
               <h2 class="text-2xl font-bold mb-6 text-akagi-charcoal">Personal Information</h2>
               <div class="grid md:grid-cols-2 gap-6">
                 <div>
                   <label class="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
-                  <input type="text" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-akagi-red focus:border-akagi-red" />
+                  <input type="text" name="name" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-akagi-red focus:border-akagi-red" />
                 </div>
                 <div>
                   <label class="block text-sm font-medium text-gray-700 mb-2">Email *</label>
-                  <input type="email" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-akagi-red focus:border-akagi-red" />
+                  <input type="email" name="email" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-akagi-red focus:border-akagi-red" />
                 </div>
                 <div>
                   <label class="block text-sm font-medium text-gray-700 mb-2">Phone Number *</label>
-                  <input type="tel" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-akagi-red focus:border-akagi-red" />
+                  <input type="tel" name="phone" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-akagi-red focus:border-akagi-red" />
                 </div>
                 <div>
                   <label class="block text-sm font-medium text-gray-700 mb-2">Driver's License Number *</label>
-                  <input type="text" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-akagi-red focus:border-akagi-red" />
+                  <input type="text" name="license" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-akagi-red focus:border-akagi-red" />
                 </div>
               </div>
             </div>
 
             <!-- Booking Details -->
             <div class="border-b border-gray-200 pb-6">
-              <h2 class="text-2xl font-bold mb-6 text-akagi-charcoal">Booking Details</h2>
-              <div class="grid md:grid-cols-2 gap-6">
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-2">Select Car Class *</label>
-                  <select id="carClass" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-akagi-red focus:border-akagi-red">
-                    <option value="">Choose a car class...</option>
-                    <option value="na-classics">Naturally Aspirated Classics (S14 or 180SX) - ¥45,000/3h</option>
-                    <option value="v6-power">Powerful V6 (350Z) - ¥60,000/3h</option>
-                    <option value="turbo-legends">Turbo Legends (Turbo S14) - ¥75,000/3h</option>
-                  </select>
-                </div>
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-2">Select Track *</label>
-                  <select id="track" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-akagi-red focus:border-akagi-red">
-                    <option value="">Choose a track...</option>
-                    <option value="chiba">Chiba Speedway - ¥24,000/3h</option>
-                    <option value="gunma">Gunma Cycle Sports - ¥30,000/3h</option>
-                    <option value="fuji">Fuji Speedway - ¥45,000/3h</option>
-                  </select>
-                </div>
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-2">Time Slot *</label>
-                  <select id="timeSlot" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-akagi-red focus:border-akagi-red">
-                    <option value="">Choose time slot...</option>
-                    <option value="morning">Morning Session (09:00–12:00, 3h)</option>
-                    <option value="afternoon">Afternoon Session (13:00–16:00, 3h)</option>
-                    <option value="fullday">Full Day (09:00–16:00)</option>
-                  </select>
-                </div>
+              <h2 class="text-2xl font-bold mb-6 text-akagi-charcoal">Select Your Car</h2>
+              <ProductGrid 
+                id="carClass" 
+                label="Choose a Car Class"
+                required={true}
+                locale={locale}
+                productType="car"
+              />
+            </div>
+
+            <div class="border-b border-gray-200 pb-6">
+              <h2 class="text-2xl font-bold mb-6 text-akagi-charcoal">Select Your Track</h2>
+              <ProductGrid 
+                id="track" 
+                label="Choose a Track"
+                required={true}
+                locale={locale}
+                productType="track"
+              />
+            </div>
+
+            <div class="border-b border-gray-200 pb-6">
+              <h2 class="text-2xl font-bold mb-6 text-akagi-charcoal">Time Slot</h2>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Select Time Slot *</label>
+                <select id="timeSlot" name="timeSlot" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-akagi-red focus:border-akagi-red">
+                  <option value="">Choose time slot...</option>
+                  <option value="morning">Morning Session (09:00–12:00, 3h)</option>
+                  <option value="afternoon">Afternoon Session (13:00–16:00, 3h)</option>
+                  <option value="fullday">Full Day (09:00–16:00)</option>
+                </select>
               </div>
             </div>
 
@@ -193,36 +197,150 @@ const t = useTranslations('en');
 </Layout>
 
 <script>
-  // Shopify configuration (placeholder - to be configured with actual store details)
-  const SHOPIFY_CONFIG = {
-    storeDomain: 'your-store.myshopify.com',
-    storefrontAccessToken: 'your-storefront-access-token',
-    apiVersion: '2024-01'
-  };
+  import { fetchCarProducts, fetchTrackProducts } from '@services/shopify-products';
+  import ProductCard from '@components/booking/ProductCard.astro';
+
+  const locale = document.documentElement.lang || 'en';
+
+  // Initialize product grids on page load
+  async function initializeProductGrids() {
+    await Promise.all([
+      initializeCarGrid(),
+      initializeTrackGrid()
+    ]);
+  }
+
+  async function initializeCarGrid() {
+    const container = document.getElementById('carClass');
+    const loading = document.getElementById('carClass-loading');
+    const errorDiv = document.getElementById('carClass-error');
+    
+    if (!container) return;
+
+    try {
+      const products = await fetchCarProducts(locale);
+      
+      loading?.classList.add('hidden');
+      container.classList.remove('hidden');
+      
+      products.forEach(product => {
+        const card = createProductCard(product, 'carClass');
+        container.appendChild(card);
+      });
+    } catch (error) {
+      console.error('Failed to load car products:', error);
+      loading?.classList.add('hidden');
+      errorDiv?.classList.remove('hidden');
+    }
+  }
+
+  async function initializeTrackGrid() {
+    const container = document.getElementById('track');
+    const loading = document.getElementById('track-loading');
+    const errorDiv = document.getElementById('track-error');
+    
+    if (!container) return;
+
+    try {
+      const products = await fetchTrackProducts(locale);
+      
+      loading?.classList.add('hidden');
+      container.classList.remove('hidden');
+      
+      products.forEach(product => {
+        const card = createProductCard(product, 'track');
+        container.appendChild(card);
+      });
+    } catch (error) {
+      console.error('Failed to load track products:', error);
+      loading?.classList.add('hidden');
+      errorDiv?.classList.remove('hidden');
+    }
+  }
+
+  function createProductCard(product: any, type: string) {
+    const card = document.createElement('div');
+    card.className = 'product-card cursor-pointer border-2 rounded-lg overflow-hidden transition-all duration-200 hover:shadow-lg hover:scale-105 border-gray-300 hover:border-akagi-orange';
+    card.dataset.productId = product.id;
+    card.dataset.handle = product.handle;
+    
+    card.innerHTML = `
+      <div class="aspect-video w-full overflow-hidden bg-gray-100">
+        <img
+          src="${product.imageUrl}"
+          alt="${product.imageAlt}"
+          class="w-full h-full object-cover"
+          loading="lazy"
+        />
+      </div>
+      <div class="p-4">
+        <h3 class="font-semibold text-lg text-akagi-charcoal mb-2 line-clamp-2">
+          ${product.title}
+        </h3>
+        <div class="flex items-center justify-between">
+          <p class="text-akagi-red font-bold text-xl">
+            ${product.price}
+          </p>
+          <svg class="w-6 h-6 text-akagi-red hidden selected-icon" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+          </svg>
+        </div>
+      </div>
+    `;
+    
+    card.addEventListener('click', () => selectProduct(type, product.handle, card));
+    
+    return card;
+  }
+
+  function selectProduct(type: string, handle: string, selectedCard: HTMLElement) {
+    const container = document.getElementById(type);
+    const hiddenInput = document.getElementById(`${type}-value`) as HTMLInputElement;
+    
+    if (!container || !hiddenInput) return;
+    
+    // Remove selection from all cards in this container
+    container.querySelectorAll('.product-card').forEach(card => {
+      card.classList.remove('border-akagi-red', 'bg-akagi-light-blue', 'bg-opacity-10', 'shadow-md');
+      card.classList.add('border-gray-300');
+      const icon = card.querySelector('.selected-icon');
+      if (icon) icon.classList.add('hidden');
+    });
+    
+    // Add selection to clicked card
+    selectedCard.classList.remove('border-gray-300');
+    selectedCard.classList.add('border-akagi-red', 'bg-akagi-light-blue', 'bg-opacity-10', 'shadow-md');
+    const icon = selectedCard.querySelector('.selected-icon');
+    if (icon) icon.classList.remove('hidden');
+    
+    // Update hidden input
+    hiddenInput.value = handle;
+    
+    // Trigger calendar update
+    updateCalendar();
+  }
 
   // Mock availability data (in production, this would come from an API)
-  const mockAvailability = {
+  const mockAvailability: Record<string, Record<string, number[]>> = {
     'na-classics': { chiba: [1, 5, 8, 12, 15, 19, 22, 26, 29], gunma: [2, 6, 9, 13, 16, 20, 23, 27, 30], fuji: [3, 7, 10, 14, 17, 21, 24, 28] },
     'v6-power': { chiba: [2, 6, 9, 13, 16, 20, 23, 27, 30], gunma: [1, 5, 8, 12, 15, 19, 22, 26, 29], fuji: [4, 8, 11, 15, 18, 22, 25, 29] },
     'turbo-legends': { chiba: [3, 7, 10, 14, 17, 21, 24, 28], gunma: [4, 8, 11, 15, 18, 22, 25, 29], fuji: [1, 5, 8, 12, 15, 19, 22, 26, 29] }
   };
 
-  let selectedDate = null;
+  let selectedDate: Date | null = null;
   let currentMonth = new Date();
 
-  // Initialize calendar when car class and track are selected
-  document.getElementById('carClass')?.addEventListener('change', updateCalendar);
-  document.getElementById('track')?.addEventListener('change', updateCalendar);
-
   function updateCalendar() {
-    const carClass = (document.getElementById('carClass') as HTMLSelectElement)?.value;
-    const track = (document.getElementById('track') as HTMLSelectElement)?.value;
+    const carClassInput = document.getElementById('carClass-value') as HTMLInputElement;
+    const trackInput = document.getElementById('track-value') as HTMLInputElement;
+    
+    const carClass = carClassInput?.value;
+    const track = trackInput?.value;
     
     if (carClass && track) {
       document.getElementById('calendar')?.classList.remove('hidden');
       document.getElementById('availabilityMessage')?.classList.remove('hidden');
       
-      // Simulate loading
       setTimeout(() => {
         document.getElementById('availabilityMessage')?.classList.add('hidden');
         renderCalendar(carClass, track);
@@ -314,6 +432,14 @@ const t = useTranslations('en');
     const submitBtnText = document.getElementById('submitBtnText');
     const submitBtnLoading = document.getElementById('submitBtnLoading');
     
+    const carClassInput = document.getElementById('carClass-value') as HTMLInputElement;
+    const trackInput = document.getElementById('track-value') as HTMLInputElement;
+    
+    if (!carClassInput?.value || !trackInput?.value) {
+      alert('Please select a car class and track');
+      return;
+    }
+    
     if (!selectedDate) {
       alert('Please select a date from the calendar');
       return;
@@ -328,8 +454,8 @@ const t = useTranslations('en');
       // Gather form data
       const formData = new FormData(e.target as HTMLFormElement);
       const bookingData = {
-        carClass: (document.getElementById('carClass') as HTMLSelectElement)?.value,
-        track: (document.getElementById('track') as HTMLSelectElement)?.value,
+        carClass: carClassInput.value,
+        track: trackInput.value,
         timeSlot: (document.getElementById('timeSlot') as HTMLSelectElement)?.value,
         selectedDate: selectedDate.toISOString().split('T')[0],
         personalInfo: {
@@ -341,7 +467,6 @@ const t = useTranslations('en');
       };
       
       // In production, this would create a Shopify checkout
-      // For now, we'll simulate the API call
       await simulateShopifyCheckout(bookingData);
       
       // Redirect would happen here in production
@@ -366,6 +491,8 @@ const t = useTranslations('en');
     });
   }
 
-  // Initialize calendar on page load if values already selected
-  window.addEventListener('DOMContentLoaded', updateCalendar);
+  // Initialize grids and calendar on page load
+  window.addEventListener('DOMContentLoaded', () => {
+    initializeProductGrids();
+  });
 </script>

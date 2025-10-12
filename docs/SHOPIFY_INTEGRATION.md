@@ -4,12 +4,26 @@ This guide explains how to integrate the booking system with Shopify's Storefron
 
 ## Overview
 
-The booking system now supports Shopify integration for secure checkout and payment processing. The integration allows customers to:
+The booking system now supports Shopify integration for secure checkout and payment processing. The integration features a modern **card-based product selection UI** that provides a rich, visual experience for customers.
 
-1. Select a car class, track, time slot, and date
-2. Fill in personal information
-3. Be redirected to Shopify checkout for secure payment
-4. Receive booking confirmation
+### Key Features
+
+1. **Visual Product Cards**: Display car and track options with images and prices
+2. **Dynamic Data Loading**: Product information loaded from Shopify Storefront API
+3. **Multi-Language Support**: Full localization for EN/JA/RU
+4. **Client-Side Caching**: Improved performance with 1-hour cache
+5. **Secure Checkout**: Seamless redirect to Shopify for payment
+
+### Customer Flow
+
+1. Select a car class from visual cards
+2. Select a track from visual cards
+3. Choose time slot and date
+4. Fill in personal information
+5. Redirect to Shopify checkout for secure payment
+6. Receive booking confirmation
+
+> **Note**: For detailed information about the card-based UI, see [CARD_BASED_UI.md](./CARD_BASED_UI.md)
 
 ## Setup Instructions
 
@@ -33,10 +47,13 @@ If you don't have a Shopify store yet:
 
 1. Click **Configure Storefront API scopes**
 2. Enable the following scopes:
-   - `unauthenticated_read_product_listings`
+   - `unauthenticated_read_product_listings` (required for card-based UI)
+   - `unauthenticated_read_product_inventory` (optional, for stock levels)
    - `unauthenticated_write_checkouts`
    - `unauthenticated_read_checkouts`
 3. Click **Save**
+
+> **Important**: The `unauthenticated_read_product_listings` scope is required for the card-based product selection UI to fetch product data dynamically.
 
 ### 4. Get Your API Credentials
 

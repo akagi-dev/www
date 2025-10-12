@@ -30,6 +30,7 @@ export const SHOPIFY_CONFIG = {
     carClasses: {
       'na-classics': {
         id: 'gid://shopify/Product/PRODUCT_ID_1',
+        handle: 'na-classics',
         variantIds: {
           '3h': 'gid://shopify/ProductVariant/VARIANT_ID_1',
           'fullday': 'gid://shopify/ProductVariant/VARIANT_ID_2'
@@ -37,6 +38,7 @@ export const SHOPIFY_CONFIG = {
       },
       'v6-power': {
         id: 'gid://shopify/Product/PRODUCT_ID_2',
+        handle: 'v6-power',
         variantIds: {
           '3h': 'gid://shopify/ProductVariant/VARIANT_ID_3',
           'fullday': 'gid://shopify/ProductVariant/VARIANT_ID_4'
@@ -44,6 +46,7 @@ export const SHOPIFY_CONFIG = {
       },
       'turbo-legends': {
         id: 'gid://shopify/Product/PRODUCT_ID_3',
+        handle: 'turbo-legends',
         variantIds: {
           '3h': 'gid://shopify/ProductVariant/VARIANT_ID_5',
           'fullday': 'gid://shopify/ProductVariant/VARIANT_ID_6'
@@ -51,10 +54,203 @@ export const SHOPIFY_CONFIG = {
       }
     },
     tracks: {
-      'chiba': 'gid://shopify/Product/PRODUCT_ID_CHIBA',
-      'gunma': 'gid://shopify/Product/PRODUCT_ID_GUNMA',
-      'fuji': 'gid://shopify/Product/PRODUCT_ID_FUJI'
+      'chiba': {
+        id: 'gid://shopify/Product/PRODUCT_ID_CHIBA',
+        handle: 'chiba'
+      },
+      'gunma': {
+        id: 'gid://shopify/Product/PRODUCT_ID_GUNMA',
+        handle: 'gunma'
+      },
+      'fuji': {
+        id: 'gid://shopify/Product/PRODUCT_ID_FUJI',
+        handle: 'fuji'
+      }
     }
+  }
+};
+
+/**
+ * Mock product data for fallback (when Shopify API is not configured)
+ */
+export const MOCK_PRODUCT_DATA = {
+  carClasses: {
+    'en': [
+      {
+        id: 'gid://shopify/Product/PRODUCT_ID_1',
+        handle: 'na-classics',
+        title: 'Naturally Aspirated Classics',
+        description: 'S14 or 180SX',
+        price: '45000',
+        currencyCode: 'JPY',
+        imageUrl: '/placeholder-car.svg'
+      },
+      {
+        id: 'gid://shopify/Product/PRODUCT_ID_2',
+        handle: 'v6-power',
+        title: 'Powerful V6',
+        description: '350Z',
+        price: '60000',
+        currencyCode: 'JPY',
+        imageUrl: '/placeholder-car.svg'
+      },
+      {
+        id: 'gid://shopify/Product/PRODUCT_ID_3',
+        handle: 'turbo-legends',
+        title: 'Turbo Legends',
+        description: 'Turbo S14',
+        price: '75000',
+        currencyCode: 'JPY',
+        imageUrl: '/placeholder-car.svg'
+      }
+    ],
+    'ja': [
+      {
+        id: 'gid://shopify/Product/PRODUCT_ID_1',
+        handle: 'na-classics',
+        title: '自然吸気クラシック',
+        description: 'S14または180SX',
+        price: '45000',
+        currencyCode: 'JPY',
+        imageUrl: '/placeholder-car.svg'
+      },
+      {
+        id: 'gid://shopify/Product/PRODUCT_ID_2',
+        handle: 'v6-power',
+        title: 'パワフルV6',
+        description: '350Z',
+        price: '60000',
+        currencyCode: 'JPY',
+        imageUrl: '/placeholder-car.svg'
+      },
+      {
+        id: 'gid://shopify/Product/PRODUCT_ID_3',
+        handle: 'turbo-legends',
+        title: 'ターボレジェンド',
+        description: 'ターボS14',
+        price: '75000',
+        currencyCode: 'JPY',
+        imageUrl: '/placeholder-car.svg'
+      }
+    ],
+    'ru': [
+      {
+        id: 'gid://shopify/Product/PRODUCT_ID_1',
+        handle: 'na-classics',
+        title: 'Атмосферная классика',
+        description: 'S14 или 180SX',
+        price: '45000',
+        currencyCode: 'JPY',
+        imageUrl: '/placeholder-car.svg'
+      },
+      {
+        id: 'gid://shopify/Product/PRODUCT_ID_2',
+        handle: 'v6-power',
+        title: 'Мощный V6',
+        description: '350Z',
+        price: '60000',
+        currencyCode: 'JPY',
+        imageUrl: '/placeholder-car.svg'
+      },
+      {
+        id: 'gid://shopify/Product/PRODUCT_ID_3',
+        handle: 'turbo-legends',
+        title: 'Турбо легенды',
+        description: 'Турбо S14',
+        price: '75000',
+        currencyCode: 'JPY',
+        imageUrl: '/placeholder-car.svg'
+      }
+    ]
+  },
+  tracks: {
+    'en': [
+      {
+        id: 'gid://shopify/Product/PRODUCT_ID_CHIBA',
+        handle: 'chiba',
+        title: 'Chiba Speedway',
+        description: 'Technical layout perfect for skill development',
+        price: '24000',
+        currencyCode: 'JPY',
+        imageUrl: '/placeholder-track.svg'
+      },
+      {
+        id: 'gid://shopify/Product/PRODUCT_ID_GUNMA',
+        handle: 'gunma',
+        title: 'Gunma Cycle Sports',
+        description: 'Challenging course with elevation changes',
+        price: '30000',
+        currencyCode: 'JPY',
+        imageUrl: '/placeholder-track.svg'
+      },
+      {
+        id: 'gid://shopify/Product/PRODUCT_ID_FUJI',
+        handle: 'fuji',
+        title: 'Fuji Speedway',
+        description: 'Iconic professional racing venue',
+        price: '45000',
+        currencyCode: 'JPY',
+        imageUrl: '/placeholder-track.svg'
+      }
+    ],
+    'ja': [
+      {
+        id: 'gid://shopify/Product/PRODUCT_ID_CHIBA',
+        handle: 'chiba',
+        title: '千葉スピードウェイ',
+        description: 'スキル向上に最適なテクニカルレイアウト',
+        price: '24000',
+        currencyCode: 'JPY',
+        imageUrl: '/placeholder-track.svg'
+      },
+      {
+        id: 'gid://shopify/Product/PRODUCT_ID_GUNMA',
+        handle: 'gunma',
+        title: '群馬サイクルスポーツ',
+        description: '高低差のある挑戦的なコース',
+        price: '30000',
+        currencyCode: 'JPY',
+        imageUrl: '/placeholder-track.svg'
+      },
+      {
+        id: 'gid://shopify/Product/PRODUCT_ID_FUJI',
+        handle: 'fuji',
+        title: '富士スピードウェイ',
+        description: '伝説的なプロレーシング会場',
+        price: '45000',
+        currencyCode: 'JPY',
+        imageUrl: '/placeholder-track.svg'
+      }
+    ],
+    'ru': [
+      {
+        id: 'gid://shopify/Product/PRODUCT_ID_CHIBA',
+        handle: 'chiba',
+        title: 'Чиба Спидвей',
+        description: 'Технический трек для развития навыков',
+        price: '24000',
+        currencyCode: 'JPY',
+        imageUrl: '/placeholder-track.svg'
+      },
+      {
+        id: 'gid://shopify/Product/PRODUCT_ID_GUNMA',
+        handle: 'gunma',
+        title: 'Гунма Сайкл Спортс',
+        description: 'Сложная трасса с перепадом высот',
+        price: '30000',
+        currencyCode: 'JPY',
+        imageUrl: '/placeholder-track.svg'
+      },
+      {
+        id: 'gid://shopify/Product/PRODUCT_ID_FUJI',
+        handle: 'fuji',
+        title: 'Фудзи Спидвей',
+        description: 'Легендарная профессиональная трасса',
+        price: '45000',
+        currencyCode: 'JPY',
+        imageUrl: '/placeholder-track.svg'
+      }
+    ]
   }
 };
 

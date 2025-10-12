@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" fill="none">
+  <rect width="800" height="600" fill="#1a2332"/>
+  <path d="M100 300 Q250 200, 400 300 T700 300" stroke="#f26522" stroke-width="8" fill="none"/>
+  <path d="M100 350 Q250 250, 400 350 T700 350" stroke="#f26522" stroke-width="8" fill="none" stroke-dasharray="20,10"/>
+  <circle cx="400" cy="300" r="80" fill="none" stroke="#00a6a6" stroke-width="4" stroke-dasharray="10,10"/>
+  <text x="400" y="500" font-family="Arial, sans-serif" font-size="24" fill="#f26522" text-anchor="middle">Drift Track</text>
+</svg>
