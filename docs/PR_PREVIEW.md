@@ -1,4 +1,4 @@
-# GitHub Pages PR Preview System - Implementation Summary
+# GitHub Pages PR Preview System
 
 ## Overview
 This implementation provides a complete GitHub Pages-based PR preview system for the Akagi Engineering website. Each pull request automatically gets its own live preview deployment that can be accessed directly via browser without downloading artifacts.

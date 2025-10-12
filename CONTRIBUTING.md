@@ -1,4 +1,4 @@
-# Quick Start: PR Quality Tests
+# Quick Start
 
 ## For Contributors
 
