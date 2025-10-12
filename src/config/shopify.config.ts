@@ -25,6 +25,13 @@ export const SHOPIFY_CONFIG = {
   // API endpoints
   graphqlEndpoint: (domain: string) => `https://${domain}/api/2024-01/graphql.json`,
   
+  // Collection handles for different product types
+  collections: {
+    cars: 'drift-cars',      // Collection handle for car products
+    tracks: 'drift-tracks',  // Collection handle for track products
+    equipment: 'drift-equipment', // Future: equipment collection
+  },
+  
   // Product mapping for car classes (to be updated with actual Shopify product IDs)
   productMapping: {
     carClasses: {

@@ -28,11 +28,6 @@ export interface Product {
       node: ProductImage;
     }>;
   };
-  translations?: Array<{
-    key: string;
-    value: string;
-    locale: string;
-  }>;
 }
 
 export interface ProductData {
@@ -51,9 +46,10 @@ const CACHE_DURATION = 1000 * 60 * 60; // 1 hour
 
 /**
  * GraphQL query for fetching products
+ * Note: Uses @inContext(language) for localization instead of translations field
  */
 const PRODUCTS_QUERY = `
-  query getProducts($ids: [ID!]!) @inContext(language: $language) {
+  query getProducts($ids: [ID!]!, $language: LanguageCode!) @inContext(language: $language) {
     nodes(ids: $ids) {
       ... on Product {
         id
@@ -74,9 +70,42 @@ const PRODUCTS_QUERY = `
             }
           }
         }
-        translations(locale: $locale) {
-          key
-          value
+      }
+    }
+  }
+`;
+
+/**
+ * GraphQL query for fetching products from a collection
+ */
+const COLLECTION_PRODUCTS_QUERY = `
+  query getCollectionProducts($handle: String!, $language: LanguageCode!, $first: Int!) @inContext(language: $language) {
+    collection(handle: $handle) {
+      id
+      handle
+      title
+      products(first: $first) {
+        edges {
+          node {
+            id
+            handle
+            title
+            description
+            priceRange {
+              minVariantPrice {
+                amount
+                currencyCode
+              }
+            }
+            images(first: 1) {
+              edges {
+                node {
+                  url
+                  altText
+                }
+              }
+            }
+          }
         }
       }
     }
@@ -225,8 +254,7 @@ export async function fetchProducts(productIds: string[], locale: string = 'en')
         query: PRODUCTS_QUERY,
         variables: {
           ids: productIds,
-          language,
-          locale: locale.toUpperCase()
+          language
         }
       })
     });
@@ -281,9 +309,141 @@ function getMockProducts(productIds: string[], locale: string): ProductData[] {
 }
 
 /**
+ * Gets mock products for a collection type
+ */
+function getMockCollectionProducts(collectionType: string, locale: string): ProductData[] {
+  const localeData = MOCK_PRODUCT_DATA[collectionType as keyof typeof MOCK_PRODUCT_DATA];
+  if (!localeData) return [];
+  
+  const products = localeData[locale as keyof typeof localeData] || localeData.en;
+  
+  return products.map(product => ({
+    ...product,
+    price: formatPrice(product.price, product.currencyCode, locale),
+    imageAlt: product.title
+  }));
+}
+
+/**
+ * Fetches products from a Shopify collection
+ * This is the universal method for fetching any collection of products
+ * 
+ * @param collectionHandle - The Shopify collection handle (e.g., 'drift-cars', 'drift-tracks')
+ * @param locale - Language locale (en, ja, ru)
+ * @param maxProducts - Maximum number of products to fetch (default: 50)
+ * @returns Array of ProductData
+ */
+export async function fetchCollectionProducts(
+  collectionHandle: string, 
+  locale: string = 'en',
+  maxProducts: number = 50
+): Promise<ProductData[]> {
+  const cacheKey = `collection_${collectionHandle}`;
+  const cached = cache.get([cacheKey], locale);
+  if (cached) {
+    console.log(`Returning cached collection products: ${collectionHandle}`);
+    return cached;
+  }
+
+  const { storeDomain, storefrontAccessToken, graphqlEndpoint } = SHOPIFY_CONFIG;
+  
+  // Check if Shopify is configured, otherwise use mock data
+  if (storeDomain === 'your-store.myshopify.com' || storefrontAccessToken === 'your-storefront-access-token') {
+    console.warn('Shopify not configured, using mock data for collection:', collectionHandle);
+    
+    // Map collection handles to mock data types
+    const collectionTypeMap: Record<string, string> = {
+      'drift-cars': 'carClasses',
+      'cars': 'carClasses',
+      'drift-tracks': 'tracks',
+      'tracks': 'tracks'
+    };
+    
+    const collectionType = collectionTypeMap[collectionHandle] || collectionHandle;
+    return getMockCollectionProducts(collectionType, locale);
+  }
+  
+  const languageMap: Record<string, string> = {
+    'en': 'EN',
+    'ja': 'JA',
+    'ru': 'RU'
+  };
+  
+  const language = languageMap[locale] || 'EN';
+  
+  try {
+    const response = await fetch(graphqlEndpoint(storeDomain), {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Shopify-Storefront-Access-Token': storefrontAccessToken
+      },
+      body: JSON.stringify({
+        query: COLLECTION_PRODUCTS_QUERY,
+        variables: {
+          handle: collectionHandle,
+          language,
+          first: maxProducts
+        }
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const result = await response.json();
+    
+    if (result.errors) {
+      console.error('GraphQL errors:', result.errors);
+      throw new Error('GraphQL query failed');
+    }
+
+    const collection = result.data?.collection;
+    if (!collection) {
+      console.warn(`Collection not found: ${collectionHandle}, using mock data`);
+      const collectionTypeMap: Record<string, string> = {
+        'drift-cars': 'carClasses',
+        'cars': 'carClasses',
+        'drift-tracks': 'tracks',
+        'tracks': 'tracks'
+      };
+      const collectionType = collectionTypeMap[collectionHandle] || collectionHandle;
+      return getMockCollectionProducts(collectionType, locale);
+    }
+
+    const products: Product[] = collection.products.edges.map((edge: any) => edge.node);
+    const transformedProducts = products
+      .filter(p => p && p.id)
+      .map(p => transformProduct(p, locale));
+    
+    cache.set([cacheKey], locale, transformedProducts);
+    
+    return transformedProducts;
+  } catch (error) {
+    console.error(`Failed to fetch collection ${collectionHandle}:`, error);
+    const collectionTypeMap: Record<string, string> = {
+      'drift-cars': 'carClasses',
+      'cars': 'carClasses',
+      'drift-tracks': 'tracks',
+      'tracks': 'tracks'
+    };
+    const collectionType = collectionTypeMap[collectionHandle] || collectionHandle;
+    return getMockCollectionProducts(collectionType, locale);
+  }
+}
+
+/**
  * Fetches car class products
+ * @deprecated Use fetchCollectionProducts('drift-cars', locale) instead
  */
 export async function fetchCarProducts(locale: string = 'en'): Promise<ProductData[]> {
+  // Use collection-based approach if collections are configured
+  if (SHOPIFY_CONFIG.collections?.cars) {
+    return fetchCollectionProducts(SHOPIFY_CONFIG.collections.cars, locale);
+  }
+  
+  // Fallback to legacy product ID-based approach
   const productIds = Object.values(SHOPIFY_CONFIG.productMapping.carClasses)
     .map(car => car.id);
   
@@ -292,8 +452,15 @@ export async function fetchCarProducts(locale: string = 'en'): Promise<ProductDa
 
 /**
  * Fetches track products
+ * @deprecated Use fetchCollectionProducts('drift-tracks', locale) instead
  */
 export async function fetchTrackProducts(locale: string = 'en'): Promise<ProductData[]> {
+  // Use collection-based approach if collections are configured
+  if (SHOPIFY_CONFIG.collections?.tracks) {
+    return fetchCollectionProducts(SHOPIFY_CONFIG.collections.tracks, locale);
+  }
+  
+  // Fallback to legacy product ID-based approach
   const productIds = Object.values(SHOPIFY_CONFIG.productMapping.tracks).map(track => track.id);
   
   return fetchProducts(productIds, locale);

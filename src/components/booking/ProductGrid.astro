@@ -2,6 +2,10 @@
 /**
  * Product Grid Component
  * Displays a grid of product cards with selection functionality
+ * 
+ * Supports two modes:
+ * 1. Legacy mode: productType='car' or 'track' (backward compatible)
+ * 2. Collection mode: collectionHandle='drift-cars' (new universal approach)
  */
 
 export interface Props {
@@ -9,10 +13,22 @@ export interface Props {
   label: string;
   required?: boolean;
   locale?: string;
-  productType: 'car' | 'track';
+  /** @deprecated Use collectionHandle instead */
+  productType?: 'car' | 'track';
+  /** Collection handle for fetching products (e.g., 'drift-cars', 'drift-tracks') */
+  collectionHandle?: string;
 }
 
-const { id, label, required = false, locale = 'en', productType } = Astro.props;
+const { id, label, required = false, locale = 'en', productType, collectionHandle } = Astro.props;
+
+// Map legacy productType to collection handles for backward compatibility
+const collectionMap: Record<string, string> = {
+  'car': 'drift-cars',
+  'track': 'drift-tracks'
+};
+
+// Determine which collection to use
+const finalCollectionHandle = collectionHandle || (productType ? collectionMap[productType] : undefined);
 ---
 
 <div class="product-grid-container">
@@ -35,6 +51,7 @@ const { id, label, required = false, locale = 'en', productType } = Astro.props;
     id={id}
     class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 hidden"
     data-product-type={productType}
+    data-collection-handle={finalCollectionHandle}
     data-locale={locale}
   >
   </div>
