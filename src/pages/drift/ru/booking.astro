@@ -57,7 +57,7 @@ const locale = 'ru';
                 label="Выберите класс автомобиля"
                 required={true}
                 locale={locale}
-                productType="car"
+                collectionHandle="drift-cars"
               />
             </div>
 
@@ -68,7 +68,7 @@ const locale = 'ru';
                 label="Выберите трассу"
                 required={true}
                 locale={locale}
-                productType="track"
+                collectionHandle="drift-tracks"
               />
             </div>
 
@@ -197,7 +197,7 @@ const locale = 'ru';
 </Layout>
 
 <script>
-  import { fetchCarProducts, fetchTrackProducts } from '@services/shopify-products';
+  import { fetchCollectionProducts } from '@services/shopify-products';
   import ProductCard from '@components/booking/ProductCard.astro';
 
   const locale = document.documentElement.lang || 'en';
@@ -218,7 +218,7 @@ const locale = 'ru';
     if (!container) return;
 
     try {
-      const products = await fetchCarProducts(locale);
+      const products = await fetchCollectionProducts('drift-cars', locale);
       
       loading?.classList.add('hidden');
       container.classList.remove('hidden');
@@ -242,7 +242,7 @@ const locale = 'ru';
     if (!container) return;
 
     try {
-      const products = await fetchTrackProducts(locale);
+      const products = await fetchCollectionProducts('drift-tracks', locale);
       
       loading?.classList.add('hidden');
       container.classList.remove('hidden');

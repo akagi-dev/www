@@ -38,7 +38,7 @@ query getProducts($ids: [ID!]!, $language: LanguageCode!) @inContext(language: $
 
 ### 2. Universal Collection Service
 
-**New Function**: `fetchCollectionProducts(collectionHandle, locale, maxProducts)`
+**Function**: `fetchCollectionProducts(collectionHandle, locale, maxProducts)`
 
 This universal function can fetch products from any Shopify collection by handle.
 
@@ -47,20 +47,6 @@ This universal function can fetch products from any Shopify collection by handle
 const carProducts = await fetchCollectionProducts('drift-cars', 'en');
 const trackProducts = await fetchCollectionProducts('drift-tracks', 'en');
 const equipmentProducts = await fetchCollectionProducts('drift-equipment', 'en');
-```
-
-### 3. Backward Compatibility
-
-Existing functions continue to work but are deprecated:
-
-```typescript
-// ✅ Still works (uses collections internally)
-const cars = await fetchCarProducts('en');
-const tracks = await fetchTrackProducts('en');
-
-// ✅ New recommended approach
-const cars = await fetchCollectionProducts('drift-cars', 'en');
-const tracks = await fetchCollectionProducts('drift-tracks', 'en');
 ```
 
 ## Configuration
@@ -78,12 +64,6 @@ export const SHOPIFY_CONFIG = {
     cars: 'drift-cars',         // Collection handle for car products
     tracks: 'drift-tracks',     // Collection handle for track products
     equipment: 'drift-equipment' // Future: equipment collection
-  },
-  
-  // Legacy product mapping (still supported)
-  productMapping: {
-    carClasses: { /* ... */ },
-    tracks: { /* ... */ }
   }
 };
 ```
@@ -104,9 +84,7 @@ export const SHOPIFY_CONFIG = {
 
 ### ProductGrid Component
 
-The `ProductGrid` component now supports both legacy and collection-based modes:
-
-#### Legacy Mode (Backward Compatible)
+The `ProductGrid` component supports collection-based product fetching:
 
 ```astro
 <ProductGrid 
@@ -114,19 +92,17 @@ The `ProductGrid` component now supports both legacy and collection-based modes:
   label="Choose a Car Class"
   required={true}
   locale={locale}
-  productType="car"  <!-- Legacy: mapped to 'drift-cars' -->
+  collectionHandle="drift-cars"
 />
 ```
 
-#### Collection Mode (Recommended)
-
 ```astro
 <ProductGrid 
-  id="equipment" 
-  label="Choose Equipment"
-  required={false}
+  id="track" 
+  label="Choose Track"
+  required={true}
   locale={locale}
-  collectionHandle="drift-equipment"  <!-- Direct collection handle -->
+  collectionHandle="drift-tracks"
 />
 ```
 
@@ -138,10 +114,7 @@ interface ProductGridProps {
   label: string;                 // Label text
   required?: boolean;            // Whether selection is required
   locale?: string;               // Current language (en/ja/ru)
-  
-  // Use ONE of the following:
-  productType?: 'car' | 'track'; // ⚠️ Deprecated: Legacy mode
-  collectionHandle?: string;     // ✅ Recommended: Collection handle
+  collectionHandle: string;      // Collection handle (e.g., 'drift-cars')
 }
 ```
 
@@ -167,28 +140,6 @@ const cars = await fetchCollectionProducts('drift-cars', 'ja');
 
 // Fetch up to 20 track products in English
 const tracks = await fetchCollectionProducts('drift-tracks', 'en', 20);
-```
-
-### `fetchCarProducts(locale)` ⚠️ Deprecated
-
-**Replacement:**
-```typescript
-// Old way
-const cars = await fetchCarProducts('en');
-
-// New way
-const cars = await fetchCollectionProducts('drift-cars', 'en');
-```
-
-### `fetchTrackProducts(locale)` ⚠️ Deprecated
-
-**Replacement:**
-```typescript
-// Old way
-const tracks = await fetchTrackProducts('en');
-
-// New way
-const tracks = await fetchCollectionProducts('drift-tracks', 'en');
 ```
 
 ## GraphQL Queries
@@ -222,36 +173,6 @@ query getCollectionProducts($handle: String!, $language: LanguageCode!, $first: 
                 altText
               }
             }
-          }
-        }
-      }
-    }
-  }
-}
-```
-
-### Products by IDs Query (Legacy)
-
-```graphql
-query getProducts($ids: [ID!]!, $language: LanguageCode!) 
-  @inContext(language: $language) {
-  nodes(ids: $ids) {
-    ... on Product {
-      id
-      handle
-      title
-      description
-      priceRange {
-        minVariantPrice {
-          amount
-          currencyCode
-        }
-      }
-      images(first: 1) {
-        edges {
-          node {
-            url
-            altText
           }
         }
       }
@@ -307,29 +228,20 @@ export const SHOPIFY_CONFIG = {
 2. Add products to each collection
 3. Verify products appear in the Shopify admin
 
-### Step 3: Update Components (Optional)
+### Step 3: Update Components
 
-For new features, use `collectionHandle` instead of `productType`:
+Use `collectionHandle` for product grids:
 
 ```astro
-<!-- Old approach (still works) -->
-<ProductGrid productType="car" ... />
-
-<!-- New approach (recommended) -->
 <ProductGrid collectionHandle="drift-cars" ... />
+<ProductGrid collectionHandle="drift-tracks" ... />
 ```
 
-### Step 4: Update Code (Optional)
+### Step 4: Update Code
 
-Replace deprecated function calls:
+Use the universal collection function:
 
 ```typescript
-// Before
-import { fetchCarProducts, fetchTrackProducts } from '@services/shopify-products';
-const cars = await fetchCarProducts(locale);
-const tracks = await fetchTrackProducts(locale);
-
-// After
 import { fetchCollectionProducts } from '@services/shopify-products';
 const cars = await fetchCollectionProducts('drift-cars', locale);
 const tracks = await fetchCollectionProducts('drift-tracks', locale);
@@ -350,14 +262,9 @@ const tracks = await fetchCollectionProducts('drift-tracks', locale);
 - Consistent API across product types
 
 ### 4. **Performance**
-- Same caching mechanism
-- Efficient GraphQL queries
+- Efficient caching mechanism
+- Optimized GraphQL queries
 - Automatic fallback to mock data
-
-### 5. **Compatibility**
-- Fully backward compatible
-- Gradual migration path
-- No breaking changes
 
 ## Best Practices
 

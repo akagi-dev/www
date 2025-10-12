@@ -434,39 +434,6 @@ export async function fetchCollectionProducts(
 }
 
 /**
- * Fetches car class products
- * @deprecated Use fetchCollectionProducts('drift-cars', locale) instead
- */
-export async function fetchCarProducts(locale: string = 'en'): Promise<ProductData[]> {
-  // Use collection-based approach if collections are configured
-  if (SHOPIFY_CONFIG.collections?.cars) {
-    return fetchCollectionProducts(SHOPIFY_CONFIG.collections.cars, locale);
-  }
-  
-  // Fallback to legacy product ID-based approach
-  const productIds = Object.values(SHOPIFY_CONFIG.productMapping.carClasses)
-    .map(car => car.id);
-  
-  return fetchProducts(productIds, locale);
-}
-
-/**
- * Fetches track products
- * @deprecated Use fetchCollectionProducts('drift-tracks', locale) instead
- */
-export async function fetchTrackProducts(locale: string = 'en'): Promise<ProductData[]> {
-  // Use collection-based approach if collections are configured
-  if (SHOPIFY_CONFIG.collections?.tracks) {
-    return fetchCollectionProducts(SHOPIFY_CONFIG.collections.tracks, locale);
-  }
-  
-  // Fallback to legacy product ID-based approach
-  const productIds = Object.values(SHOPIFY_CONFIG.productMapping.tracks).map(track => track.id);
-  
-  return fetchProducts(productIds, locale);
-}
-
-/**
  * Clears all cached product data
  */
 export function clearProductCache(): void {
