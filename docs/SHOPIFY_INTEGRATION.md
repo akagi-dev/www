@@ -261,6 +261,14 @@ These appear in the Shopify order details and can be used for fulfillment.
 
 ## Troubleshooting
 
+### GraphQL Query Errors
+
+**Issue**: GraphQL errors about `translations` field not being found
+
+**Solution**: The `translations` field is not supported by Shopify Storefront API. Our implementation now uses `@inContext(language: $language)` directive instead, which properly localizes the `title` and `description` fields.
+
+See [COLLECTIONS_SYSTEM.md](./COLLECTIONS_SYSTEM.md) for more details about the updated GraphQL queries.
+
 ### Calendar not showing
 - Check browser console for JavaScript errors
 - Verify car class and track are both selected
