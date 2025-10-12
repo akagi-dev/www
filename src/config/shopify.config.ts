@@ -20,10 +20,10 @@ export const SHOPIFY_CONFIG = {
   // Shopify store configuration
   storeDomain: import.meta.env.SHOPIFY_STORE_DOMAIN || 'your-store.myshopify.com',
   storefrontAccessToken: import.meta.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN || 'your-storefront-access-token',
-  apiVersion: '2024-01',
+  apiVersion: '2025-10',
   
   // API endpoints
-  graphqlEndpoint: (domain: string) => `https://${domain}/api/2024-01/graphql.json`,
+  graphqlEndpoint: (domain: string) => `https://${domain}/api/2025-10/graphql.json`,
   
   // Product mapping for car classes (to be updated with actual Shopify product IDs)
   productMapping: {

@@ -103,7 +103,7 @@ Edit `/src/config/shopify.config.ts`:
 export const SHOPIFY_CONFIG = {
   storeDomain: 'your-actual-store.myshopify.com', // Update this
   storefrontAccessToken: 'your-actual-token-here', // Update this
-  apiVersion: '2024-01',
+  apiVersion: '2025-10',
   
   productMapping: {
     carClasses: {

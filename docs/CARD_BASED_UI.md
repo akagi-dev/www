@@ -230,7 +230,7 @@ Update `src/config/shopify.config.ts` with your Shopify credentials:
 export const SHOPIFY_CONFIG = {
   storeDomain: 'your-store.myshopify.com',
   storefrontAccessToken: 'your-access-token',
-  apiVersion: '2024-01',
+  apiVersion: '2025-10',
   // ...
 };
 ```
