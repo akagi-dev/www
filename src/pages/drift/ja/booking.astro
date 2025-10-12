@@ -52,37 +52,69 @@ const t = useTranslations('ja');
               <h2 class="text-2xl font-bold mb-6 text-akagi-charcoal">Booking Details</h2>
               <div class="grid md:grid-cols-2 gap-6">
                 <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-2">Select Car *</label>
-                  <select required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-akagi-red focus:border-akagi-red">
-                    <option value="">Choose a car...</option>
-                    <option value="ae86">Toyota AE86 Trueno (¥15,000/hr)</option>
-                    <option value="s13">Nissan S13 Silvia (¥20,000/hr)</option>
-                    <option value="s14">Nissan S14 Silvia (¥25,000/hr)</option>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Select Car Class *</label>
+                  <select id="carClass" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-akagi-red focus:border-akagi-red">
+                    <option value="">Choose a car class...</option>
+                    <option value="na-classics">Naturally Aspirated Classics (S14 or 180SX) - ¥45,000/3h</option>
+                    <option value="v6-power">Powerful V6 (350Z) - ¥60,000/3h</option>
+                    <option value="turbo-legends">Turbo Legends (Turbo S14) - ¥75,000/3h</option>
                   </select>
                 </div>
                 <div>
                   <label class="block text-sm font-medium text-gray-700 mb-2">Select Track *</label>
-                  <select required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-akagi-red focus:border-akagi-red">
+                  <select id="track" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-akagi-red focus:border-akagi-red">
                     <option value="">Choose a track...</option>
-                    <option value="chiba">Chiba Speedway (¥8,000/hr)</option>
-                    <option value="gunma">Gunma Cycle Sports (¥10,000/hr)</option>
-                    <option value="fuji">Fuji Speedway (¥15,000/hr)</option>
+                    <option value="chiba">Chiba Speedway - ¥24,000/3h</option>
+                    <option value="gunma">Gunma Cycle Sports - ¥30,000/3h</option>
+                    <option value="fuji">Fuji Speedway - ¥45,000/3h</option>
                   </select>
                 </div>
                 <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-2">Preferred Date *</label>
-                  <input type="date" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-akagi-red focus:border-akagi-red" />
-                </div>
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-2">Session Duration *</label>
-                  <select required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-akagi-red focus:border-akagi-red">
-                    <option value="">Choose duration...</option>
-                    <option value="1hr">1 Hour</option>
-                    <option value="2hr">2 Hours</option>
-                    <option value="4hr">Half Day (4 hours)</option>
-                    <option value="8hr">Full Day (8 hours)</option>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Time Slot *</label>
+                  <select id="timeSlot" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-akagi-red focus:border-akagi-red">
+                    <option value="">Choose time slot...</option>
+                    <option value="morning">Morning Session (09:00–12:00, 3h)</option>
+                    <option value="afternoon">Afternoon Session (13:00–16:00, 3h)</option>
+                    <option value="fullday">Full Day (09:00–16:00)</option>
                   </select>
                 </div>
+              </div>
+            </div>
+
+            <!-- Calendar Section -->
+            <div class="border-b border-gray-200 pb-6">
+              <h2 class="text-2xl font-bold mb-6 text-akagi-charcoal">Select Date</h2>
+              <p class="text-sm text-gray-600 mb-4">Please select a car class and track first to see available dates</p>
+              <div id="availabilityMessage" class="hidden mb-4 p-4 bg-akagi-light-blue bg-opacity-20 rounded-md">
+                <p class="text-sm text-akagi-navy">Loading availability...</p>
+              </div>
+              <div id="calendar" class="hidden">
+                <div class="grid grid-cols-7 gap-2 mb-2">
+                  <div class="text-center text-xs font-semibold text-gray-600">Sun</div>
+                  <div class="text-center text-xs font-semibold text-gray-600">Mon</div>
+                  <div class="text-center text-xs font-semibold text-gray-600">Tue</div>
+                  <div class="text-center text-xs font-semibold text-gray-600">Wed</div>
+                  <div class="text-center text-xs font-semibold text-gray-600">Thu</div>
+                  <div class="text-center text-xs font-semibold text-gray-600">Fri</div>
+                  <div class="text-center text-xs font-semibold text-gray-600">Sat</div>
+                </div>
+                <div id="calendarDays" class="grid grid-cols-7 gap-2"></div>
+                <div class="mt-4 flex gap-4 text-sm">
+                  <div class="flex items-center gap-2">
+                    <div class="w-4 h-4 bg-green-200 border border-green-500 rounded"></div>
+                    <span>Available</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <div class="w-4 h-4 bg-gray-200 border border-gray-400 rounded"></div>
+                    <span>Unavailable</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <div class="w-4 h-4 bg-akagi-red text-white border border-akagi-red rounded"></div>
+                    <span>Selected</span>
+                  </div>
+                </div>
+              </div>
+              <input type="hidden" id="selectedDate" name="selectedDate" required />
               </div>
             </div>
 
@@ -132,11 +164,12 @@ const t = useTranslations('ja');
 
             <!-- Submit Button -->
             <div class="pt-4">
-              <button type="submit" class="w-full bg-akagi-red hover:bg-akagi-orange text-white font-bold py-4 px-6 rounded-lg transition">
-                Submit Booking Request
+              <button type="submit" id="submitBtn" class="w-full bg-akagi-red hover:bg-akagi-orange text-white font-bold py-4 px-6 rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed">
+                <span id="submitBtnText">Proceed to Checkout</span>
+                <span id="submitBtnLoading" class="hidden">Processing...</span>
               </button>
               <p class="text-sm text-gray-600 mt-4 text-center">
-                * We will contact you within 24 hours to confirm your booking and provide payment details
+                * You will be redirected to secure checkout to complete your booking
               </p>
             </div>
           </form>
@@ -158,3 +191,181 @@ const t = useTranslations('ja');
     </section>
   </div>
 </Layout>
+
+<script>
+  // Shopify configuration (placeholder - to be configured with actual store details)
+  const SHOPIFY_CONFIG = {
+    storeDomain: 'your-store.myshopify.com',
+    storefrontAccessToken: 'your-storefront-access-token',
+    apiVersion: '2024-01'
+  };
+
+  // Mock availability data (in production, this would come from an API)
+  const mockAvailability = {
+    'na-classics': { chiba: [1, 5, 8, 12, 15, 19, 22, 26, 29], gunma: [2, 6, 9, 13, 16, 20, 23, 27, 30], fuji: [3, 7, 10, 14, 17, 21, 24, 28] },
+    'v6-power': { chiba: [2, 6, 9, 13, 16, 20, 23, 27, 30], gunma: [1, 5, 8, 12, 15, 19, 22, 26, 29], fuji: [4, 8, 11, 15, 18, 22, 25, 29] },
+    'turbo-legends': { chiba: [3, 7, 10, 14, 17, 21, 24, 28], gunma: [4, 8, 11, 15, 18, 22, 25, 29], fuji: [1, 5, 8, 12, 15, 19, 22, 26, 29] }
+  };
+
+  let selectedDate = null;
+  let currentMonth = new Date();
+
+  // Initialize calendar when car class and track are selected
+  document.getElementById('carClass')?.addEventListener('change', updateCalendar);
+  document.getElementById('track')?.addEventListener('change', updateCalendar);
+
+  function updateCalendar() {
+    const carClass = (document.getElementById('carClass') as HTMLSelectElement)?.value;
+    const track = (document.getElementById('track') as HTMLSelectElement)?.value;
+    
+    if (carClass && track) {
+      document.getElementById('calendar')?.classList.remove('hidden');
+      document.getElementById('availabilityMessage')?.classList.remove('hidden');
+      
+      // Simulate loading
+      setTimeout(() => {
+        document.getElementById('availabilityMessage')?.classList.add('hidden');
+        renderCalendar(carClass, track);
+      }, 500);
+    } else {
+      document.getElementById('calendar')?.classList.add('hidden');
+      document.getElementById('availabilityMessage')?.classList.add('hidden');
+    }
+  }
+
+  function renderCalendar(carClass: string, track: string) {
+    const calendarDays = document.getElementById('calendarDays');
+    if (!calendarDays) return;
+
+    calendarDays.innerHTML = '';
+    
+    const year = currentMonth.getFullYear();
+    const month = currentMonth.getMonth();
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    // Get available days for selected car and track
+    const availableDays = mockAvailability[carClass]?.[track] || [];
+
+    // Add empty cells for days before month starts
+    for (let i = 0; i < firstDay; i++) {
+      const emptyCell = document.createElement('div');
+      calendarDays.appendChild(emptyCell);
+    }
+
+    // Add day cells
+    for (let day = 1; day <= daysInMonth; day++) {
+      const dayDate = new Date(year, month, day);
+      const isPast = dayDate < today;
+      const isAvailable = availableDays.includes(day) && !isPast;
+      
+      const dayCell = document.createElement('button');
+      dayCell.type = 'button';
+      dayCell.textContent = day.toString();
+      dayCell.className = `p-2 text-sm rounded-md border ${
+        isPast 
+          ? 'bg-gray-100 text-gray-400 cursor-not-allowed border-gray-300' 
+          : isAvailable 
+            ? 'bg-green-50 border-green-500 hover:bg-green-100 cursor-pointer' 
+            : 'bg-gray-200 text-gray-500 cursor-not-allowed border-gray-400'
+      }`;
+      
+      if (isAvailable) {
+        dayCell.addEventListener('click', () => selectDate(year, month, day));
+      } else {
+        dayCell.disabled = true;
+      }
+      
+      calendarDays.appendChild(dayCell);
+    }
+  }
+
+  function selectDate(year: number, month: number, day: number) {
+    selectedDate = new Date(year, month, day);
+    const dateString = selectedDate.toISOString().split('T')[0];
+    
+    // Update hidden input
+    const hiddenInput = document.getElementById('selectedDate') as HTMLInputElement;
+    if (hiddenInput) {
+      hiddenInput.value = dateString;
+    }
+    
+    // Update visual selection
+    const calendarDays = document.getElementById('calendarDays');
+    if (calendarDays) {
+      const buttons = calendarDays.querySelectorAll('button');
+      buttons.forEach(btn => {
+        if (btn.textContent === day.toString()) {
+          btn.className = 'p-2 text-sm rounded-md border bg-akagi-red text-white border-akagi-red font-bold';
+        } else if (!btn.disabled) {
+          btn.className = 'p-2 text-sm rounded-md border bg-green-50 border-green-500 hover:bg-green-100 cursor-pointer';
+        }
+      });
+    }
+  }
+
+  // Form submission handler
+  document.querySelector('form')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const submitBtn = document.getElementById('submitBtn') as HTMLButtonElement;
+    const submitBtnText = document.getElementById('submitBtnText');
+    const submitBtnLoading = document.getElementById('submitBtnLoading');
+    
+    if (!selectedDate) {
+      alert('Please select a date from the calendar');
+      return;
+    }
+    
+    // Disable submit button and show loading state
+    if (submitBtn) submitBtn.disabled = true;
+    submitBtnText?.classList.add('hidden');
+    submitBtnLoading?.classList.remove('hidden');
+    
+    try {
+      // Gather form data
+      const formData = new FormData(e.target as HTMLFormElement);
+      const bookingData = {
+        carClass: (document.getElementById('carClass') as HTMLSelectElement)?.value,
+        track: (document.getElementById('track') as HTMLSelectElement)?.value,
+        timeSlot: (document.getElementById('timeSlot') as HTMLSelectElement)?.value,
+        selectedDate: selectedDate.toISOString().split('T')[0],
+        personalInfo: {
+          name: formData.get('name'),
+          email: formData.get('email'),
+          phone: formData.get('phone'),
+          license: formData.get('license')
+        }
+      };
+      
+      // In production, this would create a Shopify checkout
+      // For now, we'll simulate the API call
+      await simulateShopifyCheckout(bookingData);
+      
+      // Redirect would happen here in production
+      alert('Booking data prepared! In production, you would be redirected to Shopify checkout.');
+      console.log('Booking data:', bookingData);
+      
+    } catch (error) {
+      console.error('Booking error:', error);
+      alert('An error occurred. Please try again.');
+    } finally {
+      // Re-enable submit button
+      if (submitBtn) submitBtn.disabled = false;
+      submitBtnText?.classList.remove('hidden');
+      submitBtnLoading?.classList.add('hidden');
+    }
+  });
+
+  // Simulate Shopify API call
+  async function simulateShopifyCheckout(bookingData: any) {
+    return new Promise((resolve) => {
+      setTimeout(resolve, 1000);
+    });
+  }
+
+  // Initialize calendar on page load if values already selected
+  window.addEventListener('DOMContentLoaded', updateCalendar);
+</script>
