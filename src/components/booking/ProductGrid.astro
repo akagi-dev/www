@@ -9,10 +9,11 @@ export interface Props {
   label: string;
   required?: boolean;
   locale?: string;
-  productType: 'car' | 'track';
+  /** Collection handle for fetching products (e.g., 'drift-cars', 'drift-tracks') */
+  collectionHandle: string;
 }
 
-const { id, label, required = false, locale = 'en', productType } = Astro.props;
+const { id, label, required = false, locale = 'en', collectionHandle } = Astro.props;
 ---
 
 <div class="product-grid-container">
@@ -34,7 +35,7 @@ const { id, label, required = false, locale = 'en', productType } = Astro.props;
   <div
     id={id}
     class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 hidden"
-    data-product-type={productType}
+    data-collection-handle={collectionHandle}
     data-locale={locale}
   >
   </div>

@@ -61,7 +61,7 @@ A container component that displays a grid of product cards.
 - `label`: Label text
 - `required`: Whether selection is required
 - `locale`: Current language (en/ja/ru)
-- `productType`: Either 'car' or 'track'
+- `collectionHandle`: Shopify collection handle (e.g., 'drift-cars', 'drift-tracks')
 
 **Usage:**
 ```astro
@@ -70,14 +70,29 @@ A container component that displays a grid of product cards.
   label="Choose a Car Class"
   required={true}
   locale="en"
-  productType="car"
+  collectionHandle="drift-cars"
 />
 ```
+
+```astro
+<ProductGrid 
+  id="track" 
+  label="Choose Track"
+  required={true}
+  locale="en"
+  collectionHandle="drift-tracks"
+/>
+```
+
+> **Note**: For more information about the universal collections system, see [COLLECTIONS_SYSTEM.md](./COLLECTIONS_SYSTEM.md)
 
 ## Service Layer
 
 ### shopify-products.ts
 Service for fetching and caching product data from Shopify Storefront API.
+
+**Key Functions:**
+- `fetchCollectionProducts(collectionHandle, locale, maxProducts)` - Universal collection fetcher
 
 **Key Functions:**
 
