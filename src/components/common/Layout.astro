@@ -107,6 +107,12 @@ const otherPortalPrefix = portal === 'drift' ? '' : 'drift/';
                   {t('drift.nav.pricing')}
                 </a>
                 <a 
+                  href={buildPath(`drift/${lang}/competitions`)}
+                  class={`hover:text-akagi-orange transition ${currentPath.includes('/competitions') ? 'text-akagi-light-blue' : 'text-akagi-teal'}`}
+                >
+                  {t('drift.nav.competitions')}
+                </a>
+                <a 
                   href={buildPath(`drift/${lang}/booking`)}
                   class={`bg-akagi-red hover:bg-akagi-orange px-4 py-2 rounded-md transition ${currentPath.includes('/booking') ? 'bg-akagi-orange' : ''}`}
                 >
@@ -209,6 +215,12 @@ const otherPortalPrefix = portal === 'drift' ? '' : 'drift/';
                   class={`block px-3 py-2 rounded-md hover:bg-akagi-teal ${currentPath.includes('/pricing') ? 'bg-akagi-light-blue text-akagi-navy' : ''}`}
                 >
                   {t('drift.nav.pricing')}
+                </a>
+                <a 
+                  href={buildPath(`drift/${lang}/competitions`)}
+                  class={`block px-3 py-2 rounded-md hover:bg-akagi-teal ${currentPath.includes('/competitions') ? 'bg-akagi-light-blue text-akagi-navy' : ''}`}
+                >
+                  {t('drift.nav.competitions')}
                 </a>
                 <a 
                   href={buildPath(`drift/${lang}/booking`)}
