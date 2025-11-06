@@ -58,8 +58,9 @@ export const ui = {
     // Drift portal navigation
     'drift.nav.fleet': 'Car Fleet',
     'drift.nav.tracks': 'Tracks',
-    'drift.nav.booking': 'Book Now',
     'drift.nav.pricing': 'Pricing',
+    'drift.nav.competitions': 'Competitions',
+    'drift.nav.booking': 'Book Now',
     'drift.nav.faq': 'FAQ',
     
     // Drift portal content
@@ -136,8 +137,9 @@ export const ui = {
     // Drift portal navigation
     'drift.nav.fleet': '車両一覧',
     'drift.nav.tracks': 'サーキット',
-    'drift.nav.booking': '予約する',
     'drift.nav.pricing': '料金',
+    'drift.nav.competitions': '競技',
+    'drift.nav.booking': '予約する',
     'drift.nav.faq': 'よくある質問',
     
     // Drift portal content
@@ -214,8 +216,9 @@ export const ui = {
     // Drift portal navigation
     'drift.nav.fleet': 'Автопарк',
     'drift.nav.tracks': 'Трассы',
-    'drift.nav.booking': 'Забронировать',
     'drift.nav.pricing': 'Цены',
+    'drift.nav.competitions': 'Соревнования',
+    'drift.nav.booking': 'Забронировать',
     'drift.nav.faq': 'Вопросы',
     
     // Drift portal content
