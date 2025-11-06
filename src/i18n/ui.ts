@@ -82,6 +82,8 @@ export const ui = {
     
     'drift.faq.title': 'Frequently Asked Questions',
     'drift.faq.description': 'Everything you need to know about drift car rental',
+    
+    'drift.social.title': 'Follow Us',
   },
   ja: {
     // Shared navigation
@@ -158,6 +160,8 @@ export const ui = {
     
     'drift.faq.title': 'よくある質問',
     'drift.faq.description': 'ドリフトカーレンタルについて知っておくべきすべて',
+    
+    'drift.social.title': 'フォローする',
   },
   ru: {
     // Shared navigation
@@ -234,6 +238,8 @@ export const ui = {
     
     'drift.faq.title': 'Часто задаваемые вопросы',
     'drift.faq.description': 'Все, что нужно знать об аренде дрифт-каров',
+    
+    'drift.social.title': 'Подписывайтесь на нас',
   },
 } as const;
 
